@@ -20,7 +20,6 @@ const App = () => {
     const answer = {
       id: '1',
       questionId: '1',
-      userId: '1',
       answer: 'ma réponse',
     };
     const newTodo = await API.graphql(graphqlOperation(createAnswer, {input: answer}));

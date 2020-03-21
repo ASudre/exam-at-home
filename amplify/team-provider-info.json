@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-exam-at-home-dev-154326-authRole",
+            "UnauthRoleArn": "arn:aws:iam::299934368074:role/amplify-exam-at-home-dev-154326-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::299934368074:role/amplify-exam-at-home-dev-154326-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "amplify-exam-at-home-dev-154326-deployment",
+            "UnauthRoleName": "amplify-exam-at-home-dev-154326-unauthRole",
+            "StackName": "amplify-exagit branch --set-upstream-to=origin/<branch> masterm-at-home-dev-154326",
+            "StackId": "arn:aws:cloudformation:eu-west-1:299934368074:stack/amplify-exam-at-home-dev-154326/54aa0310-6b82-11ea-9460-02dbc193ed28",
+            "AmplifyAppId": "d2jgsppeaqsaql"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d2jgsppeaqsaql",
+                    "type": "manual"
+                }
+            }
+        }
+    }
+}

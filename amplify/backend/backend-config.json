@@ -13,5 +13,22 @@
 			"dependsOn": [],
 			"customAuth": false
 		}
+	},
+	"api": {
+		"examAtHome": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authexamathome46b3332a"
+						}
+					}
+				}
+			}
+		}
 	}
 }

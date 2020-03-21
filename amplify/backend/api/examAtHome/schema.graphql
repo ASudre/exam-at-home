@@ -1,0 +1,10 @@
+type Answer @model
+@auth(rules: [
+  { allow: owner, operations: [create, read, update, delete] },
+  { allow: groups, groups: ["Admin"] }
+  ]) {
+  id: ID!
+  questionId: ID!
+  userId: ID!
+  answer: String!
+}

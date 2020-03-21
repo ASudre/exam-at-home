@@ -6,7 +6,6 @@ export const getAnswer = /* GraphQL */ `
     getAnswer(id: $id) {
       id
       questionId
-      userId
       answer
       owner
     }
@@ -22,7 +21,6 @@ export const listAnswers = /* GraphQL */ `
       items {
         id
         questionId
-        userId
         answer
         owner
       }

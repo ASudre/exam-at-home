@@ -5,6 +5,5 @@ type Answer @model
   ]) {
   id: ID!
   questionId: ID!
-  userId: ID!
   answer: String!
 }

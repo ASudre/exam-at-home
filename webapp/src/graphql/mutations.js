@@ -9,7 +9,6 @@ export const createAnswer = /* GraphQL */ `
     createAnswer(input: $input, condition: $condition) {
       id
       questionId
-      userId
       answer
       owner
     }
@@ -23,7 +22,6 @@ export const updateAnswer = /* GraphQL */ `
     updateAnswer(input: $input, condition: $condition) {
       id
       questionId
-      userId
       answer
       owner
     }
@@ -37,7 +35,6 @@ export const deleteAnswer = /* GraphQL */ `
     deleteAnswer(input: $input, condition: $condition) {
       id
       questionId
-      userId
       answer
       owner
     }

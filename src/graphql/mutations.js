@@ -1,6 +1,57 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createQuestionnaire = /* GraphQL */ `
+  mutation CreateQuestionnaire(
+    $input: CreateQuestionnaireInput!
+    $condition: ModelQuestionnaireConditionInput
+  ) {
+    createQuestionnaire(input: $input, condition: $condition) {
+      id
+      questions {
+        items {
+          id
+          imageUrl
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateQuestionnaire = /* GraphQL */ `
+  mutation UpdateQuestionnaire(
+    $input: UpdateQuestionnaireInput!
+    $condition: ModelQuestionnaireConditionInput
+  ) {
+    updateQuestionnaire(input: $input, condition: $condition) {
+      id
+      questions {
+        items {
+          id
+          imageUrl
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteQuestionnaire = /* GraphQL */ `
+  mutation DeleteQuestionnaire(
+    $input: DeleteQuestionnaireInput!
+    $condition: ModelQuestionnaireConditionInput
+  ) {
+    deleteQuestionnaire(input: $input, condition: $condition) {
+      id
+      questions {
+        items {
+          id
+          imageUrl
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const createAnswer = /* GraphQL */ `
   mutation CreateAnswer(
     $input: CreateAnswerInput!
@@ -8,8 +59,17 @@ export const createAnswer = /* GraphQL */ `
   ) {
     createAnswer(input: $input, condition: $condition) {
       id
-      questionId
       answer
+      question {
+        id
+        imageUrl
+        questionnaire {
+          id
+        }
+        answers {
+          nextToken
+        }
+      }
       owner
     }
   }
@@ -21,8 +81,17 @@ export const updateAnswer = /* GraphQL */ `
   ) {
     updateAnswer(input: $input, condition: $condition) {
       id
-      questionId
       answer
+      question {
+        id
+        imageUrl
+        questionnaire {
+          id
+        }
+        answers {
+          nextToken
+        }
+      }
       owner
     }
   }
@@ -34,8 +103,17 @@ export const deleteAnswer = /* GraphQL */ `
   ) {
     deleteAnswer(input: $input, condition: $condition) {
       id
-      questionId
       answer
+      question {
+        id
+        imageUrl
+        questionnaire {
+          id
+        }
+        answers {
+          nextToken
+        }
+      }
       owner
     }
   }
@@ -48,6 +126,20 @@ export const createQuestion = /* GraphQL */ `
     createQuestion(input: $input, condition: $condition) {
       id
       imageUrl
+      questionnaire {
+        id
+        questions {
+          nextToken
+        }
+      }
+      answers {
+        items {
+          id
+          answer
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -59,6 +151,20 @@ export const updateQuestion = /* GraphQL */ `
     updateQuestion(input: $input, condition: $condition) {
       id
       imageUrl
+      questionnaire {
+        id
+        questions {
+          nextToken
+        }
+      }
+      answers {
+        items {
+          id
+          answer
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -70,6 +176,20 @@ export const deleteQuestion = /* GraphQL */ `
     deleteQuestion(input: $input, condition: $condition) {
       id
       imageUrl
+      questionnaire {
+        id
+        questions {
+          nextToken
+        }
+      }
+      answers {
+        items {
+          id
+          answer
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;

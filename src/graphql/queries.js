@@ -1,28 +1,32 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getAnswer = /* GraphQL */ `
-  query GetAnswer($id: ID!) {
-    getAnswer(id: $id) {
+export const getQuestionnaire = /* GraphQL */ `
+  query GetQuestionnaire($id: ID!) {
+    getQuestionnaire(id: $id) {
       id
-      questionId
-      answer
-      owner
+      questions {
+        items {
+          id
+          imageUrl
+        }
+        nextToken
+      }
     }
   }
 `;
-export const listAnswers = /* GraphQL */ `
-  query ListAnswers(
-    $filter: ModelAnswerFilterInput
+export const listQuestionnaires = /* GraphQL */ `
+  query ListQuestionnaires(
+    $filter: ModelQuestionnaireFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listQuestionnaires(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        questionId
-        answer
-        owner
+        questions {
+          nextToken
+        }
       }
       nextToken
     }
@@ -33,6 +37,20 @@ export const getQuestion = /* GraphQL */ `
     getQuestion(id: $id) {
       id
       imageUrl
+      questionnaire {
+        id
+        questions {
+          nextToken
+        }
+      }
+      answers {
+        items {
+          id
+          answer
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -46,6 +64,51 @@ export const listQuestions = /* GraphQL */ `
       items {
         id
         imageUrl
+        questionnaire {
+          id
+        }
+        answers {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getAnswer = /* GraphQL */ `
+  query GetAnswer($id: ID!) {
+    getAnswer(id: $id) {
+      id
+      answer
+      question {
+        id
+        imageUrl
+        questionnaire {
+          id
+        }
+        answers {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listAnswers = /* GraphQL */ `
+  query ListAnswers(
+    $filter: ModelAnswerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        answer
+        question {
+          id
+          imageUrl
+        }
+        owner
       }
       nextToken
     }

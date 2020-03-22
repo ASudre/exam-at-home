@@ -1,11 +1,10 @@
-type Answer @model
+type Questionnaire @model
 @auth(rules: [
-  { allow: owner, operations: [create, read, update, delete] },
+  { allow: groups, groupsField: "groupsCanAccess", operations: [read] },
   { allow: groups, groups: ["Admin"], operations: [read] }
 ]) {
   id: ID!
-  questionId: ID!
-  answer: String!
+  questions: [Question] @connection(name: "QuestionnaireQuestions")
 }
 
 type Question @model
@@ -14,5 +13,17 @@ type Question @model
   { allow: private, provider: iam, operations: [create, update, delete] }
 ]) {
   id: ID!
-  imageUrl: String
+  imageUrl: String!
+  questionnaire: Questionnaire @connection(name: "QuestionnaireQuestions")
+  answers: [Answer] @connection(name: "QuestionAnswers")
+}
+
+type Answer @model
+@auth(rules: [
+  { allow: owner, operations: [create, read, update, delete] },
+  { allow: groups, groups: ["Admin"], operations: [read] }
+]) {
+  id: ID!
+  answer: String!
+  question: Question @connection(name: "QuestionAnswers")
 }

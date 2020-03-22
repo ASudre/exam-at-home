@@ -17,6 +17,7 @@ type Question @model
   id: ID!
   questionnaireId: ID!
   imageKey: String!
+  answer: String!
   answers: [Answer] @connection(name: "ByQuestion", fields: ["id"])
 }
 

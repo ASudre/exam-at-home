@@ -10,6 +10,7 @@ export const getQuestionnaire = /* GraphQL */ `
           id
           questionnaireId
           imageKey
+          answer
         }
         nextToken
       }
@@ -39,6 +40,7 @@ export const getQuestion = /* GraphQL */ `
       id
       questionnaireId
       imageKey
+      answer
       answers {
         items {
           id
@@ -62,6 +64,7 @@ export const listQuestions = /* GraphQL */ `
         id
         questionnaireId
         imageKey
+        answer
         answers {
           nextToken
         }

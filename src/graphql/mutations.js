@@ -13,6 +13,7 @@ export const createQuestionnaire = /* GraphQL */ `
           id
           questionnaireId
           imageKey
+          answer
         }
         nextToken
       }
@@ -31,6 +32,7 @@ export const updateQuestionnaire = /* GraphQL */ `
           id
           questionnaireId
           imageKey
+          answer
         }
         nextToken
       }
@@ -49,6 +51,7 @@ export const deleteQuestionnaire = /* GraphQL */ `
           id
           questionnaireId
           imageKey
+          answer
         }
         nextToken
       }
@@ -103,6 +106,7 @@ export const createQuestion = /* GraphQL */ `
       id
       questionnaireId
       imageKey
+      answer
       answers {
         items {
           id
@@ -124,6 +128,7 @@ export const updateQuestion = /* GraphQL */ `
       id
       questionnaireId
       imageKey
+      answer
       answers {
         items {
           id
@@ -145,6 +150,7 @@ export const deleteQuestion = /* GraphQL */ `
       id
       questionnaireId
       imageKey
+      answer
       answers {
         items {
           id

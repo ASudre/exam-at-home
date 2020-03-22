@@ -1,9 +1,18 @@
 type Answer @model
 @auth(rules: [
   { allow: owner, operations: [create, read, update, delete] },
-  { allow: groups, groups: ["Admin"] }
-  ]) {
+  { allow: groups, groups: ["Admin"], operations: [read] }
+]) {
   id: ID!
   questionId: ID!
   answer: String!
+}
+
+type Question @model
+@auth(rules: [
+  { allow: private, operations: [read] },
+  { allow: private, provider: iam, operations: [create, update, delete] }
+]) {
+  id: ID!
+  imageUrl: String
 }

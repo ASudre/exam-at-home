@@ -4,12 +4,9 @@ projects:
     includes:
       - src/graphql/**/*.js
     excludes:
-      - ../amplify/**
+      - ./amplify/**
     extensions:
       amplify:
         codeGenTarget: javascript
         generatedFileName: ''
         docsFilePath: src/graphql
-extensions:
-  amplify:
-    version: 3

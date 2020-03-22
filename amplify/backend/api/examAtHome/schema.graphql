@@ -4,13 +4,7 @@ type Questionnaire @model
   { allow: groups, groups: ["Admin"], operations: [read] }
 ]) {
   id: ID!
-  questions: [Question] @connection(name: "QuestionnaireQuestions")
-}
-
-type Image {
-  bucket: String!
-  region: String!
-  key: String!
+  questions: [Question] @connection(name: "ByQuestionnaire", fields: ["id"])
 }
 
 type Question @model
@@ -18,19 +12,21 @@ type Question @model
   { allow: private, operations: [read] },
   { allow: private, provider: iam, operations: [create, update, delete] }
   { allow: groups, groups: ["Admin"] }
-]) {
+])
+@key(name: "ByQuestionnaire", fields: ["questionnaireId", "imageKey"]) {
   id: ID!
-  image: Image!
-  questionnaire: Questionnaire @connection(name: "QuestionnaireQuestions")
-  answers: [Answer] @connection(name: "QuestionAnswers")
+  questionnaireId: ID!
+  imageKey: String!
+  answers: [Answer] @connection(name: "ByQuestion", fields: ["id"])
 }
 
 type Answer @model
 @auth(rules: [
   { allow: owner, operations: [create, read, update, delete] },
   { allow: groups, groups: ["Admin"], operations: [read] }
-]) {
+])
+@key(name: "ByQuestion", fields: ["questionId", "answer"]) {
   id: ID!
+  questionId: ID!
   answer: String!
-  question: Question @connection(name: "QuestionAnswers")
 }

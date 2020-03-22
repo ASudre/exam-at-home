@@ -8,6 +8,8 @@ export const onCreateQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
+          questionnaireId
+          imageKey
         }
         nextToken
       }
@@ -21,6 +23,8 @@ export const onUpdateQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
+          questionnaireId
+          imageKey
         }
         nextToken
       }
@@ -34,6 +38,8 @@ export const onDeleteQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
+          questionnaireId
+          imageKey
         }
         nextToken
       }
@@ -44,21 +50,8 @@ export const onCreateAnswer = /* GraphQL */ `
   subscription OnCreateAnswer($owner: String!) {
     onCreateAnswer(owner: $owner) {
       id
+      questionId
       answer
-      question {
-        id
-        image {
-          bucket
-          region
-          key
-        }
-        questionnaire {
-          id
-        }
-        answers {
-          nextToken
-        }
-      }
       owner
     }
   }
@@ -67,21 +60,8 @@ export const onUpdateAnswer = /* GraphQL */ `
   subscription OnUpdateAnswer($owner: String!) {
     onUpdateAnswer(owner: $owner) {
       id
+      questionId
       answer
-      question {
-        id
-        image {
-          bucket
-          region
-          key
-        }
-        questionnaire {
-          id
-        }
-        answers {
-          nextToken
-        }
-      }
       owner
     }
   }
@@ -90,21 +70,8 @@ export const onDeleteAnswer = /* GraphQL */ `
   subscription OnDeleteAnswer($owner: String!) {
     onDeleteAnswer(owner: $owner) {
       id
+      questionId
       answer
-      question {
-        id
-        image {
-          bucket
-          region
-          key
-        }
-        questionnaire {
-          id
-        }
-        answers {
-          nextToken
-        }
-      }
       owner
     }
   }
@@ -113,20 +80,12 @@ export const onCreateQuestion = /* GraphQL */ `
   subscription OnCreateQuestion {
     onCreateQuestion {
       id
-      image {
-        bucket
-        region
-        key
-      }
-      questionnaire {
-        id
-        questions {
-          nextToken
-        }
-      }
+      questionnaireId
+      imageKey
       answers {
         items {
           id
+          questionId
           answer
           owner
         }
@@ -139,20 +98,12 @@ export const onUpdateQuestion = /* GraphQL */ `
   subscription OnUpdateQuestion {
     onUpdateQuestion {
       id
-      image {
-        bucket
-        region
-        key
-      }
-      questionnaire {
-        id
-        questions {
-          nextToken
-        }
-      }
+      questionnaireId
+      imageKey
       answers {
         items {
           id
+          questionId
           answer
           owner
         }
@@ -165,20 +116,12 @@ export const onDeleteQuestion = /* GraphQL */ `
   subscription OnDeleteQuestion {
     onDeleteQuestion {
       id
-      image {
-        bucket
-        region
-        key
-      }
-      questionnaire {
-        id
-        questions {
-          nextToken
-        }
-      }
+      questionnaireId
+      imageKey
       answers {
         items {
           id
+          questionId
           answer
           owner
         }

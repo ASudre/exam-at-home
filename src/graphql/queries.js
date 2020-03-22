@@ -8,6 +8,8 @@ export const getQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
+          questionnaireId
+          imageKey
         }
         nextToken
       }
@@ -35,20 +37,12 @@ export const getQuestion = /* GraphQL */ `
   query GetQuestion($id: ID!) {
     getQuestion(id: $id) {
       id
-      image {
-        bucket
-        region
-        key
-      }
-      questionnaire {
-        id
-        questions {
-          nextToken
-        }
-      }
+      questionnaireId
+      imageKey
       answers {
         items {
           id
+          questionId
           answer
           owner
         }
@@ -66,14 +60,8 @@ export const listQuestions = /* GraphQL */ `
     listQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        image {
-          bucket
-          region
-          key
-        }
-        questionnaire {
-          id
-        }
+        questionnaireId
+        imageKey
         answers {
           nextToken
         }
@@ -86,21 +74,8 @@ export const getAnswer = /* GraphQL */ `
   query GetAnswer($id: ID!) {
     getAnswer(id: $id) {
       id
+      questionId
       answer
-      question {
-        id
-        image {
-          bucket
-          region
-          key
-        }
-        questionnaire {
-          id
-        }
-        answers {
-          nextToken
-        }
-      }
       owner
     }
   }
@@ -114,10 +89,8 @@ export const listAnswers = /* GraphQL */ `
     listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        questionId
         answer
-        question {
-          id
-        }
         owner
       }
       nextToken

@@ -7,13 +7,20 @@ type Questionnaire @model
   questions: [Question] @connection(name: "QuestionnaireQuestions")
 }
 
+type Image {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
 type Question @model
 @auth(rules: [
   { allow: private, operations: [read] },
   { allow: private, provider: iam, operations: [create, update, delete] }
+  { allow: groups, groups: ["Admin"] }
 ]) {
   id: ID!
-  imageUrl: String!
+  image: Image!
   questionnaire: Questionnaire @connection(name: "QuestionnaireQuestions")
   answers: [Answer] @connection(name: "QuestionAnswers")
 }

@@ -11,7 +11,6 @@ export const createQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
-          imageUrl
         }
         nextToken
       }
@@ -28,7 +27,6 @@ export const updateQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
-          imageUrl
         }
         nextToken
       }
@@ -45,7 +43,6 @@ export const deleteQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
-          imageUrl
         }
         nextToken
       }
@@ -62,7 +59,11 @@ export const createAnswer = /* GraphQL */ `
       answer
       question {
         id
-        imageUrl
+        image {
+          bucket
+          region
+          key
+        }
         questionnaire {
           id
         }
@@ -84,7 +85,11 @@ export const updateAnswer = /* GraphQL */ `
       answer
       question {
         id
-        imageUrl
+        image {
+          bucket
+          region
+          key
+        }
         questionnaire {
           id
         }
@@ -106,7 +111,11 @@ export const deleteAnswer = /* GraphQL */ `
       answer
       question {
         id
-        imageUrl
+        image {
+          bucket
+          region
+          key
+        }
         questionnaire {
           id
         }
@@ -125,7 +134,11 @@ export const createQuestion = /* GraphQL */ `
   ) {
     createQuestion(input: $input, condition: $condition) {
       id
-      imageUrl
+      image {
+        bucket
+        region
+        key
+      }
       questionnaire {
         id
         questions {
@@ -150,7 +163,11 @@ export const updateQuestion = /* GraphQL */ `
   ) {
     updateQuestion(input: $input, condition: $condition) {
       id
-      imageUrl
+      image {
+        bucket
+        region
+        key
+      }
       questionnaire {
         id
         questions {
@@ -175,7 +192,11 @@ export const deleteQuestion = /* GraphQL */ `
   ) {
     deleteQuestion(input: $input, condition: $condition) {
       id
-      imageUrl
+      image {
+        bucket
+        region
+        key
+      }
       questionnaire {
         id
         questions {

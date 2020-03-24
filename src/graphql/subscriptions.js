@@ -58,39 +58,6 @@ export const onDeleteQuestionnaire = /* GraphQL */ `
     }
   }
 `;
-export const onCreateAnswer = /* GraphQL */ `
-  subscription OnCreateAnswer($owner: String!) {
-    onCreateAnswer(owner: $owner) {
-      id
-      questionId
-      answer
-      createdAt
-      owner
-    }
-  }
-`;
-export const onUpdateAnswer = /* GraphQL */ `
-  subscription OnUpdateAnswer($owner: String!) {
-    onUpdateAnswer(owner: $owner) {
-      id
-      questionId
-      answer
-      createdAt
-      owner
-    }
-  }
-`;
-export const onDeleteAnswer = /* GraphQL */ `
-  subscription OnDeleteAnswer($owner: String!) {
-    onDeleteAnswer(owner: $owner) {
-      id
-      questionId
-      answer
-      createdAt
-      owner
-    }
-  }
-`;
 export const onCreateQuestion = /* GraphQL */ `
   subscription OnCreateQuestion {
     onCreateQuestion {
@@ -154,6 +121,39 @@ export const onDeleteQuestion = /* GraphQL */ `
         }
         nextToken
       }
+    }
+  }
+`;
+export const onCreateAnswer = /* GraphQL */ `
+  subscription OnCreateAnswer($owner: String!) {
+    onCreateAnswer(owner: $owner) {
+      id
+      questionId
+      answer
+      createdAt
+      owner
+    }
+  }
+`;
+export const onUpdateAnswer = /* GraphQL */ `
+  subscription OnUpdateAnswer($owner: String!) {
+    onUpdateAnswer(owner: $owner) {
+      id
+      questionId
+      answer
+      createdAt
+      owner
+    }
+  }
+`;
+export const onDeleteAnswer = /* GraphQL */ `
+  subscription OnDeleteAnswer($owner: String!) {
+    onDeleteAnswer(owner: $owner) {
+      id
+      questionId
+      answer
+      createdAt
+      owner
     }
   }
 `;

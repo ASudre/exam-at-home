@@ -36,10 +36,10 @@ const QuestionCardCreate = ({
   questionnaireId, onSave,
 }) => {
   const initState = {
-    answer: answerValues[0],
+    answer: null,
     imageFile: {},
   };
-  const [opened, setOpened] = useState(false);
+  const [addQuestionFormOpened, setAddQuestionFormOpened] = useState(false);
   const [answer, setAnswer] = useState(initState.answer);
   const [imageFile, setImageFile] = useState(initState.imageFile);
 
@@ -60,8 +60,10 @@ const QuestionCardCreate = ({
   };
 
   return (
-    !opened
-      ? <AddQuestion><IoIosAddCircleOutline onClick={() => setOpened(true)} /></AddQuestion>
+    !addQuestionFormOpened
+      ? <AddQuestion>
+          <IoIosAddCircleOutline onClick={() => setAddQuestionFormOpened(true)} />
+        </AddQuestion>
       : (<Card>
           <CardContent>
             <Button primary onClick={onImageInputClick}>
@@ -75,15 +77,16 @@ const QuestionCardCreate = ({
             />
           </CardContent>
           <CardActions>
-            <Button primary onClick={() => setOpened(false)}>
+            <Button primary onClick={() => setAddQuestionFormOpened(false)}>
               Cancel
             </Button>
             <Button
               primary
-              disabled={!imageFile.name}
+              disabled={!imageFile.name || !answer}
               onClick={() => onSave(imageFile, buildInput()).then(() => {
                 setImageFile(initState.imageFile);
                 setAnswer(initState.answer);
+                setAddQuestionFormOpened(false);
               })}
             >
               Save

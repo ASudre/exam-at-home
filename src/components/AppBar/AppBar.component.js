@@ -6,11 +6,20 @@ import { Link, withRouter } from 'react-router-dom';
 import Button from '../Button/Button.component';
 
 const Container = styled.div`
-  background-color: white;
+  background-color: ${(props) => props.theme.color.secondary};
   display: flex;
   justify-content: flex-end;
   height: 64px;
-  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+const ButtonContainer = styled.div`
+  padding: 0 20px;
+  &:last-child {
+    padding: 0;
+    padding-right: 20px;
+  }
 `;
 
 const AppBar = ({ location }) => {
@@ -29,6 +38,7 @@ const AppBar = ({ location }) => {
 
   return (
     <Container>
+      <ButtonContainer>
       {connectedUserGroups.includes('Admin') && location.pathname !== '/admin' && (
         <Button>
           <Link to="/admin">
@@ -43,7 +53,10 @@ const AppBar = ({ location }) => {
           </Link>
         </Button>
       )}
-      <Button onClick={handleSignOut}>Sign out</Button>
+      </ButtonContainer>
+      <ButtonContainer>
+        <Button onClick={handleSignOut}>Sign out</Button>
+      </ButtonContainer>
     </Container>
   );
 };

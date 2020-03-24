@@ -1,24 +1,26 @@
 import styled from 'styled-components';
 
+const backgroundColor = (props) => (props.primary ? props.theme.color.primary : '#282b33');
+
 export default styled.button`
-  background: ${(props) => (props.primary ? props.theme.main : 'white')};
-  color: ${(props) => (props.primary ? 'white' : props.theme.main)};
+  background-color: ${backgroundColor};
+  color: ${(props) => (props.primary ? 'white' : props.theme.color.primary)};
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-
+  font-weight: 700;
   font-size: 1em;
-  margin: 1em;
   padding: 0.25em 1em;
-  border: ${(props) => `2px solid ${props.theme.main}`};
+  border: ${(props) => `2px solid ${props.theme.color.primary}`};
   border-radius: 3px;
   height: 1.8em;
 
   & > a {
-    color: ${(props) => (props.primary ? 'white' : props.theme.main)};
+    color: ${(props) => (props.primary ? 'white' : props.theme.color.primary)};
     text-decoration: none;
   }
 
   &:hover {
-    background: ${(props) => (props.primary ? '#dd3f5b1f' : '#dd3f5b1f')};
+    background-color: ${(props) => (props.disabled ? backgroundColor(props) : props.theme.color.secondary)};
+    color: ${(props) => (!props.disabled && props.primary && props.theme.color.primary)};
   }
 `;

@@ -8,12 +8,15 @@ export const createQuestionnaire = /* GraphQL */ `
   ) {
     createQuestionnaire(input: $input, condition: $condition) {
       id
+      createdAt
       questions {
         items {
           id
           questionnaireId
           imageKey
+          imageName
           answer
+          createdAt
         }
         nextToken
       }
@@ -27,12 +30,15 @@ export const updateQuestionnaire = /* GraphQL */ `
   ) {
     updateQuestionnaire(input: $input, condition: $condition) {
       id
+      createdAt
       questions {
         items {
           id
           questionnaireId
           imageKey
+          imageName
           answer
+          createdAt
         }
         nextToken
       }
@@ -46,12 +52,15 @@ export const deleteQuestionnaire = /* GraphQL */ `
   ) {
     deleteQuestionnaire(input: $input, condition: $condition) {
       id
+      createdAt
       questions {
         items {
           id
           questionnaireId
           imageKey
+          imageName
           answer
+          createdAt
         }
         nextToken
       }
@@ -67,6 +76,7 @@ export const createAnswer = /* GraphQL */ `
       id
       questionId
       answer
+      createdAt
       owner
     }
   }
@@ -80,6 +90,7 @@ export const updateAnswer = /* GraphQL */ `
       id
       questionId
       answer
+      createdAt
       owner
     }
   }
@@ -93,6 +104,7 @@ export const deleteAnswer = /* GraphQL */ `
       id
       questionId
       answer
+      createdAt
       owner
     }
   }
@@ -106,12 +118,15 @@ export const createQuestion = /* GraphQL */ `
       id
       questionnaireId
       imageKey
+      imageName
       answer
+      createdAt
       answers {
         items {
           id
           questionId
           answer
+          createdAt
           owner
         }
         nextToken
@@ -128,12 +143,15 @@ export const updateQuestion = /* GraphQL */ `
       id
       questionnaireId
       imageKey
+      imageName
       answer
+      createdAt
       answers {
         items {
           id
           questionId
           answer
+          createdAt
           owner
         }
         nextToken
@@ -150,12 +168,15 @@ export const deleteQuestion = /* GraphQL */ `
       id
       questionnaireId
       imageKey
+      imageName
       answer
+      createdAt
       answers {
         items {
           id
           questionId
           answer
+          createdAt
           owner
         }
         nextToken

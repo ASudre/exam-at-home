@@ -5,12 +5,15 @@ export const getQuestionnaire = /* GraphQL */ `
   query GetQuestionnaire($id: ID!) {
     getQuestionnaire(id: $id) {
       id
+      createdAt
       questions {
         items {
           id
           questionnaireId
           imageKey
+          imageName
           answer
+          createdAt
         }
         nextToken
       }
@@ -19,13 +22,22 @@ export const getQuestionnaire = /* GraphQL */ `
 `;
 export const listQuestionnaires = /* GraphQL */ `
   query ListQuestionnaires(
+    $id: ID
     $filter: ModelQuestionnaireFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listQuestionnaires(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listQuestionnaires(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
+        createdAt
         questions {
           nextToken
         }
@@ -40,12 +52,15 @@ export const getQuestion = /* GraphQL */ `
       id
       questionnaireId
       imageKey
+      imageName
       answer
+      createdAt
       answers {
         items {
           id
           questionId
           answer
+          createdAt
           owner
         }
         nextToken
@@ -64,7 +79,9 @@ export const listQuestions = /* GraphQL */ `
         id
         questionnaireId
         imageKey
+        imageName
         answer
+        createdAt
         answers {
           nextToken
         }
@@ -79,6 +96,7 @@ export const getAnswer = /* GraphQL */ `
       id
       questionId
       answer
+      createdAt
       owner
     }
   }
@@ -94,6 +112,7 @@ export const listAnswers = /* GraphQL */ `
         id
         questionId
         answer
+        createdAt
         owner
       }
       nextToken

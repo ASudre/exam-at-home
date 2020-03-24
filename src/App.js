@@ -15,7 +15,10 @@ import Layout from './components/Layout/Layout.component';
 
 Amplify.configure(awsconfig);
 const theme = {
-  main: 'palevioletred',
+  color: {
+    primary: 'palevioletred',
+    secondary: '#dd3f5b1f',
+  },
 };
 
 const App = () => (

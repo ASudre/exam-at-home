@@ -2,22 +2,25 @@ type Questionnaire @model
 @auth(rules: [
   { allow: groups, groupsField: "groupsCanAccess", operations: [read] },
   { allow: groups, groups: ["Admin"], operations: [read] }
-]) {
+])
+@key(fields: ["id"]) {
   id: ID!
+  createdAt: AWSDateTime
   questions: [Question] @connection(name: "ByQuestionnaire", fields: ["id"])
 }
 
 type Question @model
 @auth(rules: [
   { allow: private, operations: [read] },
-  { allow: private, provider: iam, operations: [create, update, delete] }
   { allow: groups, groups: ["Admin"] }
 ])
-@key(name: "ByQuestionnaire", fields: ["questionnaireId", "imageKey"]) {
+@key(name: "ByQuestionnaire", fields: ["questionnaireId"]) {
   id: ID!
   questionnaireId: ID!
   imageKey: String!
+  imageName: String!
   answer: String!
+  createdAt: AWSDateTime
   answers: [Answer] @connection(name: "ByQuestion", fields: ["id"])
 }
 
@@ -26,8 +29,9 @@ type Answer @model
   { allow: owner, operations: [create, read, update, delete] },
   { allow: groups, groups: ["Admin"], operations: [read] }
 ])
-@key(name: "ByQuestion", fields: ["questionId", "answer"]) {
+@key(name: "ByQuestion", fields: ["questionId"]) {
   id: ID!
   questionId: ID!
   answer: String!
+  createdAt: AWSDateTime
 }

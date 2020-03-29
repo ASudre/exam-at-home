@@ -9,7 +9,6 @@ export const getQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
-          questionnaireId
           imageKey
           imageName
           answer
@@ -22,19 +21,11 @@ export const getQuestionnaire = /* GraphQL */ `
 `;
 export const listQuestionnaires = /* GraphQL */ `
   query ListQuestionnaires(
-    $id: ID
     $filter: ModelQuestionnaireFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listQuestionnaires(
-      id: $id
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listQuestionnaires(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         createdAt
@@ -50,18 +41,23 @@ export const getQuestion = /* GraphQL */ `
   query GetQuestion($id: ID!) {
     getQuestion(id: $id) {
       id
-      questionnaireId
       imageKey
       imageName
       answer
       createdAt
+      questionnaire {
+        id
+        createdAt
+        questions {
+          nextToken
+        }
+      }
       answers {
         items {
           id
-          questionId
           answer
-          createdAt
           owner
+          createdAt
         }
         nextToken
       }
@@ -77,11 +73,14 @@ export const listQuestions = /* GraphQL */ `
     listQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        questionnaireId
         imageKey
         imageName
         answer
         createdAt
+        questionnaire {
+          id
+          createdAt
+        }
         answers {
           nextToken
         }
@@ -94,10 +93,23 @@ export const getAnswer = /* GraphQL */ `
   query GetAnswer($id: ID!) {
     getAnswer(id: $id) {
       id
-      questionId
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
+          id
+          createdAt
+        }
+        answers {
+          nextToken
+        }
+      }
       answer
-      createdAt
       owner
+      createdAt
     }
   }
 `;
@@ -110,10 +122,16 @@ export const listAnswers = /* GraphQL */ `
     listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        questionId
+        question {
+          id
+          imageKey
+          imageName
+          answer
+          createdAt
+        }
         answer
-        createdAt
         owner
+        createdAt
       }
       nextToken
     }

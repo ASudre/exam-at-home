@@ -9,7 +9,6 @@ export const onCreateQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
-          questionnaireId
           imageKey
           imageName
           answer
@@ -28,7 +27,6 @@ export const onUpdateQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
-          questionnaireId
           imageKey
           imageName
           answer
@@ -47,7 +45,6 @@ export const onDeleteQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
-          questionnaireId
           imageKey
           imageName
           answer
@@ -62,18 +59,23 @@ export const onCreateQuestion = /* GraphQL */ `
   subscription OnCreateQuestion {
     onCreateQuestion {
       id
-      questionnaireId
       imageKey
       imageName
       answer
       createdAt
+      questionnaire {
+        id
+        createdAt
+        questions {
+          nextToken
+        }
+      }
       answers {
         items {
           id
-          questionId
           answer
-          createdAt
           owner
+          createdAt
         }
         nextToken
       }
@@ -84,18 +86,23 @@ export const onUpdateQuestion = /* GraphQL */ `
   subscription OnUpdateQuestion {
     onUpdateQuestion {
       id
-      questionnaireId
       imageKey
       imageName
       answer
       createdAt
+      questionnaire {
+        id
+        createdAt
+        questions {
+          nextToken
+        }
+      }
       answers {
         items {
           id
-          questionId
           answer
-          createdAt
           owner
+          createdAt
         }
         nextToken
       }
@@ -106,18 +113,23 @@ export const onDeleteQuestion = /* GraphQL */ `
   subscription OnDeleteQuestion {
     onDeleteQuestion {
       id
-      questionnaireId
       imageKey
       imageName
       answer
       createdAt
+      questionnaire {
+        id
+        createdAt
+        questions {
+          nextToken
+        }
+      }
       answers {
         items {
           id
-          questionId
           answer
-          createdAt
           owner
+          createdAt
         }
         nextToken
       }
@@ -128,10 +140,23 @@ export const onCreateAnswer = /* GraphQL */ `
   subscription OnCreateAnswer($owner: String!) {
     onCreateAnswer(owner: $owner) {
       id
-      questionId
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
+          id
+          createdAt
+        }
+        answers {
+          nextToken
+        }
+      }
       answer
-      createdAt
       owner
+      createdAt
     }
   }
 `;
@@ -139,10 +164,23 @@ export const onUpdateAnswer = /* GraphQL */ `
   subscription OnUpdateAnswer($owner: String!) {
     onUpdateAnswer(owner: $owner) {
       id
-      questionId
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
+          id
+          createdAt
+        }
+        answers {
+          nextToken
+        }
+      }
       answer
-      createdAt
       owner
+      createdAt
     }
   }
 `;
@@ -150,10 +188,23 @@ export const onDeleteAnswer = /* GraphQL */ `
   subscription OnDeleteAnswer($owner: String!) {
     onDeleteAnswer(owner: $owner) {
       id
-      questionId
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
+          id
+          createdAt
+        }
+        answers {
+          nextToken
+        }
+      }
       answer
-      createdAt
       owner
+      createdAt
     }
   }
 `;

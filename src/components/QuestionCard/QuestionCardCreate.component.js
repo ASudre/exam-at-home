@@ -52,7 +52,7 @@ const QuestionCardCreate = ({
     const questionId = uuidV4();
     return {
       id: questionId,
-      questionnaireId,
+      questionQuestionnaireId: questionnaireId,
       answer,
       imageKey: `${questionnaireId}/${questionId}`,
       imageName: imageFile.name,

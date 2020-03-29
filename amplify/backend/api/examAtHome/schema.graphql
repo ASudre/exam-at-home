@@ -1,37 +1,37 @@
-type Questionnaire @model
-@auth(rules: [
-  { allow: groups, groupsField: "groupsCanAccess", operations: [read] },
-  { allow: groups, groups: ["Admin"], operations: [read] }
-])
-@key(fields: ["id"]) {
+type Questionnaire @model {
   id: ID!
   createdAt: AWSDateTime
-  questions: [Question] @connection(name: "ByQuestionnaire", fields: ["id"])
+  questions: [Question]
+    @connection(name: "ByQuestionnaire")
+    @auth(rules: [
+      { allow: groups, groupsField: "groupsCanAccess", operations: [read] },
+      { allow: groups, groups: ["Admin"], operations: [read] }
+    ])
 }
 
 type Question @model
-@auth(rules: [
-  { allow: private, operations: [read] },
-  { allow: groups, groups: ["Admin"] }
-])
-@key(name: "ByQuestionnaire", fields: ["questionnaireId"]) {
+{
   id: ID!
-  questionnaireId: ID!
   imageKey: String!
   imageName: String!
-  answer: String!
+  answer: String
+    @auth(rules: [
+      { allow: groups, groups: ["Admin"] }
+    ])
   createdAt: AWSDateTime
-  answers: [Answer] @connection(name: "ByQuestion", fields: ["id"])
+  questionnaire: Questionnaire @connection(name: "ByQuestionnaire")
+  answers: [Answer] @connection(name: "ByQuestion")
 }
 
 type Answer @model
 @auth(rules: [
   { allow: owner, operations: [create, read, update, delete] },
   { allow: groups, groups: ["Admin"], operations: [read] }
-])
-@key(name: "ByQuestion", fields: ["questionId"]) {
+]) {
   id: ID!
-  questionId: ID!
+  question: Question
+    @connection(name: "ByQuestion")
   answer: String!
+  owner: String
   createdAt: AWSDateTime
 }

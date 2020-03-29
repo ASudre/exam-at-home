@@ -39,7 +39,7 @@ const AppBar = ({ location }) => {
   return (
     <Container>
       <ButtonContainer>
-      {connectedUserGroups.includes('Admin') && location.pathname !== '/admin' && (
+      {connectedUserGroups && connectedUserGroups.includes('Admin') && location.pathname !== '/admin' && (
         <Button>
           <Link to="/admin">
             Admin

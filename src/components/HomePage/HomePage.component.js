@@ -1,21 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 
-import { createAnswer } from '../../graphql/mutations';
-import Button from '../Button/Button.component';
+import styled from 'styled-components';
+import { get } from 'lodash';
+
+import { listQuestionsAnswers } from '../../graphql/custom_queries';
+import CandidateQuestionCard from '../CandidateQuestionCard/CandidateQuestionCard.component';
+
+const Container = styled.div`
+  padding: 50px 100px;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+`;
 
 const HomePage = () => {
-  const handleAnswer = async () => {
-    const answer = {
-      id: '1',
-      questionId: '1',
-      answer: 'ma réponse',
-    };
-    await API.graphql(graphqlOperation(createAnswer, { input: answer }));
-  };
+  const [questions, setQuestions] = useState([]);
+
+  const refreshQuestionsList = () => API.graphql(graphqlOperation(listQuestionsAnswers))
+    .then((res) => setQuestions(
+      get(res, 'data.listQuestions.items', [])
+        .sort((a, b) => (new Date(a.createdAt) - new Date(b.createdAt))),
+    ))
+    .catch((e) => {
+      console.error(e);
+    });
+
+  useEffect(() => {
+    refreshQuestionsList();
+  }, []);
 
   return (
-    <Button primary onClick={handleAnswer}>Answer</Button>
+    <Container>
+      {questions.map((q) => (
+        <CandidateQuestionCard
+          key={q.id}
+          question={q}
+          onSave={refreshQuestionsList}
+        />
+      ))}
+    </Container>
   );
 };
 

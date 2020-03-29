@@ -12,7 +12,6 @@ export const createQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
-          questionnaireId
           imageKey
           imageName
           answer
@@ -34,7 +33,6 @@ export const updateQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
-          questionnaireId
           imageKey
           imageName
           answer
@@ -56,7 +54,6 @@ export const deleteQuestionnaire = /* GraphQL */ `
       questions {
         items {
           id
-          questionnaireId
           imageKey
           imageName
           answer
@@ -74,18 +71,23 @@ export const createQuestion = /* GraphQL */ `
   ) {
     createQuestion(input: $input, condition: $condition) {
       id
-      questionnaireId
       imageKey
       imageName
       answer
       createdAt
+      questionnaire {
+        id
+        createdAt
+        questions {
+          nextToken
+        }
+      }
       answers {
         items {
           id
-          questionId
           answer
-          createdAt
           owner
+          createdAt
         }
         nextToken
       }
@@ -99,18 +101,23 @@ export const updateQuestion = /* GraphQL */ `
   ) {
     updateQuestion(input: $input, condition: $condition) {
       id
-      questionnaireId
       imageKey
       imageName
       answer
       createdAt
+      questionnaire {
+        id
+        createdAt
+        questions {
+          nextToken
+        }
+      }
       answers {
         items {
           id
-          questionId
           answer
-          createdAt
           owner
+          createdAt
         }
         nextToken
       }
@@ -124,18 +131,23 @@ export const deleteQuestion = /* GraphQL */ `
   ) {
     deleteQuestion(input: $input, condition: $condition) {
       id
-      questionnaireId
       imageKey
       imageName
       answer
       createdAt
+      questionnaire {
+        id
+        createdAt
+        questions {
+          nextToken
+        }
+      }
       answers {
         items {
           id
-          questionId
           answer
-          createdAt
           owner
+          createdAt
         }
         nextToken
       }
@@ -149,10 +161,23 @@ export const createAnswer = /* GraphQL */ `
   ) {
     createAnswer(input: $input, condition: $condition) {
       id
-      questionId
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
+          id
+          createdAt
+        }
+        answers {
+          nextToken
+        }
+      }
       answer
-      createdAt
       owner
+      createdAt
     }
   }
 `;
@@ -163,10 +188,23 @@ export const updateAnswer = /* GraphQL */ `
   ) {
     updateAnswer(input: $input, condition: $condition) {
       id
-      questionId
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
+          id
+          createdAt
+        }
+        answers {
+          nextToken
+        }
+      }
       answer
-      createdAt
       owner
+      createdAt
     }
   }
 `;
@@ -177,10 +215,23 @@ export const deleteAnswer = /* GraphQL */ `
   ) {
     deleteAnswer(input: $input, condition: $condition) {
       id
-      questionId
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
+          id
+          createdAt
+        }
+        answers {
+          nextToken
+        }
+      }
       answer
-      createdAt
       owner
+      createdAt
     }
   }
 `;

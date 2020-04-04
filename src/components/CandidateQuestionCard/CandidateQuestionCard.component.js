@@ -9,7 +9,7 @@ import CardContent from '../Card/CardContent/CardContent.component';
 import Card from '../Card/Card.component';
 import CardActions from '../Card/CardActions/CardActions.component';
 import RadioButtons from '../RadioButtons/RadioButtons.component';
-import { createAnswer as createMutation, updateAnswer as updateMutation } from '../../graphql/mutations';
+import { createCandidateAnswer as createMutation, updateCandidateAnswer as updateMutation } from '../../graphql/custom_mutations';
 
 const answerValues = ['A', 'B', 'C', 'D'];
 
@@ -22,16 +22,22 @@ const saveAnswer = save(createMutation);
 
 const CandidateQuestionCard = ({
   question,
-  onSave,
 }) => {
   const initAnswer = get(question, 'answers.items[0]', {});
   const [answer, setAnswer] = useState(initAnswer.answer);
+  const [savedAnswer, setSavedAnswer] = useState(initAnswer.answer);
 
   const buildInput = () => ({
     id: initAnswer.id || uuidV4(),
     answerQuestionId: question.id,
     answer,
   });
+
+  const onSave = (isUpdate) => ({ data }) => {
+    const saved = isUpdate ? data.updateAnswer.answer : data.createAnswer.answer;
+    setSavedAnswer(saved);
+    setAnswer(saved);
+  };
 
   return (
     <Card>
@@ -46,12 +52,12 @@ const CandidateQuestionCard = ({
       <CardActions>
         <Button
           primary
-          disabled={answer === initAnswer.answer}
+          disabled={answer === savedAnswer}
           onClick={
             () => (initAnswer.id
-              ? updateAnswer(buildInput())
-              : saveAnswer(buildInput()))
-              .then(onSave)}
+              ? updateAnswer(buildInput()).then(onSave(true))
+              : saveAnswer(buildInput()).then(onSave(false))
+            )}
         >
           Answer
         </Button>

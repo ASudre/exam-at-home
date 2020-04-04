@@ -5,9 +5,9 @@ import {
   createQuestion as createMutation,
   deleteQuestion as deleteMutation,
   updateQuestion as updateMutation,
-} from '../../graphql/mutations';
-import QuestionCardCreate from './QuestionCardCreate.component';
-import QuestionCardUpdate from './QuestionCardUpdate.component';
+} from '../../graphql/custom_mutations';
+import QuestionCardCreate from './AdminQuestionCardCreate.component';
+import QuestionCardUpdate from './AdminQuestionCardUpdate.component';
 
 const save = (mutation) => (fileToStore, questionToSave) => (
   fileToStore.name
@@ -25,17 +25,17 @@ const createQuestion = save(createMutation);
 const updateQuestion = save(updateMutation);
 
 const QuestionCard = ({
-  question, onSave, questionnaireId, update,
+  question, refreshQuestionnaire, questionnaireId, update,
 }) => (update
   ? (<QuestionCardUpdate
         question={question}
-        onSave={(f, q) => updateQuestion(f, q).then(onSave)}
-        onDelete={(q) => deleteQuestion(q).then(onSave)}
+        onSave={(f, q) => updateQuestion(f, q)}
+        onDelete={(q) => deleteQuestion(q).then(refreshQuestionnaire)}
         update
       />)
   : (<QuestionCardCreate
         questionnaireId={questionnaireId}
-        onSave={(f, q) => createQuestion(f, q).then(onSave)}
+        onSave={(f, q) => createQuestion(f, q).then(refreshQuestionnaire)}
       />));
 
 export default QuestionCard;

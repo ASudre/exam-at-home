@@ -46,7 +46,8 @@
     },
     "useDefault": "default",
     "userPoolGroupList": [
-        "Admin"
+        "Admin",
+        "Candidate"
     ],
     "dependsOn": []
 }

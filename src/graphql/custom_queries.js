@@ -1,29 +1,43 @@
 /* eslint-disable import/prefer-default-export */
-export const listQuestionsAnswers = /* GraphQL */ `
-  query ListQuestions(
-    $filter: ModelQuestionFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        imageKey
-        imageName
-        createdAt
-        questionnaire {
+export const getCandidateQuestionnaire = /* GraphQL */ `
+  query GetQuestionnaire($id: ID!) {
+    getQuestionnaire(id: $id) {
+      id
+      createdAt
+      questions {
+        items {
           id
+          imageKey
+          imageName
+          answers {
+            items {
+              id
+              answer
+            }
+          }
           createdAt
         }
-        answers {
-          nextToken
-          items {
-            id
-            answer
-          }
-        }
+        nextToken
       }
-      nextToken
+    }
+  }
+`;
+
+export const getAdminQuestionnaire = /* GraphQL */ `
+  query GetQuestionnaire($id: ID!) {
+    getQuestionnaire(id: $id) {
+      id
+      createdAt
+      questions {
+        items {
+          id
+          answer
+          imageKey
+          imageName
+          createdAt
+        }
+        nextToken
+      }
     }
   }
 `;

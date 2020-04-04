@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom';
-import Amplify from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify';
 import { ThemeProvider } from 'styled-components';
 import { withAuthenticator } from 'aws-amplify-react';
 
 import awsconfig from './aws-exports';
 import Home from './components/HomePage/HomePage.component';
-import Admin from './components/AdminPage/AdminPage.component';
+import Admin from './components/AdminQuestionnaire/AdminQuestionnaire.component';
+import Candidate from './components/CandidateQuestionnaire/CandidateQuestionnaire.component';
 import Layout from './components/Layout/Layout.component';
 
 Amplify.configure(awsconfig);
@@ -21,13 +22,24 @@ const theme = {
   },
 };
 
-const App = () => (
+const App = () => {
+  const [connectedUserGroups, setConnectedUserGroups] = useState([]);
+  useEffect(() => {
+    Auth.currentAuthenticatedUser().then((user) => {
+      setConnectedUserGroups(user.signInUserSession.accessToken.payload['cognito:groups']);
+    });
+  }, []);
+
+  return (
   <ThemeProvider theme={theme} >
     <Router>
       <Layout>
         <Switch>
-          <Route path="/admin">
-            <Admin />
+          <Route path="/:id">
+            {connectedUserGroups && connectedUserGroups.includes('Admin')
+              ? <Admin/>
+              : <Candidate />
+            }
           </Route>
           <Route path="/">
             <Home />
@@ -36,6 +48,7 @@ const App = () => (
       </Layout>
     </Router>
   </ThemeProvider>
-);
+  );
+};
 
 export default withAuthenticator(App, { usernameAttributes: 'email' });

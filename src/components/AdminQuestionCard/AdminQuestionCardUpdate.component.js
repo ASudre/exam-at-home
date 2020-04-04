@@ -14,6 +14,7 @@ const QuestionCardUpdate = ({
   question, onSave, onDelete,
 }) => {
   const [answer, setAnswer] = useState(question.answer);
+  const [savedAnswer, setSavedAnswer] = useState(question.answer);
   const [imageFile, setImageFile] = useState({});
 
   const imageInput = useRef();
@@ -43,8 +44,11 @@ const QuestionCardUpdate = ({
       <CardActions>
         <Button
           primary
-          disabled={answer === question.answer && !imageFile.name}
-          onClick={() => onSave(imageFile, buildInput())}
+          disabled={answer === savedAnswer && !imageFile.name}
+          onClick={() => onSave(imageFile, buildInput()).then(() => {
+            // why data.updateQuestion.answer is null?
+            setSavedAnswer(answer);
+          })}
         >
           Update
         </Button>

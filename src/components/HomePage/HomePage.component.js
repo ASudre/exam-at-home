@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
-
 import styled from 'styled-components';
 import { get } from 'lodash';
+import { Link } from 'react-router-dom';
 
-import { listQuestionsAnswers } from '../../graphql/custom_queries';
-import CandidateQuestionCard from '../CandidateQuestionCard/CandidateQuestionCard.component';
+import { listQuestionnaires } from '../../graphql/queries';
+import Button from '../Button/Button.component';
 
 const Container = styled.div`
   padding: 50px 100px;
@@ -17,11 +17,11 @@ const Container = styled.div`
 `;
 
 const HomePage = () => {
-  const [questions, setQuestions] = useState([]);
+  const [questionnaires, setQuestionnaires] = useState([]);
 
-  const refreshQuestionsList = () => API.graphql(graphqlOperation(listQuestionsAnswers))
-    .then((res) => setQuestions(
-      get(res, 'data.listQuestions.items', [])
+  const refreshQuestionnairesList = () => API.graphql(graphqlOperation(listQuestionnaires))
+    .then((res) => setQuestionnaires(
+      get(res, 'data.listQuestionnaires.items', [])
         .sort((a, b) => (new Date(a.createdAt) - new Date(b.createdAt))),
     ))
     .catch((e) => {
@@ -29,20 +29,16 @@ const HomePage = () => {
     });
 
   useEffect(() => {
-    refreshQuestionsList();
+    refreshQuestionnairesList();
   }, []);
 
-  return (
-    <Container>
-      {questions.map((q) => (
-        <CandidateQuestionCard
-          key={q.id}
-          question={q}
-          onSave={refreshQuestionsList}
-        />
-      ))}
-    </Container>
-  );
+  return <Container>
+        {questionnaires.map((q) => (
+          <Link key={q.id} to={`/${q.id}`}>
+            <Button>{q.id}</Button>
+          </Link>
+        ))}
+      </Container>;
 };
 
 export default HomePage;

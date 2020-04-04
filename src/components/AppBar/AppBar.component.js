@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Auth } from 'aws-amplify';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Button from '../Button/Button.component';
 
@@ -22,14 +22,8 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const AppBar = ({ location }) => {
-  const [connectedUserGroups, setConnectedUserGroups] = useState([]);
-  useEffect(() => {
-    Auth.currentAuthenticatedUser().then((user) => {
-      setConnectedUserGroups(user.signInUserSession.accessToken.payload['cognito:groups']);
-    });
-  }, []);
-
+const AppBar = () => {
+  const location = useLocation();
   const handleSignOut = () => {
     Auth.signOut()
       .then((data) => console.log(data))
@@ -39,13 +33,6 @@ const AppBar = ({ location }) => {
   return (
     <Container>
       <ButtonContainer>
-      {connectedUserGroups && connectedUserGroups.includes('Admin') && location.pathname !== '/admin' && (
-        <Button>
-          <Link to="/admin">
-            Admin
-          </Link>
-        </Button>
-      )}
       {location.pathname !== '/' && (
         <Button>
           <Link to="/">
@@ -61,4 +48,4 @@ const AppBar = ({ location }) => {
   );
 };
 
-export default withRouter(AppBar);
+export default AppBar;

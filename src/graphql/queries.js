@@ -6,8 +6,6 @@ export const getQuestionnaireById = /* GraphQL */ `
     getQuestionnaireById(id: $id) {
       id
       createdAt
-      groupsCanAccess
-      groupsCanAccessQuestions
       questions {
         items {
           id
@@ -15,59 +13,18 @@ export const getQuestionnaireById = /* GraphQL */ `
           imageName
           answer
           createdAt
+          groupsCanAccess
         }
         nextToken
       }
     }
   }
 `;
-export const getAnswer = /* GraphQL */ `
-  query GetAnswer($id: ID!) {
-    getAnswer(id: $id) {
+export const getQuestionnaire = /* GraphQL */ `
+  query GetQuestionnaire($id: ID!) {
+    getQuestionnaire(id: $id) {
       id
-      answer
-      owner
       createdAt
-      question {
-        id
-        imageKey
-        imageName
-        answer
-        createdAt
-        answers {
-          nextToken
-        }
-        questionnaire {
-          id
-          createdAt
-          groupsCanAccess
-          groupsCanAccessQuestions
-        }
-      }
-    }
-  }
-`;
-export const listAnswers = /* GraphQL */ `
-  query ListAnswers(
-    $filter: ModelAnswerFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        answer
-        owner
-        createdAt
-        question {
-          id
-          imageKey
-          imageName
-          answer
-          createdAt
-        }
-      }
-      nextToken
     }
   }
 `;
@@ -81,8 +38,6 @@ export const listQuestionnaires = /* GraphQL */ `
       items {
         id
         createdAt
-        groupsCanAccess
-        groupsCanAccessQuestions
         questions {
           nextToken
         }
@@ -91,23 +46,31 @@ export const listQuestionnaires = /* GraphQL */ `
     }
   }
 `;
-export const getQuestionnaire = /* GraphQL */ `
-  query GetQuestionnaire($id: ID!) {
-    getQuestionnaire(id: $id) {
+export const getQuestion = /* GraphQL */ `
+  query GetQuestion($id: ID!) {
+    getQuestion(id: $id) {
       id
+      imageKey
+      imageName
+      answer
       createdAt
-      groupsCanAccess
-      groupsCanAccessQuestions
-      questions {
+      questionnaire {
+        id
+        createdAt
+        questions {
+          nextToken
+        }
+      }
+      answers {
         items {
           id
-          imageKey
-          imageName
           answer
+          owner
           createdAt
         }
         nextToken
       }
+      groupsCanAccess
     }
   }
 `;
@@ -124,46 +87,66 @@ export const listQuestions = /* GraphQL */ `
         imageName
         answer
         createdAt
-        answers {
-          nextToken
-        }
         questionnaire {
           id
           createdAt
-          groupsCanAccess
-          groupsCanAccessQuestions
         }
+        answers {
+          nextToken
+        }
+        groupsCanAccess
       }
       nextToken
     }
   }
 `;
-export const getQuestion = /* GraphQL */ `
-  query GetQuestion($id: ID!) {
-    getQuestion(id: $id) {
+export const getAnswer = /* GraphQL */ `
+  query GetAnswer($id: ID!) {
+    getAnswer(id: $id) {
       id
-      imageKey
-      imageName
-      answer
-      createdAt
-      answers {
-        items {
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
           id
-          answer
-          owner
           createdAt
         }
-        nextToken
-      }
-      questionnaire {
-        id
-        createdAt
-        groupsCanAccess
-        groupsCanAccessQuestions
-        questions {
+        answers {
           nextToken
         }
+        groupsCanAccess
       }
+      answer
+      owner
+      createdAt
+    }
+  }
+`;
+export const listAnswers = /* GraphQL */ `
+  query ListAnswers(
+    $filter: ModelAnswerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        question {
+          id
+          imageKey
+          imageName
+          answer
+          createdAt
+          groupsCanAccess
+        }
+        answer
+        owner
+        createdAt
+      }
+      nextToken
     }
   }
 `;

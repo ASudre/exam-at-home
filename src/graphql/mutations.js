@@ -9,8 +9,6 @@ export const createQuestionnaire = /* GraphQL */ `
     createQuestionnaire(input: $input, condition: $condition) {
       id
       createdAt
-      groupsCanAccess
-      groupsCanAccessQuestions
       questions {
         items {
           id
@@ -18,6 +16,7 @@ export const createQuestionnaire = /* GraphQL */ `
           imageName
           answer
           createdAt
+          groupsCanAccess
         }
         nextToken
       }
@@ -32,8 +31,6 @@ export const updateQuestionnaire = /* GraphQL */ `
     updateQuestionnaire(input: $input, condition: $condition) {
       id
       createdAt
-      groupsCanAccess
-      groupsCanAccessQuestions
       questions {
         items {
           id
@@ -41,6 +38,7 @@ export const updateQuestionnaire = /* GraphQL */ `
           imageName
           answer
           createdAt
+          groupsCanAccess
         }
         nextToken
       }
@@ -55,8 +53,6 @@ export const deleteQuestionnaire = /* GraphQL */ `
     deleteQuestionnaire(input: $input, condition: $condition) {
       id
       createdAt
-      groupsCanAccess
-      groupsCanAccessQuestions
       questions {
         items {
           id
@@ -64,6 +60,7 @@ export const deleteQuestionnaire = /* GraphQL */ `
           imageName
           answer
           createdAt
+          groupsCanAccess
         }
         nextToken
       }
@@ -81,6 +78,13 @@ export const createQuestion = /* GraphQL */ `
       imageName
       answer
       createdAt
+      questionnaire {
+        id
+        createdAt
+        questions {
+          nextToken
+        }
+      }
       answers {
         items {
           id
@@ -90,15 +94,7 @@ export const createQuestion = /* GraphQL */ `
         }
         nextToken
       }
-      questionnaire {
-        id
-        createdAt
-        groupsCanAccess
-        groupsCanAccessQuestions
-        questions {
-          nextToken
-        }
-      }
+      groupsCanAccess
     }
   }
 `;
@@ -113,6 +109,13 @@ export const updateQuestion = /* GraphQL */ `
       imageName
       answer
       createdAt
+      questionnaire {
+        id
+        createdAt
+        questions {
+          nextToken
+        }
+      }
       answers {
         items {
           id
@@ -122,15 +125,7 @@ export const updateQuestion = /* GraphQL */ `
         }
         nextToken
       }
-      questionnaire {
-        id
-        createdAt
-        groupsCanAccess
-        groupsCanAccessQuestions
-        questions {
-          nextToken
-        }
-      }
+      groupsCanAccess
     }
   }
 `;
@@ -145,6 +140,13 @@ export const deleteQuestion = /* GraphQL */ `
       imageName
       answer
       createdAt
+      questionnaire {
+        id
+        createdAt
+        questions {
+          nextToken
+        }
+      }
       answers {
         items {
           id
@@ -154,15 +156,7 @@ export const deleteQuestion = /* GraphQL */ `
         }
         nextToken
       }
-      questionnaire {
-        id
-        createdAt
-        groupsCanAccess
-        groupsCanAccessQuestions
-        questions {
-          nextToken
-        }
-      }
+      groupsCanAccess
     }
   }
 `;
@@ -173,25 +167,24 @@ export const createAnswer = /* GraphQL */ `
   ) {
     createAnswer(input: $input, condition: $condition) {
       id
-      answer
-      owner
-      createdAt
       question {
         id
         imageKey
         imageName
         answer
         createdAt
-        answers {
-          nextToken
-        }
         questionnaire {
           id
           createdAt
-          groupsCanAccess
-          groupsCanAccessQuestions
         }
+        answers {
+          nextToken
+        }
+        groupsCanAccess
       }
+      answer
+      owner
+      createdAt
     }
   }
 `;
@@ -202,25 +195,24 @@ export const updateAnswer = /* GraphQL */ `
   ) {
     updateAnswer(input: $input, condition: $condition) {
       id
-      answer
-      owner
-      createdAt
       question {
         id
         imageKey
         imageName
         answer
         createdAt
-        answers {
-          nextToken
-        }
         questionnaire {
           id
           createdAt
-          groupsCanAccess
-          groupsCanAccessQuestions
         }
+        answers {
+          nextToken
+        }
+        groupsCanAccess
       }
+      answer
+      owner
+      createdAt
     }
   }
 `;
@@ -231,25 +223,24 @@ export const deleteAnswer = /* GraphQL */ `
   ) {
     deleteAnswer(input: $input, condition: $condition) {
       id
-      answer
-      owner
-      createdAt
       question {
         id
         imageKey
         imageName
         answer
         createdAt
-        answers {
-          nextToken
-        }
         questionnaire {
           id
           createdAt
-          groupsCanAccess
-          groupsCanAccessQuestions
         }
+        answers {
+          nextToken
+        }
+        groupsCanAccess
       }
+      answer
+      owner
+      createdAt
     }
   }
 `;

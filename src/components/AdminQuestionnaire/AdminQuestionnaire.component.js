@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
-
 import styled from 'styled-components';
 import { get } from 'lodash';
-import QuestionCard from '../QuestionCard/QuestionCard.component';
+import { useParams } from 'react-router-dom';
 
-import { listQuestions } from '../../graphql/queries';
+import { getAdminQuestionnaire } from '../../graphql/custom_queries';
+import QuestionCard from '../AdminQuestionCard/AdminQuestionCard.component';
 
 const Container = styled.div`
   padding: 50px 100px;
@@ -16,13 +16,15 @@ const Container = styled.div`
   }
 `;
 
-const AdminPage = () => {
-  const questionnaireId = '01b9162e-820e-42ce-a4f7-59ccf99a2642';
+const Questionnaire = () => {
+  const { id: questionnaireId } = useParams();
   const [questions, setQuestions] = useState([]);
 
-  const refreshQuestionsList = () => API.graphql(graphqlOperation(listQuestions))
+  const refreshQuestionnaire = () => API.graphql(graphqlOperation(getAdminQuestionnaire, {
+    id: questionnaireId,
+  }))
     .then((res) => setQuestions(
-      get(res, 'data.listQuestions.items', [])
+      get(res, 'data.getQuestionnaire.questions.items', [])
         .sort((a, b) => (new Date(a.createdAt) - new Date(b.createdAt))),
     ))
     .catch((e) => {
@@ -30,7 +32,7 @@ const AdminPage = () => {
     });
 
   useEffect(() => {
-    refreshQuestionsList();
+    refreshQuestionnaire();
   }, []);
 
   return (
@@ -39,16 +41,16 @@ const AdminPage = () => {
         <QuestionCard
           key={q.id}
           question={q}
-          onSave={refreshQuestionsList}
+          refreshQuestionnaire={refreshQuestionnaire}
           update
         />
       ))}
       <QuestionCard
         questionnaireId={questionnaireId}
-        onSave={refreshQuestionsList}
+        refreshQuestionnaire={refreshQuestionnaire}
       />
     </Container>
   );
 };
 
-export default AdminPage;
+export default Questionnaire;

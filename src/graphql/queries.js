@@ -1,11 +1,13 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getQuestionnaire = /* GraphQL */ `
-  query GetQuestionnaire($id: ID!) {
-    getQuestionnaire(id: $id) {
+export const getQuestionnaireById = /* GraphQL */ `
+  query GetQuestionnaireById($id: String) {
+    getQuestionnaireById(id: $id) {
       id
       createdAt
+      groupsCanAccess
+      groupsCanAccessQuestions
       questions {
         items {
           id
@@ -19,6 +21,56 @@ export const getQuestionnaire = /* GraphQL */ `
     }
   }
 `;
+export const getAnswer = /* GraphQL */ `
+  query GetAnswer($id: ID!) {
+    getAnswer(id: $id) {
+      id
+      answer
+      owner
+      createdAt
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        answers {
+          nextToken
+        }
+        questionnaire {
+          id
+          createdAt
+          groupsCanAccess
+          groupsCanAccessQuestions
+        }
+      }
+    }
+  }
+`;
+export const listAnswers = /* GraphQL */ `
+  query ListAnswers(
+    $filter: ModelAnswerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        answer
+        owner
+        createdAt
+        question {
+          id
+          imageKey
+          imageName
+          answer
+          createdAt
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const listQuestionnaires = /* GraphQL */ `
   query ListQuestionnaires(
     $filter: ModelQuestionnaireFilterInput
@@ -29,6 +81,8 @@ export const listQuestionnaires = /* GraphQL */ `
       items {
         id
         createdAt
+        groupsCanAccess
+        groupsCanAccessQuestions
         questions {
           nextToken
         }
@@ -37,26 +91,19 @@ export const listQuestionnaires = /* GraphQL */ `
     }
   }
 `;
-export const getQuestion = /* GraphQL */ `
-  query GetQuestion($id: ID!) {
-    getQuestion(id: $id) {
+export const getQuestionnaire = /* GraphQL */ `
+  query GetQuestionnaire($id: ID!) {
+    getQuestionnaire(id: $id) {
       id
-      imageKey
-      imageName
-      answer
       createdAt
-      questionnaire {
-        id
-        createdAt
-        questions {
-          nextToken
-        }
-      }
-      answers {
+      groupsCanAccess
+      groupsCanAccessQuestions
+      questions {
         items {
           id
+          imageKey
+          imageName
           answer
-          owner
           createdAt
         }
         nextToken
@@ -77,63 +124,46 @@ export const listQuestions = /* GraphQL */ `
         imageName
         answer
         createdAt
+        answers {
+          nextToken
+        }
         questionnaire {
           id
           createdAt
-        }
-        answers {
-          nextToken
+          groupsCanAccess
+          groupsCanAccessQuestions
         }
       }
       nextToken
     }
   }
 `;
-export const getAnswer = /* GraphQL */ `
-  query GetAnswer($id: ID!) {
-    getAnswer(id: $id) {
+export const getQuestion = /* GraphQL */ `
+  query GetQuestion($id: ID!) {
+    getQuestion(id: $id) {
       id
-      question {
-        id
-        imageKey
-        imageName
-        answer
-        createdAt
-        questionnaire {
+      imageKey
+      imageName
+      answer
+      createdAt
+      answers {
+        items {
           id
+          answer
+          owner
           createdAt
         }
-        answers {
+        nextToken
+      }
+      questionnaire {
+        id
+        createdAt
+        groupsCanAccess
+        groupsCanAccessQuestions
+        questions {
           nextToken
         }
       }
-      answer
-      owner
-      createdAt
-    }
-  }
-`;
-export const listAnswers = /* GraphQL */ `
-  query ListAnswers(
-    $filter: ModelAnswerFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        question {
-          id
-          imageKey
-          imageName
-          answer
-          createdAt
-        }
-        answer
-        owner
-        createdAt
-      }
-      nextToken
     }
   }
 `;

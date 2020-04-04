@@ -1,16 +1,20 @@
-type Questionnaire @model {
+type Questionnaire @model
+@auth(rules: [
+  { allow: groups, groups: ["Admin"], operations: [read] }
+  { allow: private, provider: iam, operations: [read] }
+]) {
   id: ID!
   createdAt: AWSDateTime
-  questions: [Question]
-    @connection(name: "ByQuestionnaire")
-    @auth(rules: [
-      { allow: groups, groupsField: "groupsCanAccess", operations: [read] },
-      { allow: groups, groups: ["Admin"], operations: [read] }
-    ])
+  questions: [Question] @connection(name: "ByQuestionnaire")
+  groupsCanAccess: [String]
+  groupsCanAccessQuestions: [String]
 }
 
 type Question @model
-{
+@auth(rules: [
+  { allow: groups, groups: ["Admin"], operations: [read] },
+  { allow: private, provider: iam, operations: [read] }
+]) {
   id: ID!
   imageKey: String!
   imageName: String!
@@ -29,9 +33,12 @@ type Answer @model
   { allow: groups, groups: ["Admin"], operations: [read] }
 ]) {
   id: ID!
-  question: Question
-    @connection(name: "ByQuestion")
+  question: Question @connection(name: "ByQuestion")
   answer: String!
   owner: String
   createdAt: AWSDateTime
+}
+
+type Query {
+  getQuestionnaireById(id: String): Questionnaire
 }

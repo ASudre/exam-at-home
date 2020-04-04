@@ -6,6 +6,8 @@ export const onCreateQuestionnaire = /* GraphQL */ `
     onCreateQuestionnaire {
       id
       createdAt
+      groupsCanAccess
+      groupsCanAccessQuestions
       questions {
         items {
           id
@@ -24,6 +26,8 @@ export const onUpdateQuestionnaire = /* GraphQL */ `
     onUpdateQuestionnaire {
       id
       createdAt
+      groupsCanAccess
+      groupsCanAccessQuestions
       questions {
         items {
           id
@@ -42,6 +46,8 @@ export const onDeleteQuestionnaire = /* GraphQL */ `
     onDeleteQuestionnaire {
       id
       createdAt
+      groupsCanAccess
+      groupsCanAccessQuestions
       questions {
         items {
           id
@@ -63,13 +69,6 @@ export const onCreateQuestion = /* GraphQL */ `
       imageName
       answer
       createdAt
-      questionnaire {
-        id
-        createdAt
-        questions {
-          nextToken
-        }
-      }
       answers {
         items {
           id
@@ -78,6 +77,15 @@ export const onCreateQuestion = /* GraphQL */ `
           createdAt
         }
         nextToken
+      }
+      questionnaire {
+        id
+        createdAt
+        groupsCanAccess
+        groupsCanAccessQuestions
+        questions {
+          nextToken
+        }
       }
     }
   }
@@ -90,13 +98,6 @@ export const onUpdateQuestion = /* GraphQL */ `
       imageName
       answer
       createdAt
-      questionnaire {
-        id
-        createdAt
-        questions {
-          nextToken
-        }
-      }
       answers {
         items {
           id
@@ -105,6 +106,15 @@ export const onUpdateQuestion = /* GraphQL */ `
           createdAt
         }
         nextToken
+      }
+      questionnaire {
+        id
+        createdAt
+        groupsCanAccess
+        groupsCanAccessQuestions
+        questions {
+          nextToken
+        }
       }
     }
   }
@@ -117,13 +127,6 @@ export const onDeleteQuestion = /* GraphQL */ `
       imageName
       answer
       createdAt
-      questionnaire {
-        id
-        createdAt
-        questions {
-          nextToken
-        }
-      }
       answers {
         items {
           id
@@ -133,6 +136,15 @@ export const onDeleteQuestion = /* GraphQL */ `
         }
         nextToken
       }
+      questionnaire {
+        id
+        createdAt
+        groupsCanAccess
+        groupsCanAccessQuestions
+        questions {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -140,23 +152,25 @@ export const onCreateAnswer = /* GraphQL */ `
   subscription OnCreateAnswer($owner: String!) {
     onCreateAnswer(owner: $owner) {
       id
+      answer
+      owner
+      createdAt
       question {
         id
         imageKey
         imageName
         answer
         createdAt
-        questionnaire {
-          id
-          createdAt
-        }
         answers {
           nextToken
         }
+        questionnaire {
+          id
+          createdAt
+          groupsCanAccess
+          groupsCanAccessQuestions
+        }
       }
-      answer
-      owner
-      createdAt
     }
   }
 `;
@@ -164,23 +178,25 @@ export const onUpdateAnswer = /* GraphQL */ `
   subscription OnUpdateAnswer($owner: String!) {
     onUpdateAnswer(owner: $owner) {
       id
+      answer
+      owner
+      createdAt
       question {
         id
         imageKey
         imageName
         answer
         createdAt
-        questionnaire {
-          id
-          createdAt
-        }
         answers {
           nextToken
         }
+        questionnaire {
+          id
+          createdAt
+          groupsCanAccess
+          groupsCanAccessQuestions
+        }
       }
-      answer
-      owner
-      createdAt
     }
   }
 `;
@@ -188,23 +204,25 @@ export const onDeleteAnswer = /* GraphQL */ `
   subscription OnDeleteAnswer($owner: String!) {
     onDeleteAnswer(owner: $owner) {
       id
+      answer
+      owner
+      createdAt
       question {
         id
         imageKey
         imageName
         answer
         createdAt
-        questionnaire {
-          id
-          createdAt
-        }
         answers {
           nextToken
         }
+        questionnaire {
+          id
+          createdAt
+          groupsCanAccess
+          groupsCanAccessQuestions
+        }
       }
-      answer
-      owner
-      createdAt
     }
   }
 `;

@@ -12,7 +12,6 @@ export default styled.button`
   padding: 0.25em 1em;
   border: ${(props) => `2px solid ${props.theme.color.primary}`};
   border-radius: 3px;
-  height: 1.8em;
 
   & > a {
     color: ${(props) => (props.primary ? 'white' : props.theme.color.primary)};

@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 
 import { listQuestionnaires } from '../../graphql/queries';
 import Button from '../Button/Button.component';
+import Loader from '../Loader/Loader.component';
+import Card from '../Card/Card.component';
+import CardActions from '../Card/CardActions/CardActions.component';
 
 const Container = styled.div`
   padding: 50px 100px;
@@ -16,29 +19,38 @@ const Container = styled.div`
   }
 `;
 
-const HomePage = () => {
-  const [questionnaires, setQuestionnaires] = useState([]);
+const refreshQuestionnairesList = (setQuestionnaires) => API
+  .graphql(graphqlOperation(listQuestionnaires))
+  .then((res) => setQuestionnaires(
+    get(res, 'data.listQuestionnaires.items', [])
+      .sort((a, b) => (new Date(a.createdAt) - new Date(b.createdAt))),
+  ))
+  .catch((e) => {
+    console.error(e);
+  });
 
-  const refreshQuestionnairesList = () => API.graphql(graphqlOperation(listQuestionnaires))
-    .then((res) => setQuestionnaires(
-      get(res, 'data.listQuestionnaires.items', [])
-        .sort((a, b) => (new Date(a.createdAt) - new Date(b.createdAt))),
-    ))
-    .catch((e) => {
-      console.error(e);
-    });
+const HomePage = () => {
+  const [questionnaires, setQuestionnaires] = useState(null);
 
   useEffect(() => {
-    refreshQuestionnairesList();
+    refreshQuestionnairesList(setQuestionnaires);
   }, []);
 
-  return <Container>
-        {questionnaires.map((q) => (
-          <Link key={q.id} to={`/${q.id}`}>
-            <Button>{q.id}</Button>
-          </Link>
-        ))}
-      </Container>;
+  return (
+    !questionnaires
+      ? <Loader />
+      : <Container>
+      {questionnaires.map((q) => (
+        <Card key={q.id}>
+            <CardActions>
+              <Link to={`/questionnaires/${q.id}`}>
+                <Button>{q.id}</Button>
+              </Link>
+            </CardActions>
+          </Card>
+      ))}
+    </Container>
+  );
 };
 
 export default HomePage;

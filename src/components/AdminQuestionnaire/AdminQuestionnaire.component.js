@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { API, graphqlOperation } from 'aws-amplify';
+import React from 'react';
 import styled from 'styled-components';
 import { get } from 'lodash';
-import { useParams } from 'react-router-dom';
 
-import { getAdminQuestionnaire } from '../../graphql/custom_queries';
 import QuestionCard from '../AdminQuestionCard/AdminQuestionCard.component';
 
 const Container = styled.div`
@@ -16,41 +13,21 @@ const Container = styled.div`
   }
 `;
 
-const Questionnaire = () => {
-  const { id: questionnaireId } = useParams();
-  const [questions, setQuestions] = useState([]);
-
-  const refreshQuestionnaire = () => API.graphql(graphqlOperation(getAdminQuestionnaire, {
-    id: questionnaireId,
-  }))
-    .then((res) => setQuestions(
-      get(res, 'data.getQuestionnaire.questions.items', [])
-        .sort((a, b) => (new Date(a.createdAt) - new Date(b.createdAt))),
-    ))
-    .catch((e) => {
-      console.error(e);
-    });
-
-  useEffect(() => {
-    refreshQuestionnaire();
-  }, []);
-
-  return (
-    <Container>
-      {questions.map((q) => (
-        <QuestionCard
-          key={q.id}
-          question={q}
-          refreshQuestionnaire={refreshQuestionnaire}
-          update
-        />
-      ))}
+const AdminQuestionnaire = ({ questionnaire, refreshQuestionnaire }) => (
+  <Container>
+    {get(questionnaire, 'questions.items', []).map((q) => (
       <QuestionCard
-        questionnaireId={questionnaireId}
+        key={q.id}
+        question={q}
         refreshQuestionnaire={refreshQuestionnaire}
+        update
       />
-    </Container>
-  );
-};
+    ))}
+    <QuestionCard
+      questionnaireId={questionnaire.id}
+      refreshQuestionnaire={refreshQuestionnaire}
+    />
+  </Container>
+);
 
-export default Questionnaire;
+export default AdminQuestionnaire;

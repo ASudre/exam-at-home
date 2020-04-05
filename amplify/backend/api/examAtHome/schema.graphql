@@ -1,6 +1,9 @@
 type Questionnaire @model
 @auth(rules: [{allow: private}]) {
   id: ID!
+  startTime: AWSDateTime!
+  name: String!
+  duration: Int!
   createdAt: AWSDateTime
   questions: [Question] @connection(name: "ByQuestionnaire")
 }

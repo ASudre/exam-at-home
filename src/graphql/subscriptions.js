@@ -5,6 +5,9 @@ export const onCreateQuestionnaire = /* GraphQL */ `
   subscription OnCreateQuestionnaire {
     onCreateQuestionnaire {
       id
+      startTime
+      name
+      duration
       createdAt
       questions {
         items {
@@ -24,6 +27,9 @@ export const onUpdateQuestionnaire = /* GraphQL */ `
   subscription OnUpdateQuestionnaire {
     onUpdateQuestionnaire {
       id
+      startTime
+      name
+      duration
       createdAt
       questions {
         items {
@@ -43,6 +49,9 @@ export const onDeleteQuestionnaire = /* GraphQL */ `
   subscription OnDeleteQuestionnaire {
     onDeleteQuestionnaire {
       id
+      startTime
+      name
+      duration
       createdAt
       questions {
         items {
@@ -68,6 +77,9 @@ export const onCreateQuestion = /* GraphQL */ `
       createdAt
       questionnaire {
         id
+        startTime
+        name
+        duration
         createdAt
         questions {
           nextToken
@@ -96,6 +108,9 @@ export const onUpdateQuestion = /* GraphQL */ `
       createdAt
       questionnaire {
         id
+        startTime
+        name
+        duration
         createdAt
         questions {
           nextToken
@@ -124,6 +139,9 @@ export const onDeleteQuestion = /* GraphQL */ `
       createdAt
       questionnaire {
         id
+        startTime
+        name
+        duration
         createdAt
         questions {
           nextToken
@@ -154,6 +172,9 @@ export const onCreateAnswer = /* GraphQL */ `
         createdAt
         questionnaire {
           id
+          startTime
+          name
+          duration
           createdAt
         }
         answers {
@@ -179,6 +200,9 @@ export const onUpdateAnswer = /* GraphQL */ `
         createdAt
         questionnaire {
           id
+          startTime
+          name
+          duration
           createdAt
         }
         answers {
@@ -204,6 +228,9 @@ export const onDeleteAnswer = /* GraphQL */ `
         createdAt
         questionnaire {
           id
+          startTime
+          name
+          duration
           createdAt
         }
         answers {

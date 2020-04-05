@@ -7,10 +7,10 @@ export default styled.button`
   color: ${(props) => (props.primary ? 'white' : props.theme.color.primary)};
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-  font-weight: 700;
+  font-weight: 400;
   font-size: 1em;
   padding: 0.25em 1em;
-  border: ${(props) => `2px solid ${props.theme.color.primary}`};
+  border: ${(props) => `1px solid ${props.theme.color.primary}`};
   border-radius: 3px;
 
   & > a {

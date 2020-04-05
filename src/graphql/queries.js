@@ -5,6 +5,9 @@ export const getQuestionnaireById = /* GraphQL */ `
   query GetQuestionnaireById($id: String) {
     getQuestionnaireById(id: $id) {
       id
+      startTime
+      name
+      duration
       createdAt
       questions {
         items {
@@ -24,7 +27,21 @@ export const getQuestionnaire = /* GraphQL */ `
   query GetQuestionnaire($id: ID!) {
     getQuestionnaire(id: $id) {
       id
+      startTime
+      name
+      duration
       createdAt
+      questions {
+        items {
+          id
+          imageKey
+          imageName
+          answer
+          createdAt
+          groupsCanAccess
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -37,6 +54,9 @@ export const listQuestionnaires = /* GraphQL */ `
     listQuestionnaires(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        startTime
+        name
+        duration
         createdAt
         questions {
           nextToken
@@ -56,6 +76,9 @@ export const getQuestion = /* GraphQL */ `
       createdAt
       questionnaire {
         id
+        startTime
+        name
+        duration
         createdAt
         questions {
           nextToken
@@ -89,6 +112,9 @@ export const listQuestions = /* GraphQL */ `
         createdAt
         questionnaire {
           id
+          startTime
+          name
+          duration
           createdAt
         }
         answers {
@@ -112,6 +138,9 @@ export const getAnswer = /* GraphQL */ `
         createdAt
         questionnaire {
           id
+          startTime
+          name
+          duration
           createdAt
         }
         answers {

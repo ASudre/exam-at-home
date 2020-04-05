@@ -8,6 +8,9 @@ export const createQuestionnaire = /* GraphQL */ `
   ) {
     createQuestionnaire(input: $input, condition: $condition) {
       id
+      startTime
+      name
+      duration
       createdAt
       questions {
         items {
@@ -30,6 +33,9 @@ export const updateQuestionnaire = /* GraphQL */ `
   ) {
     updateQuestionnaire(input: $input, condition: $condition) {
       id
+      startTime
+      name
+      duration
       createdAt
       questions {
         items {
@@ -52,6 +58,9 @@ export const deleteQuestionnaire = /* GraphQL */ `
   ) {
     deleteQuestionnaire(input: $input, condition: $condition) {
       id
+      startTime
+      name
+      duration
       createdAt
       questions {
         items {
@@ -80,6 +89,9 @@ export const createQuestion = /* GraphQL */ `
       createdAt
       questionnaire {
         id
+        startTime
+        name
+        duration
         createdAt
         questions {
           nextToken
@@ -111,6 +123,9 @@ export const updateQuestion = /* GraphQL */ `
       createdAt
       questionnaire {
         id
+        startTime
+        name
+        duration
         createdAt
         questions {
           nextToken
@@ -142,6 +157,9 @@ export const deleteQuestion = /* GraphQL */ `
       createdAt
       questionnaire {
         id
+        startTime
+        name
+        duration
         createdAt
         questions {
           nextToken
@@ -175,6 +193,9 @@ export const createAnswer = /* GraphQL */ `
         createdAt
         questionnaire {
           id
+          startTime
+          name
+          duration
           createdAt
         }
         answers {
@@ -203,6 +224,9 @@ export const updateAnswer = /* GraphQL */ `
         createdAt
         questionnaire {
           id
+          startTime
+          name
+          duration
           createdAt
         }
         answers {
@@ -231,6 +255,9 @@ export const deleteAnswer = /* GraphQL */ `
         createdAt
         questionnaire {
           id
+          startTime
+          name
+          duration
           createdAt
         }
         answers {

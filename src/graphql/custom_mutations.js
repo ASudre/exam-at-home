@@ -61,3 +61,43 @@ export const deleteQuestion = /* GraphQL */ `
     }
   }
 `;
+export const createQuestionnaire = /* GraphQL */ `
+  mutation CreateQuestionnaire(
+    $input: CreateQuestionnaireInput!
+    $condition: ModelQuestionnaireConditionInput
+  ) {
+    createQuestionnaire(input: $input, condition: $condition) {
+      id
+      startTime
+      name
+      duration
+    }
+  }
+`;
+export const updateQuestionnaire = /* GraphQL */ `
+  mutation UpdateQuestionnaire(
+    $input: UpdateQuestionnaireInput!
+    $condition: ModelQuestionnaireConditionInput
+  ) {
+    updateQuestionnaire(input: $input, condition: $condition) {
+      id
+      startTime
+      name
+      duration
+    }
+  }
+`;
+export const deleteQuestionnaire = /* GraphQL */ `
+  mutation DeleteQuestionnaire(
+    $input: DeleteQuestionnaireInput!
+    $condition: ModelQuestionnaireConditionInput
+  ) {
+    deleteQuestionnaire(input: $input, condition: $condition) {
+      id
+      startTime
+      name
+      duration
+      createdAt
+    }
+  }
+`;

@@ -15,6 +15,7 @@ const Container = styled.div`
 const Content = styled.div`
   flex: 1;
   display: flex;
+  justify-content: center;
 `;
 
 const Layout = ({ children }) => (

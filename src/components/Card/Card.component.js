@@ -7,8 +7,10 @@ export default styled.div`
   flex-direction: column;
   align-items: stretch;
   margin-bottom: 40px;
+  min-width: 600px;
   @media (max-width: 768px) {
     margin-bottom: 20px;
+    min-width: auto;
   }
   &:last-child {
     margin: 0;

@@ -13,11 +13,9 @@ const Container = styled.div`
   padding: 50px 100px;
   display: flex;
   flex-direction: column;
-  min-width: 750px;
   @media (max-width: 768px) {
     padding: 20px;
     width: 100%;
-    min-width: auto;
   }
 `;
 

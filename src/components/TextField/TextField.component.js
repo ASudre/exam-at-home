@@ -7,14 +7,14 @@ const Input = styled.input`
   color: ${(props) => props.inputColor || props.theme.color.primary};
   border: ${(props) => `1px solid ${props.theme.color.primary}`};
   border-radius: 3px;
+  font-size: small;
 `;
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 const Label = styled.div`

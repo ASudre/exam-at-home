@@ -17,7 +17,7 @@ const InfoTag = styled.div`
   border-radius: 2px;
   @media (max-width: 768px) {
     margin-left: .5em;
-    font-size: x-small;
+    font-size: small;
   }
 `;
 

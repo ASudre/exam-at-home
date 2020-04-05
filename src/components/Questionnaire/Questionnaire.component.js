@@ -8,7 +8,7 @@ import CandidateQuestionnaire from '../CandidateQuestionnaire/CandidateQuestionn
 import AdminQuestionnaire from '../AdminQuestionnaire/AdminQuestionnaire.component';
 import Loader from '../Loader/Loader.component';
 
-const refreshQuestionnaire = (id, isAdmin) => async (setQuestionnaire) => API
+const getQuestionnaire = async (id, isAdmin) => API
   .graphql(
     graphqlOperation(isAdmin
       ? getAdminQuestionnaire
@@ -17,9 +17,14 @@ const refreshQuestionnaire = (id, isAdmin) => async (setQuestionnaire) => API
       id,
     }),
   )
-  .then((res) => setQuestionnaire(
-    get(res, 'data.getQuestionnaire', {}),
-  ))
+  .then((res) => get(res, 'data.getQuestionnaire', {}))
+  .then((q) => ({
+    ...q,
+    questions: {
+      ...q.questions,
+      items: q.questions.items.sort((a, b) => (new Date(a.createdAt) - new Date(b.createdAt))),
+    },
+  }))
   .catch((e) => {
     console.error(e);
   });
@@ -29,7 +34,7 @@ const Questionnaire = ({ isAdmin }) => {
   const [questionnaire, setQuestionnaire] = useState(null);
 
   useEffect(() => {
-    refreshQuestionnaire(id, isAdmin)(setQuestionnaire);
+    getQuestionnaire(id, isAdmin).then(setQuestionnaire);
   },
   [id, isAdmin]);
 
@@ -40,7 +45,7 @@ const Questionnaire = ({ isAdmin }) => {
   return (isAdmin
     ? <AdminQuestionnaire
         questionnaire={questionnaire}
-        refreshQuestionnaire={() => refreshQuestionnaire(id, true)(setQuestionnaire)}
+        refreshQuestionnaire={() => getQuestionnaire(id, true).then(setQuestionnaire)}
       />
     : <CandidateQuestionnaire
         questionnaire={questionnaire}

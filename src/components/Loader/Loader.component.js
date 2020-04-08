@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 import Loader from 'react-loader-spinner';
 
 const LoaderContainer = styled.div`
@@ -9,15 +9,18 @@ const LoaderContainer = styled.div`
   justify-content: center;
 `;
 
-const LoaderComponent = () => (
-  <LoaderContainer>
-    <Loader
-        type="Puff"
-        color="palevioletred"
-        height={100}
-        width={100}
-    />
-  </LoaderContainer>
-);
+const LoaderComponent = () => {
+  const themeContext = useContext(ThemeContext);
+  return (
+    <LoaderContainer>
+      <Loader
+          type="Puff"
+          color={themeContext.color.primary}
+          height={100}
+          width={100}
+      />
+    </LoaderContainer>
+  );
+};
 
 export default LoaderComponent;

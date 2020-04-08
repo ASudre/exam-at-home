@@ -1,17 +1,23 @@
 type Questionnaire @model
-@auth(rules: [{allow: private}]) {
+@auth(rules: [
+  { allow: private, operations: [read] },
+  { allow: groups, groups: ["Admin"], operations: [create, update, read, delete] },
+]) {
   id: ID!
   startTime: AWSDateTime!
   name: String!
   duration: Int!
   createdAt: AWSDateTime
   questions: [Question] @connection(name: "ByQuestionnaire")
+    @auth(rules: [
+      { allow: private, provider: iam, operations: [read] }
+    ])
 }
 
 type Question @model
 @auth(rules: [
+  { allow: private, provider: iam, operations: [read] }
   { allow: groups, groups: ["Admin"], operations: [create, update, read, delete] },
-  { allow: groups, groupsField: "groupsCanAccess", operations: [read] },
 ]) {
   id: ID!
   imageKey: String!
@@ -23,13 +29,14 @@ type Question @model
   createdAt: AWSDateTime
   questionnaire: Questionnaire @connection(name: "ByQuestionnaire")
   answers: [Answer] @connection(name: "ByQuestion")
-  groupsCanAccess: [String]
 }
 
 type Answer @model
 @auth(rules: [
-  { allow: owner, operations: [create, read, update, delete] },
+  { allow: owner, operations: [read] },
+  { allow: private, provider: iam, operations: [create, update] }
   { allow: groups, groups: ["Admin"], operations: [read] }
+  { allow: groups, groups: ["Forbidden"] }
 ]) {
   id: ID!
   question: Question @connection(name: "ByQuestion")

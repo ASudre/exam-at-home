@@ -34,11 +34,11 @@ const AppBar = () => {
     <Container>
       <ButtonContainer>
       {location.pathname !== '/' && (
-        <Button>
-          <Link to="/">
+        <Link to="/">
+          <Button>
             Home
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       )}
       </ButtonContainer>
       <ButtonContainer>

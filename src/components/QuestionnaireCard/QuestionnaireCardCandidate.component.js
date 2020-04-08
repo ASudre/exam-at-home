@@ -52,11 +52,11 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => (
         Edit
       </Button>
       }
-      <Button>
-        <Link to={`/questionnaires/${questionnaire.id}`}>
+      <Link to={`/questionnaires/${questionnaire.id}`}>
+        <Button>
           Start
-        </Link>
-      </Button>
+        </Button>
+      </Link>
     </CardActions>
   </Card>
 );

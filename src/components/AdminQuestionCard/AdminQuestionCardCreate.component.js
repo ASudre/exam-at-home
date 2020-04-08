@@ -43,7 +43,7 @@ const QuestionCardCreate = ({
       ? <AddIcon onClick={() => setAddQuestionFormOpened(true)} />
       : (<Card>
           <CardContent>
-            <Button primary onClick={onImageInputClick}>
+            <Button onClick={onImageInputClick}>
               {imageFile.name || 'Select image'}
             </Button>
             <FileInput ref={imageInput} setFile={setImageFile} />
@@ -54,11 +54,10 @@ const QuestionCardCreate = ({
             />
           </CardContent>
           <CardActions>
-            <Button primary onClick={() => setAddQuestionFormOpened(false)}>
+            <Button onClick={() => setAddQuestionFormOpened(false)}>
               Cancel
             </Button>
             <Button
-              primary
               disabled={!imageFile.name || !answer}
               onClick={() => onSave(imageFile, buildInput()).then(() => {
                 setImageFile(initState.imageFile);

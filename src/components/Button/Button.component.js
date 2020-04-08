@@ -1,25 +1,34 @@
 import styled from 'styled-components';
 
-const backgroundColor = (props) => (props.primary ? props.theme.color.primary : '#282b33');
+const backgroundColor = (props) => (props.secondary
+  ? props.theme.backgroundColor.secondary
+  : props.theme.backgroundColor.primary);
+
+const color = (props) => (props.secondary
+  ? props.theme.color.secondary
+  : props.theme.color.primary);
 
 export default styled.button`
   background-color: ${backgroundColor};
-  color: ${(props) => (props.primary ? 'white' : props.theme.color.primary)};
+  color: ${color};
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-  font-weight: 400;
   font-size: 1em;
-  padding: 0.25em 1em;
+  padding: 0.3em 1em;
   border: ${(props) => `1px solid ${props.theme.color.primary}`};
-  border-radius: 3px;
+  border-radius: 7px;
 
   & > a {
-    color: ${(props) => (props.primary ? 'white' : props.theme.color.primary)};
+    color: ${color};
     text-decoration: none;
   }
 
-  &:hover {
-    background-color: ${(props) => (props.disabled ? backgroundColor(props) : props.theme.color.secondary)};
-    color: ${(props) => (!props.disabled && props.primary && props.theme.color.primary)};
+  &:focus {
+    outline:0;
   }
+
+  &:hover {
+    background-color: ${(props) => (!props.disabled && props.theme.backgroundColor.secondary)};
+  }
+
 `;

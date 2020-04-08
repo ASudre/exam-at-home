@@ -43,7 +43,6 @@ const QuestionCardUpdate = ({
       </CardContent>
       <CardActions>
         <Button
-          primary
           disabled={answer === savedAnswer && !imageFile.name}
           onClick={() => onSave(imageFile, buildInput()).then(() => {
             // why data.updateQuestion.answer is null?
@@ -53,7 +52,6 @@ const QuestionCardUpdate = ({
           Update
         </Button>
         <Button
-          primary
           onClick={() => onDelete(question)}
         >
           Delete

@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Button from '../Button/Button.component';
 
 const Container = styled.div`
-  background-color: ${(props) => props.theme.color.secondary};
+  background-color: ${(props) => props.theme.backgroundColor.primary};
   display: flex;
   justify-content: flex-end;
   height: 64px;
@@ -15,10 +15,10 @@ const Container = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  padding: 0 20px;
+  padding: 0 .8em;
   &:last-child {
     padding: 0;
-    padding-right: 20px;
+    padding-right: .8em;
   }
 `;
 

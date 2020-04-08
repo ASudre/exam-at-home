@@ -15,9 +15,14 @@ import QuestionnairePage from './components/QuestionnairePage/QuestionnairePage.
 
 Amplify.configure(awsconfig);
 const theme = {
+  backgroundColor: {
+    primary: '#ff9900',
+    secondary: '#ffc165',
+    ternary: '#1529390f',
+  },
   color: {
-    primary: 'palevioletred',
-    secondary: '#dd3f5b1f',
+    primary: '#152939',
+    secondary: 'white',
   },
 };
 

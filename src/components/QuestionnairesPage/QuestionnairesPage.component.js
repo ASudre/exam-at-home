@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 
 import Loader from '../Loader/Loader.component';
 import QuestionnaireCardEdit from '../QuestionnaireCard/QuestionnaireCardEdit.component';
@@ -8,16 +7,6 @@ import AddIcon from '../AddIcon/AddIcon.component';
 import {
   listSortedQuestionnaires, updateQuestionnaire, deleteQuestionnaire, createQuestionnaire,
 } from './QuestionnairesPage.util';
-
-const Container = styled.div`
-  padding: 50px 100px;
-  display: flex;
-  flex-direction: column;
-  @media (max-width: 768px) {
-    padding: 20px;
-    width: 100%;
-  }
-`;
 
 const QuestionnairesPage = ({ isAdmin }) => {
   const [questionnaires, setQuestionnaires] = useState(null);
@@ -30,7 +19,7 @@ const QuestionnairesPage = ({ isAdmin }) => {
   return (
     !questionnaires
       ? <Loader />
-      : <Container>
+      : <>
       {questionnaires.map((q) => (
         <QuestionnaireCard
           key={q.id}
@@ -56,7 +45,7 @@ const QuestionnairesPage = ({ isAdmin }) => {
             onClick={() => setAddQuestionnaireOpened(true)}
           />
       )}
-    </Container>
+    </>
   );
 };
 

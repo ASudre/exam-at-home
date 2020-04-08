@@ -51,7 +51,6 @@ const CandidateQuestionCard = ({
       </CardContent>
       <CardActions>
         <Button
-          primary
           disabled={answer === savedAnswer}
           onClick={
             () => (initAnswer.id

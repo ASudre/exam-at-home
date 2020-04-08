@@ -10,8 +10,6 @@ const Radio = styled.input`
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
-  justify-content: center;
 `;
 
 const RadioContainer = styled.div`

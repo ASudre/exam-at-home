@@ -6,7 +6,7 @@ const Input = styled.input`
   margin: 0.5em;
   color: ${(props) => props.inputColor || props.theme.color.primary};
   border: ${(props) => `1px solid ${props.theme.color.primary}`};
-  border-radius: 3px;
+  border-radius: 7px;
   font-size: small;
 `;
 

@@ -10,11 +10,11 @@ import Button from '../Button/Button.component';
 
 const InfoTag = styled.div`
   align-self: flex-end;
-  border: 1px solid palevioletred;
-  padding: 2px;
+  border: ${(props) => `1px solid ${props.theme.color.primary}`};
+  padding: 3px;
   font-size: smaller;
   margin-left: 1em;
-  border-radius: 2px;
+  border-radius: 4px;
   @media (max-width: 768px) {
     margin-left: .5em;
     font-size: small;
@@ -28,7 +28,7 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: large;
+  font-size: 1.1em;
   margin: 5px 5px 0;
   @media (max-width: 768px) {
     margin: 10px 5px 0;

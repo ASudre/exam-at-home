@@ -5,12 +5,10 @@ export default styled.div`
   justify-content: space-between;
   font-size: 1em;
   flex-direction: column;
-  align-items: stretch;
-  margin-bottom: 40px;
-  min-width: 600px;
-  @media (max-width: 768px) {
-    margin-bottom: 20px;
-    min-width: auto;
+  margin-bottom: 1.6em;
+  width: 100%;
+  @media (min-width: 768px) {
+    width: 600px;
   }
   &:last-child {
     margin: 0;

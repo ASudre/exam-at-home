@@ -1,27 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getQuestionnaireById = /* GraphQL */ `
-  query GetQuestionnaireById($id: String) {
-    getQuestionnaireById(id: $id) {
-      id
-      startTime
-      name
-      duration
-      createdAt
-      questions {
-        items {
-          id
-          imageKey
-          imageName
-          answer
-          createdAt
-        }
-        nextToken
-      }
-    }
-  }
-`;
 export const getQuestionnaire = /* GraphQL */ `
   query GetQuestionnaire($id: ID!) {
     getQuestionnaire(id: $id) {

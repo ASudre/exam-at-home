@@ -41,7 +41,3 @@ type Answer @model
   owner: String
   createdAt: AWSDateTime
 }
-
-type Query {
-  getQuestionnaireById(id: String): Questionnaire
-}

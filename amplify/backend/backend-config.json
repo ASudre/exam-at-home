@@ -51,13 +51,7 @@
 			}
 		}
 	},
-	"function": {
-		"getQuestionnaireByIdLambda": {
-			"service": "Lambda",
-			"providerPlugin": "awscloudformation",
-			"build": true
-		}
-	},
+	"function": {},
 	"storage": {
 		"examAtHomeQuestions": {
 			"service": "S3",

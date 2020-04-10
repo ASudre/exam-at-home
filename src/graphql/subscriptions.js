@@ -16,7 +16,6 @@ export const onCreateQuestionnaire = /* GraphQL */ `
           imageName
           answer
           createdAt
-          groupsCanAccess
         }
         nextToken
       }
@@ -38,7 +37,6 @@ export const onUpdateQuestionnaire = /* GraphQL */ `
           imageName
           answer
           createdAt
-          groupsCanAccess
         }
         nextToken
       }
@@ -60,7 +58,6 @@ export const onDeleteQuestionnaire = /* GraphQL */ `
           imageName
           answer
           createdAt
-          groupsCanAccess
         }
         nextToken
       }
@@ -94,7 +91,6 @@ export const onCreateQuestion = /* GraphQL */ `
         }
         nextToken
       }
-      groupsCanAccess
     }
   }
 `;
@@ -125,7 +121,6 @@ export const onUpdateQuestion = /* GraphQL */ `
         }
         nextToken
       }
-      groupsCanAccess
     }
   }
 `;
@@ -156,70 +151,16 @@ export const onDeleteQuestion = /* GraphQL */ `
         }
         nextToken
       }
-      groupsCanAccess
-    }
-  }
-`;
-export const onCreateAnswer = /* GraphQL */ `
-  subscription OnCreateAnswer($owner: String!) {
-    onCreateAnswer(owner: $owner) {
-      id
-      question {
-        id
-        imageKey
-        imageName
-        answer
-        createdAt
-        questionnaire {
-          id
-          startTime
-          name
-          duration
-          createdAt
-        }
-        answers {
-          nextToken
-        }
-        groupsCanAccess
-      }
-      answer
-      owner
-      createdAt
-    }
-  }
-`;
-export const onUpdateAnswer = /* GraphQL */ `
-  subscription OnUpdateAnswer($owner: String!) {
-    onUpdateAnswer(owner: $owner) {
-      id
-      question {
-        id
-        imageKey
-        imageName
-        answer
-        createdAt
-        questionnaire {
-          id
-          startTime
-          name
-          duration
-          createdAt
-        }
-        answers {
-          nextToken
-        }
-        groupsCanAccess
-      }
-      answer
-      owner
-      createdAt
     }
   }
 `;
 export const onDeleteAnswer = /* GraphQL */ `
-  subscription OnDeleteAnswer($owner: String!) {
-    onDeleteAnswer(owner: $owner) {
+  subscription OnDeleteAnswer {
+    onDeleteAnswer {
       id
+      answer
+      owner
+      createdAt
       question {
         id
         imageKey
@@ -236,11 +177,61 @@ export const onDeleteAnswer = /* GraphQL */ `
         answers {
           nextToken
         }
-        groupsCanAccess
       }
+    }
+  }
+`;
+export const onCreateAnswer = /* GraphQL */ `
+  subscription OnCreateAnswer {
+    onCreateAnswer {
+      id
       answer
       owner
       createdAt
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
+          id
+          startTime
+          name
+          duration
+          createdAt
+        }
+        answers {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onUpdateAnswer = /* GraphQL */ `
+  subscription OnUpdateAnswer {
+    onUpdateAnswer {
+      id
+      answer
+      owner
+      createdAt
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
+          id
+          startTime
+          name
+          duration
+          createdAt
+        }
+        answers {
+          nextToken
+        }
+      }
     }
   }
 `;

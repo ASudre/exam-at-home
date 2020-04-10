@@ -19,7 +19,6 @@ export const createQuestionnaire = /* GraphQL */ `
           imageName
           answer
           createdAt
-          groupsCanAccess
         }
         nextToken
       }
@@ -44,7 +43,6 @@ export const updateQuestionnaire = /* GraphQL */ `
           imageName
           answer
           createdAt
-          groupsCanAccess
         }
         nextToken
       }
@@ -69,7 +67,6 @@ export const deleteQuestionnaire = /* GraphQL */ `
           imageName
           answer
           createdAt
-          groupsCanAccess
         }
         nextToken
       }
@@ -106,7 +103,6 @@ export const createQuestion = /* GraphQL */ `
         }
         nextToken
       }
-      groupsCanAccess
     }
   }
 `;
@@ -140,7 +136,6 @@ export const updateQuestion = /* GraphQL */ `
         }
         nextToken
       }
-      groupsCanAccess
     }
   }
 `;
@@ -174,69 +169,6 @@ export const deleteQuestion = /* GraphQL */ `
         }
         nextToken
       }
-      groupsCanAccess
-    }
-  }
-`;
-export const createAnswer = /* GraphQL */ `
-  mutation CreateAnswer(
-    $input: CreateAnswerInput!
-    $condition: ModelAnswerConditionInput
-  ) {
-    createAnswer(input: $input, condition: $condition) {
-      id
-      question {
-        id
-        imageKey
-        imageName
-        answer
-        createdAt
-        questionnaire {
-          id
-          startTime
-          name
-          duration
-          createdAt
-        }
-        answers {
-          nextToken
-        }
-        groupsCanAccess
-      }
-      answer
-      owner
-      createdAt
-    }
-  }
-`;
-export const updateAnswer = /* GraphQL */ `
-  mutation UpdateAnswer(
-    $input: UpdateAnswerInput!
-    $condition: ModelAnswerConditionInput
-  ) {
-    updateAnswer(input: $input, condition: $condition) {
-      id
-      question {
-        id
-        imageKey
-        imageName
-        answer
-        createdAt
-        questionnaire {
-          id
-          startTime
-          name
-          duration
-          createdAt
-        }
-        answers {
-          nextToken
-        }
-        groupsCanAccess
-      }
-      answer
-      owner
-      createdAt
     }
   }
 `;
@@ -247,6 +179,9 @@ export const deleteAnswer = /* GraphQL */ `
   ) {
     deleteAnswer(input: $input, condition: $condition) {
       id
+      answer
+      owner
+      createdAt
       question {
         id
         imageKey
@@ -263,11 +198,67 @@ export const deleteAnswer = /* GraphQL */ `
         answers {
           nextToken
         }
-        groupsCanAccess
       }
+    }
+  }
+`;
+export const createAnswer = /* GraphQL */ `
+  mutation CreateAnswer(
+    $input: CreateAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    createAnswer(input: $input, condition: $condition) {
+      id
       answer
       owner
       createdAt
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
+          id
+          startTime
+          name
+          duration
+          createdAt
+        }
+        answers {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const updateAnswer = /* GraphQL */ `
+  mutation UpdateAnswer(
+    $input: UpdateAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    updateAnswer(input: $input, condition: $condition) {
+      id
+      answer
+      owner
+      createdAt
+      question {
+        id
+        imageKey
+        imageName
+        answer
+        createdAt
+        questionnaire {
+          id
+          startTime
+          name
+          duration
+          createdAt
+        }
+        answers {
+          nextToken
+        }
+      }
     }
   }
 `;

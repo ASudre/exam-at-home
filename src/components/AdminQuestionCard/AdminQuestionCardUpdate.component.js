@@ -1,10 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { S3Image } from 'aws-amplify-react';
 
 import Button from '../Button/Button.component';
 import CardContent from '../Card/CardContent/CardContent.component';
 import Card from '../Card/Card.component';
-import FileInput from '../FileInput/FileInput.component';
 import CardActions from '../Card/CardActions/CardActions.component';
 import RadioButtons from '../RadioButtons/RadioButtons.component';
 

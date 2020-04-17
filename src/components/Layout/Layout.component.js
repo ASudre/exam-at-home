@@ -23,9 +23,9 @@ const Content = styled.div`
   align-items: center;
 `;
 
-const Layout = ({ children }) => (
+const Layout = ({ username, isAdmin, children }) => (
   <Container>
-    <AppBar/>
+    <AppBar username={username} isAdmin={isAdmin} />
     <Content>
       {children}
     </Content>

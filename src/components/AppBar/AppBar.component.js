@@ -12,17 +12,29 @@ const Container = styled.div`
   height: 64px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
 const ButtonContainer = styled.div`
   padding: 0 .8em;
+  white-space: nowrap;
   &:last-child {
     padding: 0;
     padding-right: .8em;
   }
 `;
 
-const AppBar = () => {
+const Left = styled.div`
+  padding: 0 .8em;
+  color: ${(props) => props.theme.color.primary};
+  overflow: hidden;
+`;
+
+const Right = styled.div`
+  display: flex;
+`;
+
+const AppBar = ({username, isAdmin}) => {
   const location = useLocation();
   const handleSignOut = () => {
     Auth.signOut()
@@ -32,18 +44,23 @@ const AppBar = () => {
 
   return (
     <Container>
-      <ButtonContainer>
-      {location.pathname !== '/' && (
-        <Link to="/">
-          <Button>
-            Home
-          </Button>
-        </Link>
-      )}
-      </ButtonContainer>
-      <ButtonContainer>
-        <Button onClick={handleSignOut}>Sign out</Button>
-      </ButtonContainer>
+      <Left>
+        {`${username}${isAdmin ? ' (admin)' : ''}`}
+      </Left>
+      <Right>
+        <ButtonContainer>
+        {location.pathname !== '/' && (
+          <Link to="/">
+            <Button>
+              Home
+            </Button>
+          </Link>
+        )}
+        </ButtonContainer>
+        <ButtonContainer>
+          <Button onClick={handleSignOut}>Sign out</Button>
+        </ButtonContainer>
+      </Right>
     </Container>
   );
 };

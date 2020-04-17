@@ -28,16 +28,18 @@ const theme = {
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(null);
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
     Auth.currentAuthenticatedUser().then((user) => {
       setIsAdmin(user.signInUserSession.accessToken.payload['cognito:groups'].includes('Admin'));
+      setUsername(user.username);
     });
   }, []);
 
   return (<ThemeProvider theme={theme} >
     <Router>
-      <Layout>
+      <Layout username={username} isAdmin={isAdmin} >
         <Switch>
           <Route path="/questionnaires/:id">
             <QuestionnairePage isAdmin={isAdmin} />

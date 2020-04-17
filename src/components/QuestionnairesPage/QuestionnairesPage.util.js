@@ -20,7 +20,7 @@ export const updateQuestionnaire = save(updateMutation);
 export const listSortedQuestionnaires = () => API
   .graphql(graphqlOperation(listQuestionnaires))
   .then((res) => get(res, 'data.listQuestionnaires.items', [])
-    .sort((a, b) => (new Date(a.createdAt) - new Date(b.createdAt))))
+    .sort((a, b) => (new Date(a.startTime) - new Date(b.startTime))))
   .catch((e) => {
     console.error(e);
   });

@@ -9,7 +9,7 @@ import {
 import QuestionCardCreate from './AdminQuestionCardCreate.component';
 import QuestionCardUpdate from './AdminQuestionCardUpdate.component';
 
-const save = (mutation) => (fileToStore, questionToSave) => (
+const save = (mutation) => (questionToSave, fileToStore = {}) => (
   fileToStore.name
     ? Storage.put(questionToSave.imageKey, fileToStore, { contentType: 'image/png' })
     : Promise.resolve())

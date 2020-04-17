@@ -15,26 +15,17 @@ const QuestionCardUpdate = ({
 }) => {
   const [answer, setAnswer] = useState(question.answer);
   const [savedAnswer, setSavedAnswer] = useState(question.answer);
-  const [imageFile, setImageFile] = useState({});
-
-  const imageInput = useRef();
-  const onImageInputClick = () => {
-    imageInput.current.click();
-  };
 
   const buildInput = () => ({
     id: question.id,
     questionnaireId: question.questionnaireId,
-    imageKey: question.imageKey,
     answer,
-    imageName: imageFile.name,
   });
 
   return (
     <Card>
       <CardContent>
-        <S3Image theme={{ photoImg: { width: '100%' } }} onClick={onImageInputClick} imgKey={question.imageKey} alt="question"/>
-        <FileInput ref={imageInput} setFile={setImageFile} />
+        <S3Image theme={{ photoImg: { width: '100%' } }} imgKey={question.imageKey} alt="question"/>
         <RadioButtons
           values={answerValues}
           setValue={setAnswer}
@@ -43,8 +34,8 @@ const QuestionCardUpdate = ({
       </CardContent>
       <CardActions>
         <Button
-          disabled={answer === savedAnswer && !imageFile.name}
-          onClick={() => onSave(imageFile, buildInput()).then(() => {
+          disabled={answer === savedAnswer}
+          onClick={() => onSave(buildInput()).then(() => {
             // why data.updateQuestion.answer is null?
             setSavedAnswer(answer);
           })}

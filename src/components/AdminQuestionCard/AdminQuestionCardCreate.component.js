@@ -59,7 +59,7 @@ const QuestionCardCreate = ({
             </Button>
             <Button
               disabled={!imageFile.name || !answer}
-              onClick={() => onSave(imageFile, buildInput()).then(() => {
+              onClick={() => onSave(buildInput(), imageFile).then(() => {
                 setImageFile(initState.imageFile);
                 setAnswer(initState.answer);
                 setAddQuestionFormOpened(false);

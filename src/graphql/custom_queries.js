@@ -24,7 +24,7 @@ export const getCandidateQuestionnaire = /* GraphQL */ `
 
 export const getAdminQuestionnaire = /* GraphQL */ `
   query GetQuestionnaire($id: ID!) {
-    questionnaire(id: $id) {
+    getQuestionnaire(id: $id) {
       id
       createdAt
       questions {

@@ -7,6 +7,7 @@ import { getAdminQuestionnaire, getCandidateQuestionnaire } from '../../graphql/
 import CandidateQuestionnaire from '../CandidateQuestionnaire/CandidateQuestionnaire.component';
 import AdminQuestionnaire from '../AdminQuestionnaire/AdminQuestionnaire.component';
 import Loader from '../Loader/Loader.component';
+import WaitingForStart from '../WaitingForStart/WaitingForStart.component';
 
 const getQuestionnaire = async (id, isAdmin) => API
   .graphql(
@@ -40,6 +41,13 @@ const QuestionnairePage = ({ isAdmin }) => {
 
   if (isAdmin === null || !questionnaire) {
     return <Loader />;
+  }
+
+  if(questionnaire.status === 'NOT_PLAYED') {
+    return <WaitingForStart
+      startsIn={questionnaire.startsIn}
+      onStart={() => getQuestionnaire(id, isAdmin).then(setQuestionnaire)}
+    />
   }
 
   return (isAdmin

@@ -66,12 +66,19 @@ const updateCandidateAnswer = (mutation, variables) => getAppsyncClient()
 
 const questionnaireStatusFromNowMethod = (now = new Date()) => (time, duration) => {
   if (moment(now).isBefore(moment(time))) {
-    return 'NOT_PLAYED';
+    return {
+      startsIn: moment(time).diff(moment(now), 'seconds'),
+      status: 'NOT_PLAYED',
+    };
   }
   if (moment(now).isBefore(moment(time).add(duration, 'minutes'))) {
-    return 'PLAYING';
+    return {
+      status: 'PLAYING',
+    };
   }
-  return 'PLAYED';
+  return {
+    status: 'PLAYED',
+  };
 };
 
 const mapQuestionsToTypename = (typename) => (list) => (
@@ -84,7 +91,10 @@ const resolvers = {
       const { id } = ctx.arguments;
       const { username } = ctx.identity;
       const questionnaire = await getQuestionnaire(getQuestionnaireQuery, { id });
-      const status = getQuestionnaireStatus(questionnaire.startTime, questionnaire.duration);
+      const { status, startsIn } = getQuestionnaireStatus(
+        questionnaire.startTime,
+        questionnaire.duration,
+      );
       let questions = [];
       switch (status) {
         case 'NOT_PLAYED':
@@ -107,6 +117,7 @@ const resolvers = {
           break;
       }
       return {
+        startsIn,
         status,
         questions: {
           items: mapQuestionsToTypename('CandidateQuestion')(questions),
@@ -120,7 +131,7 @@ const resolvers = {
       const questionnaire = await getQuestionnaireFromQuestion(getQuestionnaireFromQuestionQuery, {
         id: ctx.arguments.input.answerQuestionId,
       });
-      const status = getQuestionnaireStatus(questionnaire.startTime, questionnaire.duration);
+      const { status } = getQuestionnaireStatus(questionnaire.startTime, questionnaire.duration);
       const answer = status === 'PLAYING'
         ? await createCandidateAnswer(
           createCandidateAnswerMutation,
@@ -140,7 +151,7 @@ const resolvers = {
       const questionnaire = await getQuestionnaireFromQuestion(getQuestionnaireFromQuestionQuery, {
         id: ctx.arguments.input.answerQuestionId,
       });
-      const status = getQuestionnaireStatus(questionnaire.startTime, questionnaire.duration);
+      const { status } = getQuestionnaireStatus(questionnaire.startTime, questionnaire.duration);
       const answer = status === 'PLAYING'
         ? await updateCandidateAnswer(
           updateCandidateAnswerMutation,

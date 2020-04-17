@@ -75,6 +75,7 @@ type QuestionConnection {
 }
 
 type CandidateQuestionnaire {
+  startsIn: Int
   status: String
   questions: QuestionConnection
 }

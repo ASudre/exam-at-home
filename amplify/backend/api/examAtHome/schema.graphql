@@ -78,6 +78,24 @@ type CandidateQuestionnaire {
   status: String
   questions: QuestionConnection
 }
+
 type Query {
   getCandidateQuestionnaire(id: ID): CandidateQuestionnaire @function(name: "GraphQLResolverFunction-${env}")
+}
+
+input SaveAnswerInput {
+  id: ID!
+  answerQuestionId: ID!
+  answer: String
+}
+
+type CandidateAnswer {
+  id: ID
+  answer: String
+  questionnaireStatus: String
+}
+
+type Mutation {
+  createCandidateAnswer(input: SaveAnswerInput): CandidateAnswer @function(name: "GraphQLResolverFunction-${env}")
+  updateCandidateAnswer(input: SaveAnswerInput): CandidateAnswer @function(name: "GraphQLResolverFunction-${env}")
 }

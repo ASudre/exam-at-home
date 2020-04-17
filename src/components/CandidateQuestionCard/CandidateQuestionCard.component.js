@@ -18,7 +18,7 @@ const save = (mutation) => (answerToSave) => (
   .catch(console.error);
 
 const updateAnswer = save(updateMutation);
-const saveAnswer = save(createMutation);
+const createAnswer = save(createMutation);
 
 const CandidateQuestionCard = ({
   question,
@@ -34,7 +34,7 @@ const CandidateQuestionCard = ({
   });
 
   const onSave = (isUpdate) => ({ data }) => {
-    const saved = isUpdate ? data.updateAnswer.answer : data.createAnswer.answer;
+    const saved = isUpdate ? data.updateCandidateAnswer.answer : data.createCandidateAnswer.answer;
     setSavedAnswer(saved);
     setAnswer(saved);
   };
@@ -55,7 +55,7 @@ const CandidateQuestionCard = ({
           onClick={
             () => (initAnswer.id
               ? updateAnswer(buildInput()).then(onSave(true))
-              : saveAnswer(buildInput()).then(onSave(false))
+              : createAnswer(buildInput()).then(onSave(false))
             )}
         >
           Answer

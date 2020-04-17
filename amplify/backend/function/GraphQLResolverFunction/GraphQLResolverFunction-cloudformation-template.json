@@ -173,7 +173,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-exam-at-home-dev-154326-deployment",
-					"S3Key": "amplify-builds/GraphQLResolverFunction-636a4d77346e7757722f-build.zip"
+					"S3Key": "amplify-builds/GraphQLResolverFunction-4a762b4a564577325542-build.zip"
 				}
 			}
 		},

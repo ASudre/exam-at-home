@@ -69,8 +69,34 @@ const getCandidateQuestionnaireWithCorrectionQuery = gql`
   }
 `;
 
+const getQuestionnaireFromQuestionQuery = gql`
+  query GetQuestion($id: ID!) {
+    getQuestion(id: $id) {
+      questionnaire {
+        startTime
+        name
+        duration
+        createdAt
+      }
+    }
+  }
+`;
+
+const getAnswerQuery = gql`
+  query GetAnswer($id: ID!) {
+    getAnswer(id: $id) {
+      id
+      answer
+      owner
+      createdAt
+    }
+  }
+`;
+
 module.exports = {
+  getAnswerQuery,
   getQuestionnaireQuery,
   getCandidateQuestionnaireQuery,
   getCandidateQuestionnaireWithCorrectionQuery,
+  getQuestionnaireFromQuestionQuery,
 };

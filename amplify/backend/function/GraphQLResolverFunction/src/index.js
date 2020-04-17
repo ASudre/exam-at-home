@@ -14,10 +14,17 @@ const moment = require('moment');
 global.fetch = fetch;
 
 const {
+  getAnswerQuery,
   getQuestionnaireQuery,
   getCandidateQuestionnaireQuery,
   getCandidateQuestionnaireWithCorrectionQuery,
+  getQuestionnaireFromQuestionQuery,
 } = require('./graphql/queries');
+
+const {
+  createCandidateAnswerMutation,
+  updateCandidateAnswerMutation,
+} = require('./graphql/mutations');
 
 const getAppsyncClient = async () => new appsync.AWSAppSyncClient({
   url: process.env.API_EXAMATHOME_GRAPHQLAPIENDPOINTOUTPUT,
@@ -37,9 +44,25 @@ const getQuestionnaire = (query, variables) => getAppsyncClient()
   .then(async (client) => client.query({ query, variables }))
   .then((res) => get(res, 'data.getQuestionnaire', {}));
 
+const getAnswer = (query, variables) => getAppsyncClient()
+  .then(async (client) => client.query({ query, variables }))
+  .then((res) => get(res, 'data.getAnswer', {}));
+
+const getQuestionnaireFromQuestion = (query, variables) => getAppsyncClient()
+  .then(async (client) => client.query({ query, variables }))
+  .then((res) => get(res, 'data.getQuestion.questionnaire', {}));
+
 const listQuestions = (query, variables) => getAppsyncClient()
   .then(async (client) => client.query({ query, variables }))
   .then((res) => get(res, 'data.getQuestionnaire.questions', {}));
+
+const createCandidateAnswer = (mutation, variables) => getAppsyncClient()
+  .then(async (client) => client.mutate({ mutation, variables }))
+  .then((res) => get(res, 'data.createAnswer', {}));
+
+const updateCandidateAnswer = (mutation, variables) => getAppsyncClient()
+  .then(async (client) => client.mutate({ mutation, variables }))
+  .then((res) => get(res, 'data.updateAnswer', {}));
 
 const questionnaireStatusFromNowMethod = (now = new Date()) => (time, duration) => {
   if (moment(now).isBefore(moment(time))) {
@@ -60,10 +83,7 @@ const resolvers = {
       const getQuestionnaireStatus = questionnaireStatusFromNowMethod();
       const { id } = ctx.arguments;
       const { username } = ctx.identity;
-      const questionnaire = {
-        ...await getQuestionnaire(getQuestionnaireQuery, { id }),
-        questions: [],
-      };
+      const questionnaire = await getQuestionnaire(getQuestionnaireQuery, { id });
       const status = getQuestionnaireStatus(questionnaire.startTime, questionnaire.duration);
       let questions = [];
       switch (status) {
@@ -91,6 +111,45 @@ const resolvers = {
         questions: {
           items: mapQuestionsToTypename('CandidateQuestion')(questions),
         },
+      };
+    },
+  },
+  Mutation: {
+    createCandidateAnswer: async (ctx) => {
+      const getQuestionnaireStatus = questionnaireStatusFromNowMethod();
+      const questionnaire = await getQuestionnaireFromQuestion(getQuestionnaireFromQuestionQuery, {
+        id: ctx.arguments.input.answerQuestionId,
+      });
+      const status = getQuestionnaireStatus(questionnaire.startTime, questionnaire.duration);
+      const answer = status === 'PLAYING'
+        ? await createCandidateAnswer(
+          createCandidateAnswerMutation,
+          {
+            input: {
+              owner: ctx.identity.username, ...ctx.arguments.input,
+            },
+          },
+        ) : {};
+      return {
+        ...answer,
+        questionnaireStatus: status,
+      };
+    },
+    updateCandidateAnswer: async (ctx) => {
+      const getQuestionnaireStatus = questionnaireStatusFromNowMethod();
+      const questionnaire = await getQuestionnaireFromQuestion(getQuestionnaireFromQuestionQuery, {
+        id: ctx.arguments.input.answerQuestionId,
+      });
+      const status = getQuestionnaireStatus(questionnaire.startTime, questionnaire.duration);
+      const answer = status === 'PLAYING'
+        ? await updateCandidateAnswer(
+          updateCandidateAnswerMutation,
+          ctx.arguments,
+        )
+        : await getAnswer(getAnswerQuery, { id: ctx.arguments.input.id });
+      return {
+        ...answer,
+        questionnaireStatus: status,
       };
     },
   },

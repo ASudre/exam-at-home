@@ -1,21 +1,19 @@
 /* eslint-disable import/prefer-default-export */
 export const createCandidateAnswer = /* GraphQL */ `
-  mutation CreateAnswer(
-    $input: CreateAnswerInput!
-    $condition: ModelAnswerConditionInput
+  mutation CreateCandidateAnswer(
+    $input: SaveAnswerInput!
   ) {
-    createAnswer(input: $input, condition: $condition) {
+    createCandidateAnswer(input: $input) {
       id
       answer
     }
   }
 `;
 export const updateCandidateAnswer = /* GraphQL */ `
-  mutation UpdateAnswer(
-    $input: UpdateAnswerInput!
-    $condition: ModelAnswerConditionInput
+  mutation UpdateCandidateAnswer(
+    $input: SaveAnswerInput!
   ) {
-    updateAnswer(input: $input, condition: $condition) {
+    updateCandidateAnswer(input: $input) {
       id
       answer
     }

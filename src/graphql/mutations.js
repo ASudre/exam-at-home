@@ -1,6 +1,24 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createCandidateAnswer = /* GraphQL */ `
+  mutation CreateCandidateAnswer($input: SaveAnswerInput) {
+    createCandidateAnswer(input: $input) {
+      id
+      answer
+      questionnaireStatus
+    }
+  }
+`;
+export const updateCandidateAnswer = /* GraphQL */ `
+  mutation UpdateCandidateAnswer($input: SaveAnswerInput) {
+    updateCandidateAnswer(input: $input) {
+      id
+      answer
+      questionnaireStatus
+    }
+  }
+`;
 export const createQuestionnaire = /* GraphQL */ `
   mutation CreateQuestionnaire(
     $input: CreateQuestionnaireInput!

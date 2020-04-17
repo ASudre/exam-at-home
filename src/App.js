@@ -32,7 +32,11 @@ const App = () => {
 
   useEffect(() => {
     Auth.currentAuthenticatedUser().then((user) => {
-      setIsAdmin(user.signInUserSession.accessToken.payload['cognito:groups'].includes('Admin'));
+      setIsAdmin(
+        user.signInUserSession.accessToken.payload['cognito:groups']
+          ? user.signInUserSession.accessToken.payload['cognito:groups'].includes('Admin')
+          : false,
+      );
       setUsername(user.username);
     });
   }, []);

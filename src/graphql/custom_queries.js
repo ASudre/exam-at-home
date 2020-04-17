@@ -1,23 +1,22 @@
 /* eslint-disable import/prefer-default-export */
 export const getCandidateQuestionnaire = /* GraphQL */ `
-  query GetQuestionnaire($id: ID!) {
-    getQuestionnaire(id: $id) {
-      id
-      createdAt
+  query GetCandidateQuestionnaire($id: ID!) {
+    getCandidateQuestionnaire(id: $id) {
+      status
       questions {
         items {
           id
+          answer
           imageKey
           imageName
+          createdAt
           answers {
             items {
               id
               answer
             }
           }
-          createdAt
         }
-        nextToken
       }
     }
   }
@@ -25,7 +24,7 @@ export const getCandidateQuestionnaire = /* GraphQL */ `
 
 export const getAdminQuestionnaire = /* GraphQL */ `
   query GetQuestionnaire($id: ID!) {
-    getQuestionnaire(id: $id) {
+    questionnaire(id: $id) {
       id
       createdAt
       questions {

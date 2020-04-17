@@ -1,5 +1,6 @@
 type Questionnaire @model
 @auth(rules: [
+  { allow: private, operations: [read], provider: iam },
   { allow: private, operations: [read] },
   { allow: groups, groups: ["Admin"] }
 ]) {
@@ -11,9 +12,34 @@ type Questionnaire @model
   questions: [Question] @connection(name: "ByQuestionnaire")
 }
 
-type Question @model
+interface QuestionInterface {
+  id: ID!
+  imageKey: String!
+  imageName: String!
+  createdAt: AWSDateTime
+  questionnaire: Questionnaire
+}
+
+type CandidateQuestion implements QuestionInterface {
+  id: ID!
+  imageKey: String!
+  imageName: String!
+  createdAt: AWSDateTime
+  questionnaire: Questionnaire
+  answers: AnswerConnection
+  answer: String
+}
+
+type AnswerConnection {
+  items: [Answer]
+  nextToken: String
+}
+
+type Question
+@model
 @auth(rules: [
   { allow: groups, groups: ["Admin"] },
+  { allow: private, operations: [read] },
   { allow: private, provider: iam, operations: [read] }
 ]) {
   id: ID!
@@ -21,7 +47,8 @@ type Question @model
   imageName: String!
   answer: String
     @auth(rules: [
-      { allow: groups, groups: ["Admin"] }
+      { allow: groups, groups: ["Admin"] },
+      { allow: private, provider: iam, operations: [read] }
     ])
   createdAt: AWSDateTime
   questionnaire: Questionnaire @connection(name: "ByQuestionnaire")
@@ -31,7 +58,7 @@ type Question @model
 type Answer @model
 @auth(rules: [
   { allow: owner, operations: [read] },
-  { allow: private, provider: iam, operations: [create, update] },
+  { allow: private, provider: iam, operations: [create, update, read] },
   { allow: groups, groups: ["Admin"], operations: [read] },
   { allow: groups, groups: ["Forbidden"] }
 ]) {
@@ -40,4 +67,17 @@ type Answer @model
   answer: String!
   owner: String
   createdAt: AWSDateTime
+}
+
+type QuestionConnection {
+  items: [CandidateQuestion]
+  nextToken: String
+}
+
+type CandidateQuestionnaire {
+  status: String
+  questions: QuestionConnection
+}
+type Query {
+  getCandidateQuestionnaire(id: ID): CandidateQuestionnaire @function(name: "GraphQLResolverFunction-${env}")
 }

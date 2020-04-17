@@ -14,8 +14,8 @@ export const onCreateQuestionnaire = /* GraphQL */ `
           id
           imageKey
           imageName
-          answer
           createdAt
+          answer
         }
         nextToken
       }
@@ -35,8 +35,8 @@ export const onUpdateQuestionnaire = /* GraphQL */ `
           id
           imageKey
           imageName
-          answer
           createdAt
+          answer
         }
         nextToken
       }
@@ -56,8 +56,8 @@ export const onDeleteQuestionnaire = /* GraphQL */ `
           id
           imageKey
           imageName
-          answer
           createdAt
+          answer
         }
         nextToken
       }
@@ -70,7 +70,6 @@ export const onCreateQuestion = /* GraphQL */ `
       id
       imageKey
       imageName
-      answer
       createdAt
       questionnaire {
         id
@@ -82,6 +81,7 @@ export const onCreateQuestion = /* GraphQL */ `
           nextToken
         }
       }
+      answer
       answers {
         items {
           id
@@ -100,7 +100,6 @@ export const onUpdateQuestion = /* GraphQL */ `
       id
       imageKey
       imageName
-      answer
       createdAt
       questionnaire {
         id
@@ -112,6 +111,7 @@ export const onUpdateQuestion = /* GraphQL */ `
           nextToken
         }
       }
+      answer
       answers {
         items {
           id
@@ -130,7 +130,6 @@ export const onDeleteQuestion = /* GraphQL */ `
       id
       imageKey
       imageName
-      answer
       createdAt
       questionnaire {
         id
@@ -142,6 +141,7 @@ export const onDeleteQuestion = /* GraphQL */ `
           nextToken
         }
       }
+      answer
       answers {
         items {
           id
@@ -165,7 +165,6 @@ export const onDeleteAnswer = /* GraphQL */ `
         id
         imageKey
         imageName
-        answer
         createdAt
         questionnaire {
           id
@@ -174,6 +173,7 @@ export const onDeleteAnswer = /* GraphQL */ `
           duration
           createdAt
         }
+        answer
         answers {
           nextToken
         }
@@ -192,7 +192,6 @@ export const onCreateAnswer = /* GraphQL */ `
         id
         imageKey
         imageName
-        answer
         createdAt
         questionnaire {
           id
@@ -201,6 +200,7 @@ export const onCreateAnswer = /* GraphQL */ `
           duration
           createdAt
         }
+        answer
         answers {
           nextToken
         }
@@ -219,7 +219,6 @@ export const onUpdateAnswer = /* GraphQL */ `
         id
         imageKey
         imageName
-        answer
         createdAt
         questionnaire {
           id
@@ -228,6 +227,7 @@ export const onUpdateAnswer = /* GraphQL */ `
           duration
           createdAt
         }
+        answer
         answers {
           nextToken
         }

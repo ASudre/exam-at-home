@@ -17,7 +17,7 @@ const getQuestionnaire = async (id, isAdmin) => API
       id,
     }),
   )
-  .then((res) => get(res, 'data.getQuestionnaire', {}))
+  .then((res) => get(res, isAdmin ? 'data.questionnaire' : 'data.getCandidateQuestionnaire', {}))
   .then((q) => ({
     ...q,
     questions: {

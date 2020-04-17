@@ -17,8 +17,8 @@ export const createQuestionnaire = /* GraphQL */ `
           id
           imageKey
           imageName
-          answer
           createdAt
+          answer
         }
         nextToken
       }
@@ -41,8 +41,8 @@ export const updateQuestionnaire = /* GraphQL */ `
           id
           imageKey
           imageName
-          answer
           createdAt
+          answer
         }
         nextToken
       }
@@ -65,8 +65,8 @@ export const deleteQuestionnaire = /* GraphQL */ `
           id
           imageKey
           imageName
-          answer
           createdAt
+          answer
         }
         nextToken
       }
@@ -82,7 +82,6 @@ export const createQuestion = /* GraphQL */ `
       id
       imageKey
       imageName
-      answer
       createdAt
       questionnaire {
         id
@@ -94,6 +93,7 @@ export const createQuestion = /* GraphQL */ `
           nextToken
         }
       }
+      answer
       answers {
         items {
           id
@@ -115,7 +115,6 @@ export const updateQuestion = /* GraphQL */ `
       id
       imageKey
       imageName
-      answer
       createdAt
       questionnaire {
         id
@@ -127,6 +126,7 @@ export const updateQuestion = /* GraphQL */ `
           nextToken
         }
       }
+      answer
       answers {
         items {
           id
@@ -148,7 +148,6 @@ export const deleteQuestion = /* GraphQL */ `
       id
       imageKey
       imageName
-      answer
       createdAt
       questionnaire {
         id
@@ -160,6 +159,7 @@ export const deleteQuestion = /* GraphQL */ `
           nextToken
         }
       }
+      answer
       answers {
         items {
           id
@@ -186,7 +186,6 @@ export const deleteAnswer = /* GraphQL */ `
         id
         imageKey
         imageName
-        answer
         createdAt
         questionnaire {
           id
@@ -195,6 +194,7 @@ export const deleteAnswer = /* GraphQL */ `
           duration
           createdAt
         }
+        answer
         answers {
           nextToken
         }
@@ -216,7 +216,6 @@ export const createAnswer = /* GraphQL */ `
         id
         imageKey
         imageName
-        answer
         createdAt
         questionnaire {
           id
@@ -225,6 +224,7 @@ export const createAnswer = /* GraphQL */ `
           duration
           createdAt
         }
+        answer
         answers {
           nextToken
         }
@@ -246,7 +246,6 @@ export const updateAnswer = /* GraphQL */ `
         id
         imageKey
         imageName
-        answer
         createdAt
         questionnaire {
           id
@@ -255,6 +254,7 @@ export const updateAnswer = /* GraphQL */ `
           duration
           createdAt
         }
+        answer
         answers {
           nextToken
         }

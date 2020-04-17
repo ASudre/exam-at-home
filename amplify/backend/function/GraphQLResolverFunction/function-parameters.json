@@ -1,0 +1,12 @@
+{
+    "permissions": {
+        "api": {
+            "examAtHome": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ]
+        }
+    }
+}

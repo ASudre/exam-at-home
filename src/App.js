@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import Amplify, { Auth } from 'aws-amplify';
 import { ThemeProvider } from 'styled-components';
-import { withAuthenticator } from 'aws-amplify-react';
+import { withAuthenticator, SignIn, ForgotPassword } from 'aws-amplify-react';
 
 import awsconfig from './aws-exports';
 import Questionnaires from './components/QuestionnairesPage/QuestionnairesPage.component';
@@ -58,4 +58,10 @@ const App = () => {
   );
 };
 
-export default withAuthenticator(App, { usernameAttributes: 'email' });
+export default withAuthenticator(
+  App,
+  {
+    usernameAttributes: 'email',
+    authenticatorComponents: [<SignIn/>, <ForgotPassword/>]
+  }
+);

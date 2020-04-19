@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { S3Image } from 'aws-amplify-react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { v4 as uuidV4 } from 'uuid';
@@ -28,7 +28,14 @@ const CandidateQuestionCard = ({
   const initAnswer = get(question, 'answers.items[0]', {});
   const correctAnswer = question.answer;
   const [answer, setAnswer] = useState(initAnswer.answer);
-  const [savedAnswer, setSavedAnswer] = useState(initAnswer.answer);
+  const [savedAnswer, setSavedAnswer] = useState();
+
+  useEffect(() => {
+    setSavedAnswer(get(question, 'answers.items[0].answer', null));
+    if (disabled) {
+      setAnswer(get(question, 'answers.items[0].answer', null));
+    }
+  }, [question, disabled])
 
   const buildInput = () => ({
     id: initAnswer.id || uuidV4(),

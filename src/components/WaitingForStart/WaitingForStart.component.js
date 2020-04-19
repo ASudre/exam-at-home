@@ -21,22 +21,27 @@ const Counter = styled.div`
   text-align: center;
 `;
 
-const WaitingForStart = ({startsIn = -1, onStart}) => {
+const WaitingForStart = ({ startsIn = 0, onStart }) => {
   const [countDown, setCountDown] = useState(startsIn);
+  const [start, setStart] = useState(false);
 
   useEffect(() => {
     if (countDown < 0) {
       return;
     }
     if (countDown === 0) {
-      setCountDown(-1);
-      onStart();
+      setStart(true);
     } else {
       setTimeout(() => setCountDown(countDown - 1), 1000);
     }
   }, [countDown, onStart])
 
-  return <Container><Counter>Starts in {countDown} seconds</Counter></Container>
+  useEffect(() => {
+    if (start) {
+      onStart().then(() => setStart(false));
+    }
+  }, [start])
+  return <Container><Counter>Starts in {countDown} second{`${countDown > 1 ? 's' : ''}`}</Counter></Container>
 }
 
 export default WaitingForStart;

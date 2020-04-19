@@ -30,6 +30,9 @@ const toDisplay = (seconds) =>
 const getAnswered = (questions) =>
   questions.reduce((acc, q) => (q.answers.items.length > 0 ? acc + 1 : acc), 0);
 
+const getRightAnswered = (questions) =>
+  questions.reduce((acc, q) => (q.answers.items.length > 0 && q.answers.items[0].answer === q.answer ? acc + 1 : acc), 0);
+
 const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
   const { status, remainingTime: initRemainingTime } = questionnaire;
   const [remainingTime, setRemainingTime] = useState(
@@ -37,6 +40,7 @@ const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
   );
   const questions = get(questionnaire, "questions.items", []);
   const [answered, setAnswered] = useState(getAnswered(questions));
+  const rightAnswered = status === 'PLAYED' ? getRightAnswered(questions) : null;
 
   useEffect(() => {
     if (status === 'PLAYING') {
@@ -53,10 +57,8 @@ const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
       <InfoCard>
         <Container>
           <InfoCardContent>
-            {questionnaire.status === "PLAYING"
-              ? `${toDisplay(remainingTime)} - `
-              : ""}
-            {answered} on {questions.length} answered
+            {questionnaire.status === "PLAYING" && `${toDisplay(remainingTime)} - ${answered} out of ${questions.length} answered`}
+            {questionnaire.status === "PLAYED" && `${rightAnswered} out of ${questions.length} correct answer${rightAnswered.length > 1 ? 's' : ''}`}
           </InfoCardContent>
         </Container>
       </InfoCard>

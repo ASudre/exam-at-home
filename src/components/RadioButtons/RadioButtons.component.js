@@ -24,7 +24,11 @@ const Label = styled.label`
   font-weight: 700;
 `;
 
-const RadioButton = ({ values, setValue, checkedValue }) => (
+const CorrectAnswerLabel = styled(Label)`
+  color: #00923b;
+`;
+
+const RadioButton = ({ values, setValue, checkedValue, correctAnswer, disabled }) => (
   <Container>
     {values.map((value) => (
       <RadioContainer key={value}>
@@ -34,8 +38,12 @@ const RadioButton = ({ values, setValue, checkedValue }) => (
           value={value}
           onChange={() => setValue(value)}
           checked={value === checkedValue}
+          disabled={disabled}
         />
-        <Label htmlFor={`${value}-radio-button`}>{value}</Label>
+        {correctAnswer === value
+          ? <CorrectAnswerLabel htmlFor={`${value}-radio-button`}>{value}</CorrectAnswerLabel>
+          : <Label htmlFor={`${value}-radio-button`}>{value}</Label>
+        }
       </RadioContainer>
     ))}
   </Container>

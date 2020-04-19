@@ -56,8 +56,9 @@ const QuestionnairePage = ({ isAdmin }) => {
           refreshQuestionnaire={() => getQuestionnaire(id, true).then(setQuestionnaire)}
         />
     : <CandidateQuestionnaire
-          questionnaire={questionnaire}
-        />);
+        questionnaire={questionnaire}
+        onTimeIsUp={() => getQuestionnaire(id, false).then(setQuestionnaire)}
+      />);
 };
 
 export default QuestionnairePage;

@@ -22,8 +22,11 @@ const createAnswer = save(createMutation);
 
 const CandidateQuestionCard = ({
   question,
+  onCreateAnswer,
+  disabled,
 }) => {
   const initAnswer = get(question, 'answers.items[0]', {});
+  const correctAnswer = question.answer;
   const [answer, setAnswer] = useState(initAnswer.answer);
   const [savedAnswer, setSavedAnswer] = useState(initAnswer.answer);
 
@@ -47,20 +50,24 @@ const CandidateQuestionCard = ({
           values={answerValues}
           setValue={setAnswer}
           checkedValue={answer}
+          correctAnswer={correctAnswer}
+          disabled={disabled}
         />
       </CardContent>
-      <CardActions>
-        <Button
-          disabled={answer === savedAnswer}
-          onClick={
-            () => (initAnswer.id
-              ? updateAnswer(buildInput()).then(onSave(true))
-              : createAnswer(buildInput()).then(onSave(false))
-            )}
-        >
-          Answer
-        </Button>
-      </CardActions>
+      {!disabled &&
+        <CardActions>
+          <Button
+            disabled={answer === savedAnswer}
+            onClick={
+              () => (initAnswer.id
+                ? updateAnswer(buildInput()).then(onSave(true))
+                : createAnswer(buildInput()).then(onSave(false)).then(onCreateAnswer)
+              )}
+          >
+            Answer
+          </Button>
+        </CardActions>
+      }
     </Card>
   );
 };

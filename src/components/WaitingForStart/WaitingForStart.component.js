@@ -23,24 +23,15 @@ const Counter = styled.div`
 
 const WaitingForStart = ({ startsIn = 0, onStart }) => {
   const [countDown, setCountDown] = useState(startsIn);
-  const [start, setStart] = useState(false);
 
   useEffect(() => {
-    if (countDown < 0) {
-      return;
-    }
     if (countDown === 0) {
-      setStart(true);
+      onStart();
     } else {
       setTimeout(() => setCountDown(countDown - 1), 1000);
     }
   }, [countDown, onStart])
 
-  useEffect(() => {
-    if (start) {
-      onStart().then(() => setStart(false));
-    }
-  }, [start, onStart])
   return <Container><Counter>Starts in {countDown} second{`${countDown > 1 ? 's' : ''}`}</Counter></Container>
 }
 

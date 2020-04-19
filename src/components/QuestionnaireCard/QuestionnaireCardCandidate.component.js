@@ -37,12 +37,14 @@ const Title = styled.div`
 
 const displayDate = (date) => (date ? moment(date).format('DD/MM/YYYY HH:mm') : 'Undefined');
 
+const displayDuration = (duration) => `${duration} minute${duration > 1 ? 's' : ''}`
+
 const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => (
   <Card>
     <CardContent>
       <InfoContainer>
         <InfoTag>{displayDate(questionnaire.startTime)}</InfoTag>
-        <InfoTag>{questionnaire.duration} minutes</InfoTag>
+        <InfoTag>{displayDuration(questionnaire.duration)}</InfoTag>
       </InfoContainer>
       <Title>{questionnaire.name}</Title>
     </CardContent>

@@ -18,6 +18,7 @@ const InputContainer = styled.div`
 `;
 
 const Label = styled.div`
+  text-align: end;
 `;
 
 const TextField = ({

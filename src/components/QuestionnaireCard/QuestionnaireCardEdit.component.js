@@ -55,7 +55,7 @@ const QuestionnaireCard = ({
               onChange={setStartTime}
             />
             <TextField
-              label="Duration"
+              label="Duration (minutes)"
               value={duration}
               placeholder="20"
               onChange={setDuration}

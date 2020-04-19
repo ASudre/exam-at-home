@@ -40,7 +40,7 @@ const WaitingForStart = ({ startsIn = 0, onStart }) => {
     if (start) {
       onStart().then(() => setStart(false));
     }
-  }, [start])
+  }, [start, onStart])
   return <Container><Counter>Starts in {countDown} second{`${countDown > 1 ? 's' : ''}`}</Counter></Container>
 }
 

@@ -73,6 +73,7 @@ const questionnaireStatusFromNowMethod = (now = new Date()) => (time, duration) 
   }
   if (moment(now).isBefore(moment(time).add(duration, 'minutes'))) {
     return {
+      remainingTime: moment(time).add(duration, 'minutes').diff(moment(now), 'seconds'),
       status: 'PLAYING',
     };
   }
@@ -91,7 +92,7 @@ const resolvers = {
       const { id } = ctx.arguments;
       const { username } = ctx.identity;
       const questionnaire = await getQuestionnaire(getQuestionnaireQuery, { id });
-      const { status, startsIn } = getQuestionnaireStatus(
+      const { status, startsIn, remainingTime } = getQuestionnaireStatus(
         questionnaire.startTime,
         questionnaire.duration,
       );
@@ -118,6 +119,7 @@ const resolvers = {
       }
       return {
         startsIn,
+        remainingTime,
         status,
         questions: {
           items: mapQuestionsToTypename('CandidateQuestion')(questions),

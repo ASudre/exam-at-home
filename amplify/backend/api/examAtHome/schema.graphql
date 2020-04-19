@@ -76,6 +76,7 @@ type QuestionConnection {
 
 type CandidateQuestionnaire {
   startsIn: Int
+  remainingTime: Int
   status: String
   questions: QuestionConnection
 }

@@ -12,6 +12,10 @@
 		"apiexamAtHomeGraphQLAPIEndpointOutput": {
 			"Type": "String",
 			"Default": "apiexamAtHomeGraphQLAPIEndpointOutput"
+		},
+		"authexamathome46b3332aUserPoolId": {
+			"Type": "String",
+			"Default": "authexamathome46b3332aUserPoolId"
 		}
 	},
 	"Conditions": {
@@ -160,6 +164,9 @@
 						},
 						"API_EXAMATHOME_GRAPHQLAPIENDPOINTOUTPUT": {
 							"Ref": "apiexamAtHomeGraphQLAPIEndpointOutput"
+						},
+						"AUTH_EXAMATHOME46B3332A_USERPOOLID": {
+							"Ref": "authexamathome46b3332aUserPoolId"
 						}
 					}
 				},
@@ -173,7 +180,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-exam-at-home-dev-154326-deployment",
-					"S3Key": "amplify-builds/GraphQLResolverFunction-79464f4d7330494c6d67-build.zip"
+					"S3Key": "amplify-builds/GraphQLResolverFunction-32776d526c667a444b55-build.zip"
 				}
 			}
 		},
@@ -274,6 +281,46 @@
 				"PolicyDocument": {
 					"Version": "2012-10-17",
 					"Statement": [
+						{
+							"Effect": "Allow",
+							"Action": [
+								"cognito-identity:Describe*",
+								"cognito-identity:Get*",
+								"cognito-identity:List*",
+								"cognito-idp:Describe*",
+								"cognito-idp:AdminGetDevice",
+								"cognito-idp:AdminGetUser",
+								"cognito-idp:AdminList*",
+								"cognito-idp:List*",
+								"cognito-sync:Describe*",
+								"cognito-sync:Get*",
+								"cognito-sync:List*",
+								"iam:ListOpenIdConnectProviders",
+								"iam:ListRoles",
+								"sns:ListPlatformApplications"
+							],
+							"Resource": [
+								{
+									"Fn::Join": [
+										"",
+										[
+											"arn:aws:cognito-idp:",
+											{
+												"Ref": "AWS::Region"
+											},
+											":",
+											{
+												"Ref": "AWS::AccountId"
+											},
+											":userpool/",
+											{
+												"Ref": "authexamathome46b3332aUserPoolId"
+											}
+										]
+									]
+								}
+							]
+						},
 						{
 							"Effect": "Allow",
 							"Action": [

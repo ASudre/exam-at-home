@@ -1,5 +1,10 @@
 {
     "permissions": {
+        "auth": {
+            "examathome46b3332a": [
+                "read"
+            ]
+        },
         "api": {
             "examAtHome": [
                 "create",

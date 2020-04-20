@@ -64,6 +64,13 @@
                         "GraphQLAPIIdOutput",
                         "GraphQLAPIEndpointOutput"
                     ]
+                },
+                {
+                    "category": "auth",
+                    "resourceName": "examathome46b3332a",
+                    "attributes": [
+                        "UserPoolId"
+                    ]
                 }
             ]
         }

@@ -2,6 +2,7 @@
 You can access the following resource attributes as environment variables from your Lambda function
 var environment = process.env.ENV
 var region = process.env.REGION
+var authExamathome46b3332aUserPoolId = process.env.AUTH_EXAMATHOME46B3332A_USERPOOLID
 var apiExamAtHomeGraphQLAPIIdOutput = process.env.API_EXAMATHOME_GRAPHQLAPIIDOUTPUT
 var apiExamAtHomeGraphQLAPIEndpointOutput = process.env.API_EXAMATHOME_GRAPHQLAPIENDPOINTOUTPUT
 
@@ -10,8 +11,20 @@ const appsync = require('aws-appsync');
 const fetch = require('node-fetch');
 const { get } = require('lodash');
 const moment = require('moment');
+const CognitoISP = require('aws-sdk/clients/cognitoidentityserviceprovider');
 
 global.fetch = fetch;
+
+const cognitoISP = new CognitoISP(
+  {
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      sessionToken: process.env.AWS_SESSION_TOKEN,
+    },
+    region: 'eu-west-1',
+  },
+);
 
 const {
   getAnswerQuery,
@@ -97,6 +110,12 @@ const mapQuestionsToTypename = (typename) => (list) => (
 
 const resolvers = {
   Query: {
+    listUsers: async () => {
+      const users = await cognitoISP
+        .listUsers({ UserPoolId: process.env.AUTH_EXAMATHOME46B3332A_USERPOOLID }).promise();
+      console.log('users:', users);
+      return 'OK';
+    },
     getCandidateQuestionnaire: async (ctx) => {
       const getQuestionnaireStatus = questionnaireStatusFromNowMethod();
       const { id } = ctx.arguments;

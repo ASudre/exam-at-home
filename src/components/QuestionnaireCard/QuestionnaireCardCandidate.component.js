@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -55,32 +55,43 @@ const generateReport = async (id) => API
     console.error(e);
   });
 
-const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => (
-  <Card>
-    <CardContent>
-      <InfoContainer>
-        <InfoTag>{displayDate(questionnaire.startTime)}</InfoTag>
-        <InfoTag>{displayDuration(questionnaire.duration)}</InfoTag>
-      </InfoContainer>
-      <Title>{questionnaire.name}</Title>
-    </CardContent>
-    <CardActions>
-      {isAdmin && (
-        new Date(questionnaire.startTime) > new Date()
-        ? <Button onClick={onEdit}>
-            Edit
+const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
+  const [exporting, setExporting] = useState(false);
+
+  return (
+    <Card>
+      <CardContent>
+        <InfoContainer>
+          <InfoTag>{displayDate(questionnaire.startTime)}</InfoTag>
+          <InfoTag>{displayDuration(questionnaire.duration)}</InfoTag>
+        </InfoContainer>
+        <Title>{questionnaire.name}</Title>
+      </CardContent>
+      <CardActions>
+        {isAdmin && (
+          new Date(questionnaire.startTime) > new Date()
+          ? <Button onClick={onEdit}>
+              Edit
+            </Button>
+          : <Button
+              onClick={async () => {
+                setExporting(true);
+                generateFile('report.csv', await generateReport(questionnaire.id));
+                setExporting(false);
+              }}
+              disabled={exporting}
+            >
+              Export
+            </Button>
+        )}
+        <Link to={`/questionnaires/${questionnaire.id}`}>
+          <Button>
+            Start
           </Button>
-        : <Button onClick={async () => { generateFile('report.csv', await generateReport(questionnaire.id)) }}>
-            Export
-          </Button>
-      )}
-      <Link to={`/questionnaires/${questionnaire.id}`}>
-        <Button>
-          Start
-        </Button>
-      </Link>
-    </CardActions>
-  </Card>
-);
+        </Link>
+      </CardActions>
+    </Card>
+  )
+};
 
 export default QuestionCardCandidate;

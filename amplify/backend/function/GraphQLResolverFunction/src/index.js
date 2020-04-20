@@ -19,7 +19,7 @@ const {
   getCandidateQuestionnaireQuery,
   getCandidateQuestionnaireWithCorrectionQuery,
   getQuestionnaireFromQuestionQuery,
-  getQuestionFromAnswerQuery,
+  getExtendedAnswerQuery,
 } = require('./graphql/queries');
 
 const {
@@ -50,9 +50,9 @@ const getAnswer = (query, variables) => getAppsyncClient()
   .then(async (client) => client.query({ query, variables }))
   .then((res) => get(res, 'data.getAnswer', {}));
 
-const getQuestionFromAnswer = (query, variables) => getAppsyncClient()
+const getExtendedAnswer = (query, variables) => getAppsyncClient()
   .then(async (client) => client.query({ query, variables }))
-  .then((res) => get(res, 'data.getAnswer.question', {}));
+  .then((res) => get(res, 'data.getAnswer', {}));
 
 const getQuestionnaireFromQuestion = (query, variables) => getAppsyncClient()
   .then(async (client) => client.query({ query, variables }))
@@ -160,11 +160,14 @@ const resolvers = {
     },
     updateCandidateAnswer: async (ctx) => {
       const getQuestionnaireStatus = questionnaireStatusFromNowMethod();
-      const { id: questionId, questionnaire } = await getQuestionFromAnswer(
-        getQuestionFromAnswerQuery, {
+      const { owner, question: { id: questionId, questionnaire } } = await getExtendedAnswer(
+        getExtendedAnswerQuery, {
           id: ctx.arguments.input.id,
         },
       );
+      if (owner !== ctx.identity.username) {
+        throw new Error('The answer is not owner by logged user');
+      }
       const { status } = getQuestionnaireStatus(questionnaire.startTime, questionnaire.duration);
       const answer = status === 'PLAYING'
         ? await updateCandidateAnswer(
@@ -184,11 +187,14 @@ const resolvers = {
     },
     deleteCandidateAnswer: async (ctx) => {
       const getQuestionnaireStatus = questionnaireStatusFromNowMethod();
-      const { questionnaire } = await getQuestionFromAnswer(
-        getQuestionFromAnswerQuery, {
+      const { owner, question: { questionnaire } } = await getExtendedAnswer(
+        getExtendedAnswerQuery, {
           id: ctx.arguments.input.id,
         },
       );
+      if (owner !== ctx.identity.username) {
+        throw new Error('The answer is not owner by logged user');
+      }
       const { status } = getQuestionnaireStatus(questionnaire.startTime, questionnaire.duration);
       const answer = status === 'PLAYING'
         ? await deleteCandidateAnswer(

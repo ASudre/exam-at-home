@@ -84,9 +84,10 @@ const getQuestionnaireFromQuestionQuery = gql`
   }
 `;
 
-const getQuestionFromAnswerQuery = gql`
+const getExtendedAnswerQuery = gql`
   query GetAnswer($id: ID!) {
     getAnswer(id: $id) {
+      owner
       question {
         id
         questionnaire {
@@ -118,5 +119,5 @@ module.exports = {
   getCandidateQuestionnaireQuery,
   getCandidateQuestionnaireWithCorrectionQuery,
   getQuestionnaireFromQuestionQuery,
-  getQuestionFromAnswerQuery,
+  getExtendedAnswerQuery,
 };

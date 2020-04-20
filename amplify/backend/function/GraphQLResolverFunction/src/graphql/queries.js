@@ -23,6 +23,7 @@ const getCandidateQuestionnaireQuery = gql`
           id
           imageKey
           imageName
+          createdAt
           answers(filter: {owner: {
             eq: $owner
           }}) {

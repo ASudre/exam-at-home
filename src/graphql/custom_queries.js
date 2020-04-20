@@ -42,3 +42,9 @@ export const getAdminQuestionnaire = /* GraphQL */ `
     }
   }
 `;
+
+export const generateQuestionnaireReport = /* GraphQL */ `
+  query GenerateQuestionnaireReport($id: ID!) {
+    generateQuestionnaireReport(id: $id)
+  }
+`;

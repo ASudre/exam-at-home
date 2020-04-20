@@ -2,11 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
+import { graphqlOperation, API } from 'aws-amplify';
+import { get } from 'lodash';
 
 import Card from '../Card/Card.component';
 import CardActions from '../Card/CardActions/CardActions.component';
 import CardContent from '../Card/CardContent/CardContent.component';
 import Button from '../Button/Button.component';
+import { generateQuestionnaireReport } from './../../graphql/custom_queries';
+import generateFile from './exportFile.utils';
 
 const InfoTag = styled.div`
   align-self: flex-end;
@@ -39,6 +43,18 @@ const displayDate = (date) => (date ? moment(date).format('DD/MM/YYYY HH:mm') : 
 
 const displayDuration = (duration) => `${duration} minute${duration > 1 ? 's' : ''}`
 
+const generateReport = async (id) => API
+  .graphql(
+    graphqlOperation(generateQuestionnaireReport,
+    {
+      id,
+    }),
+  )
+  .then((res) => get(res, 'data.generateQuestionnaireReport', ''))
+  .catch((e) => {
+    console.error(e);
+  });
+
 const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => (
   <Card>
     <CardContent>
@@ -49,11 +65,15 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => (
       <Title>{questionnaire.name}</Title>
     </CardContent>
     <CardActions>
-      {isAdmin
-      && <Button onClick={onEdit}>
-        Edit
-      </Button>
-      }
+      {isAdmin && (
+        new Date(questionnaire.startTime) > new Date()
+        ? <Button onClick={onEdit}>
+            Edit
+          </Button>
+        : <Button onClick={async () => { generateFile('report.csv', await generateReport(questionnaire.id)) }}>
+            Export
+          </Button>
+      )}
       <Link to={`/questionnaires/${questionnaire.id}`}>
         <Button>
           Start

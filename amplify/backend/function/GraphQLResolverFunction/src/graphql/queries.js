@@ -52,6 +52,7 @@ const getCandidateQuestionnaireWithCorrectionQuery = gql`
           id
           imageKey
           imageName
+          createdAt
           answer
           answers(filter: {owner: {
             eq: $owner

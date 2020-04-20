@@ -83,7 +83,7 @@ type CandidateQuestionnaire {
 
 type Query {
   getCandidateQuestionnaire(id: ID): CandidateQuestionnaire @function(name: "GraphQLResolverFunction-${env}")
-  listUsers: String @function(name: "GraphQLResolverFunction-${env}")
+  generateQuestionnaireReport(id: ID): String @function(name: "GraphQLResolverFunction-${env}")
 }
 
 input SaveAnswerInput {

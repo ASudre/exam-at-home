@@ -29,6 +29,7 @@ const cognitoISP = new CognitoISP(
 const {
   getAnswerQuery,
   getQuestionnaireQuery,
+  getExtendedQuestionnaireQuery,
   getCandidateQuestionnaireQuery,
   getCandidateQuestionnaireWithCorrectionQuery,
   getQuestionnaireFromQuestionQuery,
@@ -60,10 +61,6 @@ const getQuestionnaire = (query, variables) => getAppsyncClient()
   .then((res) => get(res, 'data.getQuestionnaire', {}));
 
 const getAnswer = (query, variables) => getAppsyncClient()
-  .then(async (client) => client.query({ query, variables }))
-  .then((res) => get(res, 'data.getAnswer', {}));
-
-const getExtendedAnswer = (query, variables) => getAppsyncClient()
   .then(async (client) => client.query({ query, variables }))
   .then((res) => get(res, 'data.getAnswer', {}));
 
@@ -110,11 +107,41 @@ const mapQuestionsToTypename = (typename) => (list) => (
 
 const resolvers = {
   Query: {
-    listUsers: async () => {
+    generateQuestionnaireReport: async (ctx) => {
+      const { id } = ctx.arguments;
+      const scale = {
+        'N/A': 0,
+        R: 2,
+        W: -0.5,
+      };
+
       const users = await cognitoISP
-        .listUsers({ UserPoolId: process.env.AUTH_EXAMATHOME46B3332A_USERPOOLID }).promise();
-      console.log('users:', users);
-      return 'OK';
+        .listUsers({ UserPoolId: process.env.AUTH_EXAMATHOME46B3332A_USERPOOLID }).promise()
+        .then(({ Users }) => Users.map((u) => u.Username));
+
+      const { questions } = await getQuestionnaire(getExtendedQuestionnaireQuery, { id });
+      if (!questions) {
+        return '';
+      }
+      const sortedQuestions = questions
+        .items
+        .sort((q1, q2) => (q1.createdAt > q2.createdAt ? 1 : -1));
+
+      const header = ['Username', ...sortedQuestions.map((_, i) => `Q${i + 1}`), 'Mark'];
+
+      const rows = users.map((u) => {
+        const answers = sortedQuestions.map((q) => {
+          const answerObj = q.answers.items.find((a) => a.owner === u);
+          if (!answerObj) {
+            return 'N/A';
+          }
+          return answerObj.answer === q.answer ? 'R' : 'W';
+        });
+        const mark = answers.reduce((acc, a) => acc + scale[a], 0);
+        return [u, ...answers, mark];
+      });
+
+      return [header, ...rows].map((r) => r.join(',')).join('\n');
     },
     getCandidateQuestionnaire: async (ctx) => {
       const getQuestionnaireStatus = questionnaireStatusFromNowMethod();
@@ -179,7 +206,7 @@ const resolvers = {
     },
     updateCandidateAnswer: async (ctx) => {
       const getQuestionnaireStatus = questionnaireStatusFromNowMethod();
-      const { owner, question: { id: questionId, questionnaire } } = await getExtendedAnswer(
+      const { owner, question: { id: questionId, questionnaire } } = await getAnswer(
         getExtendedAnswerQuery, {
           id: ctx.arguments.input.id,
         },
@@ -206,7 +233,7 @@ const resolvers = {
     },
     deleteCandidateAnswer: async (ctx) => {
       const getQuestionnaireStatus = questionnaireStatusFromNowMethod();
-      const { owner, question: { questionnaire } } = await getExtendedAnswer(
+      const { owner, question: { questionnaire } } = await getAnswer(
         getExtendedAnswerQuery, {
           id: ctx.arguments.input.id,
         },

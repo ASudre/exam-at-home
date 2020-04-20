@@ -12,6 +12,28 @@ const getQuestionnaireQuery = gql`
   }
 `;
 
+const getExtendedQuestionnaireQuery = gql`
+  query GetQuestionnaire($id: ID!) {
+    getQuestionnaire(id: $id) {
+      id
+      questions {
+        items {
+          id
+          createdAt
+          answer
+          answers {
+            items {
+              owner
+              answer
+            }
+          }
+        }
+        nextToken
+      }
+    }
+  }
+`;
+
 const getCandidateQuestionnaireQuery = gql`
   query GetQuestionnaire(
     $id: ID!
@@ -116,6 +138,7 @@ const getAnswerQuery = gql`
 module.exports = {
   getAnswerQuery,
   getQuestionnaireQuery,
+  getExtendedQuestionnaireQuery,
   getCandidateQuestionnaireQuery,
   getCandidateQuestionnaireWithCorrectionQuery,
   getQuestionnaireFromQuestionQuery,

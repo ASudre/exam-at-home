@@ -9,44 +9,50 @@ import CardContent from '../Card/CardContent/CardContent.component';
 import Card from '../Card/Card.component';
 import CardActions from '../Card/CardActions/CardActions.component';
 import RadioButtons from '../RadioButtons/RadioButtons.component';
-import { createCandidateAnswer as createMutation, updateCandidateAnswer as updateMutation } from '../../graphql/custom_mutations';
+import {
+  createCandidateAnswer as createMutation,
+  updateCandidateAnswer as updateMutation,
+  deleteCandidateAnswer as deleteMutation
+} from '../../graphql/custom_mutations';
 
 const answerValues = ['A', 'B', 'C', 'D'];
 
-const save = (mutation) => (answerToSave) => (
-  API.graphql(graphqlOperation(mutation, { input: answerToSave })))
+const save = (mutation) => (answer) => (
+  API.graphql(graphqlOperation(mutation, { input: answer })))
   .catch(console.error);
 
 const updateAnswer = save(updateMutation);
 const createAnswer = save(createMutation);
+const deleteAnswer = save(deleteMutation);
 
 const CandidateQuestionCard = ({
   question,
   onCreateAnswer,
+  onDeleteAnswer,
   disabled,
 }) => {
   const initAnswer = get(question, 'answers.items[0]', {});
   const correctAnswer = question.answer;
-  const [answer, setAnswer] = useState(initAnswer.answer);
-  const [savedAnswer, setSavedAnswer] = useState();
+  const [answerValue, setAnswerValue] = useState(initAnswer.answer);
+  const [savedAnswer, setSavedAnswer] = useState(initAnswer);
 
   useEffect(() => {
-    setSavedAnswer(get(question, 'answers.items[0].answer', null));
+    setSavedAnswer(get(question, 'answers.items[0]', {}));
     if (disabled) {
-      setAnswer(get(question, 'answers.items[0].answer', null));
+      setAnswerValue(get(question, 'answers.items[0].answer', null));
     }
   }, [question, disabled])
 
   const buildInput = () => ({
-    id: initAnswer.id || uuidV4(),
+    id: savedAnswer.id || uuidV4(),
     answerQuestionId: question.id,
-    answer,
+    answer: answerValue,
   });
 
   const onSave = (isUpdate) => ({ data }) => {
-    const saved = isUpdate ? data.updateCandidateAnswer.answer : data.createCandidateAnswer.answer;
+    const saved = isUpdate ? data.updateCandidateAnswer : data.createCandidateAnswer;
     setSavedAnswer(saved);
-    setAnswer(saved);
+    setAnswerValue(saved.answer);
   };
 
   return (
@@ -55,18 +61,32 @@ const CandidateQuestionCard = ({
         <S3Image theme={{ photoImg: { width: '100%' } }} imgKey={question.imageKey} alt="question"/>
         <RadioButtons
           values={answerValues}
-          setValue={setAnswer}
-          checkedValue={answer}
+          setValue={setAnswerValue}
+          checkedValue={answerValue}
           correctAnswer={correctAnswer}
           disabled={disabled}
         />
       </CardContent>
       {!disabled &&
         <CardActions>
+          {savedAnswer.id &&
+            <Button
+              onClick={
+                () => deleteAnswer(buildInput())
+                  .then(() => {
+                    setSavedAnswer({});
+                    setAnswerValue(null);
+                  })
+                  .then(onDeleteAnswer)
+              }
+            >
+              Cancel
+            </Button>
+          }
           <Button
-            disabled={answer === savedAnswer}
+            disabled={answerValue === savedAnswer.answer}
             onClick={
-              () => (initAnswer.id
+              () => (savedAnswer.id
                 ? updateAnswer(buildInput()).then(onSave(true))
                 : createAnswer(buildInput()).then(onSave(false)).then(onCreateAnswer)
               )}

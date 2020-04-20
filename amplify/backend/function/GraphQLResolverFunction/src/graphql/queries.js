@@ -84,6 +84,23 @@ const getQuestionnaireFromQuestionQuery = gql`
   }
 `;
 
+const getQuestionFromAnswerQuery = gql`
+  query GetAnswer($id: ID!) {
+    getAnswer(id: $id) {
+      question {
+        id
+        questionnaire {
+          id
+          startTime
+          name
+          duration
+          createdAt
+        }
+      }
+    }
+  }
+`;
+
 const getAnswerQuery = gql`
   query GetAnswer($id: ID!) {
     getAnswer(id: $id) {
@@ -101,4 +118,5 @@ module.exports = {
   getCandidateQuestionnaireQuery,
   getCandidateQuestionnaireWithCorrectionQuery,
   getQuestionnaireFromQuestionQuery,
+  getQuestionFromAnswerQuery,
 };

@@ -58,7 +58,7 @@ type Question
 type Answer @model
 @auth(rules: [
   { allow: owner, operations: [read] },
-  { allow: private, provider: iam, operations: [create, update, read] },
+  { allow: private, provider: iam, operations: [create, update, read, delete] },
   { allow: groups, groups: ["Admin"], operations: [read] },
   { allow: groups, groups: ["Forbidden"] }
 ]) {
@@ -91,6 +91,10 @@ input SaveAnswerInput {
   answer: String
 }
 
+input DeleteAnswerInput {
+  id: ID!
+}
+
 type CandidateAnswer {
   id: ID
   answer: String
@@ -100,4 +104,5 @@ type CandidateAnswer {
 type Mutation {
   createCandidateAnswer(input: SaveAnswerInput): CandidateAnswer @function(name: "GraphQLResolverFunction-${env}")
   updateCandidateAnswer(input: SaveAnswerInput): CandidateAnswer @function(name: "GraphQLResolverFunction-${env}")
+  deleteCandidateAnswer(input: SaveAnswerInput): CandidateAnswer @function(name: "GraphQLResolverFunction-${env}")
 }

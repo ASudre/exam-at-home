@@ -67,6 +67,7 @@ const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
           key={q.id}
           question={q}
           onCreateAnswer={() => setAnswered(answered + 1)}
+          onDeleteAnswer={() => setAnswered(answered - 1)}
           disabled={questionnaire.status !== "PLAYING"}
         />
       ))}

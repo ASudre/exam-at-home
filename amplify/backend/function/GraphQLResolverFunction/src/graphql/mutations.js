@@ -24,7 +24,20 @@ const updateCandidateAnswerMutation = gql`
   }
 `;
 
+const deleteCandidateAnswerMutation = gql`
+  mutation DeleteAnswer(
+    $input: DeleteAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    deleteAnswer(input: $input, condition: $condition) {
+      id
+      answer
+    }
+  }
+`;
+
 module.exports = {
   createCandidateAnswerMutation,
   updateCandidateAnswerMutation,
+  deleteCandidateAnswerMutation,
 };

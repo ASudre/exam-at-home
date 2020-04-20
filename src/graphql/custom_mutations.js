@@ -19,7 +19,15 @@ export const updateCandidateAnswer = /* GraphQL */ `
     }
   }
 `;
-
+export const deleteCandidateAnswer = /* GraphQL */ `
+  mutation DeleteAnswer(
+    $input: SaveAnswerInput!
+  ) {
+    deleteCandidateAnswer(input: $input) {
+      id
+    }
+  }
+`;
 export const createQuestion = /* GraphQL */ `
   mutation CreateQuestion(
     $input: CreateQuestionInput!

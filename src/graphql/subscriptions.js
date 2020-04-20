@@ -154,33 +154,6 @@ export const onDeleteQuestion = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteAnswer = /* GraphQL */ `
-  subscription OnDeleteAnswer {
-    onDeleteAnswer {
-      id
-      answer
-      owner
-      createdAt
-      question {
-        id
-        imageKey
-        imageName
-        createdAt
-        questionnaire {
-          id
-          startTime
-          name
-          duration
-          createdAt
-        }
-        answer
-        answers {
-          nextToken
-        }
-      }
-    }
-  }
-`;
 export const onCreateAnswer = /* GraphQL */ `
   subscription OnCreateAnswer {
     onCreateAnswer {
@@ -211,6 +184,33 @@ export const onCreateAnswer = /* GraphQL */ `
 export const onUpdateAnswer = /* GraphQL */ `
   subscription OnUpdateAnswer {
     onUpdateAnswer {
+      id
+      answer
+      owner
+      createdAt
+      question {
+        id
+        imageKey
+        imageName
+        createdAt
+        questionnaire {
+          id
+          startTime
+          name
+          duration
+          createdAt
+        }
+        answer
+        answers {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onDeleteAnswer = /* GraphQL */ `
+  subscription OnDeleteAnswer {
+    onDeleteAnswer {
       id
       answer
       owner

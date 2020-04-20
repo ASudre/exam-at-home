@@ -19,6 +19,15 @@ export const updateCandidateAnswer = /* GraphQL */ `
     }
   }
 `;
+export const deleteCandidateAnswer = /* GraphQL */ `
+  mutation DeleteCandidateAnswer($input: SaveAnswerInput) {
+    deleteCandidateAnswer(input: $input) {
+      id
+      answer
+      questionnaireStatus
+    }
+  }
+`;
 export const createQuestionnaire = /* GraphQL */ `
   mutation CreateQuestionnaire(
     $input: CreateQuestionnaireInput!
@@ -190,36 +199,6 @@ export const deleteQuestion = /* GraphQL */ `
     }
   }
 `;
-export const deleteAnswer = /* GraphQL */ `
-  mutation DeleteAnswer(
-    $input: DeleteAnswerInput!
-    $condition: ModelAnswerConditionInput
-  ) {
-    deleteAnswer(input: $input, condition: $condition) {
-      id
-      answer
-      owner
-      createdAt
-      question {
-        id
-        imageKey
-        imageName
-        createdAt
-        questionnaire {
-          id
-          startTime
-          name
-          duration
-          createdAt
-        }
-        answer
-        answers {
-          nextToken
-        }
-      }
-    }
-  }
-`;
 export const createAnswer = /* GraphQL */ `
   mutation CreateAnswer(
     $input: CreateAnswerInput!
@@ -256,6 +235,36 @@ export const updateAnswer = /* GraphQL */ `
     $condition: ModelAnswerConditionInput
   ) {
     updateAnswer(input: $input, condition: $condition) {
+      id
+      answer
+      owner
+      createdAt
+      question {
+        id
+        imageKey
+        imageName
+        createdAt
+        questionnaire {
+          id
+          startTime
+          name
+          duration
+          createdAt
+        }
+        answer
+        answers {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const deleteAnswer = /* GraphQL */ `
+  mutation DeleteAnswer(
+    $input: DeleteAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    deleteAnswer(input: $input, condition: $condition) {
       id
       answer
       owner

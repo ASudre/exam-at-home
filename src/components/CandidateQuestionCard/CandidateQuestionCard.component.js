@@ -69,22 +69,8 @@ const CandidateQuestionCard = ({
       </CardContent>
       {!disabled &&
         <CardActions>
-          {savedAnswer.id &&
-            <Button
-              onClick={
-                () => deleteAnswer(buildInput())
-                  .then(() => {
-                    setSavedAnswer({});
-                    setAnswerValue(null);
-                  })
-                  .then(onDeleteAnswer)
-              }
-            >
-              Cancel
-            </Button>
-          }
           <Button
-            disabled={answerValue === savedAnswer.answer}
+            disabled={!answerValue || answerValue === savedAnswer.answer}
             onClick={
               () => (savedAnswer.id
                 ? updateAnswer(buildInput()).then(onSave(true))
@@ -92,6 +78,19 @@ const CandidateQuestionCard = ({
               )}
           >
             Answer
+          </Button>
+          <Button
+            disabled={!savedAnswer.id}
+            onClick={
+              () => deleteAnswer(buildInput())
+                .then(() => {
+                  setSavedAnswer({});
+                  setAnswerValue(null);
+                })
+                .then(onDeleteAnswer)
+            }
+          >
+            Cancel
           </Button>
         </CardActions>
       }

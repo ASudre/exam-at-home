@@ -68,22 +68,21 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
         <Title>{questionnaire.name}</Title>
       </CardContent>
       <CardActions>
-        {isAdmin && (
-          new Date(questionnaire.startTime) > new Date()
-          ? <Button onClick={onEdit}>
-              Edit
-            </Button>
-          : <Button
-              onClick={async () => {
-                setExporting(true);
-                generateFile('report.csv', await generateReport(questionnaire.id));
-                setExporting(false);
-              }}
-              disabled={exporting}
-            >
-              Export
-            </Button>
-        )}
+        {isAdmin && new Date(questionnaire.startTime) < new Date() &&
+          <Button
+            onClick={async () => {
+              setExporting(true);
+              generateFile('report.csv', await generateReport(questionnaire.id));
+              setExporting(false);
+            }}
+            disabled={exporting}
+          >
+            Export
+          </Button>
+        }
+        <Button onClick={onEdit}>
+          Edit
+        </Button>
         <Link to={`/questionnaires/${questionnaire.id}`}>
           <Button>
             Start

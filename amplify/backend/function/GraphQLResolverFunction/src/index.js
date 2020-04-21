@@ -147,10 +147,10 @@ const resolvers = {
       const getQuestionnaireStatus = questionnaireStatusFromNowMethod();
       const { id } = ctx.arguments;
       const { username } = ctx.identity;
-      const questionnaire = await getQuestionnaire(getQuestionnaireQuery, { id });
+      const { startTime, duration } = await getQuestionnaire(getQuestionnaireQuery, { id });
       const { status, startsIn, remainingTime } = getQuestionnaireStatus(
-        questionnaire.startTime,
-        questionnaire.duration,
+        startTime,
+        duration,
       );
       let questions = [];
       switch (status) {
@@ -174,6 +174,8 @@ const resolvers = {
           break;
       }
       return {
+        startTime,
+        duration,
         startsIn,
         remainingTime,
         status,

@@ -55,6 +55,7 @@ const QuestionnairePage = ({ isAdmin }) => {
   return (questionnaire.status === 'NOT_PLAYED'
     ? <WaitingForStart
         startsIn={questionnaire.startsIn}
+        startTime={questionnaire.startTime}
         onStart={() => getQuestionnaire(id, false).then(setQuestionnaire)}
       />
     : <CandidateQuestionnaire

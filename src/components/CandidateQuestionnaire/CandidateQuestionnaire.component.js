@@ -52,30 +52,39 @@ const Scale = ({ scale }) => {
   </FlexContainer>
 };
 
+const getRemainingTime = (startTime, duration) => {
+  const endTime = new Date(startTime).setMinutes(new Date(startTime).getMinutes() + duration);
+  return Math.floor((endTime - new Date()) / 1000);
+}
+
 const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
   const scale = [2, -0.5, 0];
-  const [remainingTime, setRemainingTime] = useState();
-  const [status, setStatus] = useState();
-  const [questions, setQuestions] = useState([]);
+  const [remainingTime, setRemainingTime] = useState(getRemainingTime(questionnaire.startTime, questionnaire.duration));
+  const [startTime, setStartTime] = useState(questionnaire.startTime);
+  const [duration, setDuration] = useState(questionnaire.duration);
+  const [status, setStatus] = useState(questionnaire.status);
+  const [questions, setQuestions] = useState(get(questionnaire, 'questions.items', []));
   const [answered, setAnswered] = useState(0);
   const [mark, setMark] = useState(0);
   const [maxMark, setMaxMark] = useState(0);
 
   useEffect(() => {
     setQuestions(get(questionnaire, 'questions.items', []));
-    setRemainingTime(questionnaire.remainingTime);
+    setStartTime(questionnaire.startTime);
+    setDuration(questionnaire.duration);
+    setRemainingTime(getRemainingTime(questionnaire.startTime, questionnaire.duration));
     setStatus(questionnaire.status);
   }, [questionnaire]);
 
   useEffect(() => {
     if (status === 'PLAYING') {
-      if (remainingTime === 0) {
+      if (remainingTime <= 0) {
         onTimeIsUp();
       } else {
-        setTimeout(() => setRemainingTime(remainingTime - 1), 1000);
+        setTimeout(() => setRemainingTime(getRemainingTime(startTime, duration)), 1000);
       }
     }
-  }, [remainingTime, onTimeIsUp, status]);
+  }, [remainingTime, onTimeIsUp, status, duration, startTime]);
 
   useEffect(() => {
     if (status === 'PLAYING') {

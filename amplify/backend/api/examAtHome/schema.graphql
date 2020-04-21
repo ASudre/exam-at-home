@@ -75,6 +75,8 @@ type QuestionConnection {
 }
 
 type CandidateQuestionnaire {
+  startTime: AWSDateTime
+  duration: Int
   startsIn: Int
   remainingTime: Int
   status: String

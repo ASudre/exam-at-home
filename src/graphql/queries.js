@@ -4,6 +4,8 @@
 export const getCandidateQuestionnaire = /* GraphQL */ `
   query GetCandidateQuestionnaire($id: ID) {
     getCandidateQuestionnaire(id: $id) {
+      startTime
+      duration
       startsIn
       remainingTime
       status
@@ -18,6 +20,11 @@ export const getCandidateQuestionnaire = /* GraphQL */ `
         nextToken
       }
     }
+  }
+`;
+export const generateQuestionnaireReport = /* GraphQL */ `
+  query GenerateQuestionnaireReport($id: ID) {
+    generateQuestionnaireReport(id: $id)
   }
 `;
 export const listQuestionnaires = /* GraphQL */ `

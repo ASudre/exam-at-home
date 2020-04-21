@@ -21,16 +21,18 @@ const Counter = styled.div`
   text-align: center;
 `;
 
-const WaitingForStart = ({ startsIn = 0, onStart }) => {
-  const [countDown, setCountDown] = useState(startsIn);
+const getCountDown = (startTime) => Math.floor((new Date(startTime) - new Date()) / 1000);
+
+const WaitingForStart = ({ onStart, startTime }) => {
+  const [countDown, setCountDown] = useState(getCountDown(startTime));
 
   useEffect(() => {
-    if (countDown === 0) {
+    if (countDown <= 0) {
       onStart();
     } else {
-      setTimeout(() => setCountDown(countDown - 1), 1000);
+      setTimeout(() => setCountDown(getCountDown(startTime)), 1000);
     }
-  }, [countDown, onStart])
+  }, [countDown, onStart, startTime])
 
   return <Container><Counter>Starts in {countDown} second{`${countDown > 1 ? 's' : ''}`}</Counter></Container>
 }

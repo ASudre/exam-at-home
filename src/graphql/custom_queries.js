@@ -3,6 +3,8 @@ export const getCandidateQuestionnaire = /* GraphQL */ `
   query GetCandidateQuestionnaire($id: ID!) {
     getCandidateQuestionnaire(id: $id) {
       status
+      startTime
+      duration
       startsIn
       remainingTime
       questions {

@@ -44,7 +44,7 @@ const FlexContainer = styled.div`
 `;
 
 const Scale = ({ scale }) => {
-  const format = (nbPts => `${nbPts}pt${nbPts > 1 ? 's' : ''}`);
+  const format = (nbPts => `${nbPts}pt${Math.abs(nbPts) > 1 ? 's' : ''}`);
   return <FlexContainer>
     <div>Correct answer: {format(scale[0])}</div>
     <div>Wrong answer: {format(scale[1])}</div>
@@ -54,13 +54,18 @@ const Scale = ({ scale }) => {
 
 const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
   const scale = [2, -0.5, 0];
-  const { status, remainingTime: initRemainingTime } = questionnaire;
-  const [remainingTime, setRemainingTime] = useState(
-    initRemainingTime,
-  );
-  const questions = get(questionnaire, 'questions.items', []);
-  const [answered, setAnswered] = useState(getAnswered(questions));
-  const [mark, setMark] = useState();
+  const [remainingTime, setRemainingTime] = useState();
+  const [status, setStatus] = useState();
+  const [questions, setQuestions] = useState([]);
+  const [answered, setAnswered] = useState(0);
+  const [mark, setMark] = useState(0);
+  const [maxMark, setMaxMark] = useState(0);
+
+  useEffect(() => {
+    setQuestions(get(questionnaire, 'questions.items', []));
+    setRemainingTime(questionnaire.remainingTime);
+    setStatus(questionnaire.status);
+  }, [questionnaire]);
 
   useEffect(() => {
     if (status === 'PLAYING') {
@@ -73,8 +78,14 @@ const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
   }, [remainingTime, onTimeIsUp, status]);
 
   useEffect(() => {
+    if (status === 'PLAYING') {
+      setAnswered(getAnswered(questions));
+      return;
+    }
     if (status === 'PLAYED') {
       setMark(getMark(questions, scale));
+      setMaxMark(questions.length * scale[0]);
+      return;
     }
   }, [status, questions, scale]);
 
@@ -89,7 +100,7 @@ const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
         <Container>
           <InfoCardContent>
             {questionnaire.status === "PLAYING" && `${toDisplay(remainingTime)} - ${answered} out of ${questions.length} answered`}
-            {questionnaire.status === "PLAYED" && `Your result: ${mark}pt${mark > 1 ? 's' : ''}`}
+            {questionnaire.status === "PLAYED" && `Your result: ${mark} / ${maxMark} pt${mark > 1 ? 's' : ''}`}
           </InfoCardContent>
         </Container>
       </InfoCard>

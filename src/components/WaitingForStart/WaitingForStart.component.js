@@ -27,12 +27,14 @@ const WaitingForStart = ({ onStart, startTime }) => {
   const [countDown, setCountDown] = useState(getCountDown(startTime));
 
   useEffect(() => {
+    let timeout = null;
     if (countDown <= 0) {
       onStart();
     } else {
-      setTimeout(() => setCountDown(getCountDown(startTime)), 1000);
+      timeout = setTimeout(() => setCountDown(getCountDown(startTime)), 1000);
     }
-  }, [countDown, onStart, startTime])
+    return () => clearTimeout(timeout);
+  }, [countDown, onStart, startTime]);
 
   return <Container><Counter>Starts in {countDown} second{`${countDown > 1 ? 's' : ''}`}</Counter></Container>
 }

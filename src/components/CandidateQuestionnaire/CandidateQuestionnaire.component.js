@@ -77,13 +77,15 @@ const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
   }, [questionnaire]);
 
   useEffect(() => {
+    let timeout = null;
     if (status === 'PLAYING') {
       if (remainingTime <= 0) {
         onTimeIsUp();
       } else {
-        setTimeout(() => setRemainingTime(getRemainingTime(startTime, duration)), 1000);
+        timeout = setTimeout(() => setRemainingTime(getRemainingTime(startTime, duration)), 1000);
       }
     }
+    return clearTimeout(timeout);
   }, [remainingTime, onTimeIsUp, status, duration, startTime]);
 
   useEffect(() => {

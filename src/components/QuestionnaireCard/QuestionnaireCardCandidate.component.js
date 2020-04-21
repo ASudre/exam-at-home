@@ -80,9 +80,10 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
             Export
           </Button>
         }
-        <Button onClick={onEdit}>
-          Edit
-        </Button>
+        {isAdmin && <Button onClick={onEdit}>
+            Edit
+          </Button>
+        }
         <Link to={`/questionnaires/${questionnaire.id}`}>
           <Button>
             Start

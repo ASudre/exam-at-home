@@ -35,7 +35,9 @@ const QuestionnairePage = ({ isAdmin }) => {
   const [questionnaire, setQuestionnaire] = useState(null);
 
   useEffect(() => {
-    getQuestionnaire(id, isAdmin).then(setQuestionnaire);
+    if (isAdmin !== null) {
+      getQuestionnaire(id, isAdmin).then(setQuestionnaire);
+    }
   },
   [id, isAdmin]);
 
@@ -43,22 +45,23 @@ const QuestionnairePage = ({ isAdmin }) => {
     return <Loader />;
   }
 
-  if(questionnaire.status === 'NOT_PLAYED') {
-    return <WaitingForStart
-      startsIn={questionnaire.startsIn}
-      onStart={() => getQuestionnaire(id, isAdmin).then(setQuestionnaire)}
+  if (isAdmin) {
+    return <AdminQuestionnaire
+      questionnaire={questionnaire}
+      refreshQuestionnaire={() => getQuestionnaire(id, true).then(setQuestionnaire)}
     />
   }
 
-  return (isAdmin
-    ? <AdminQuestionnaire
-          questionnaire={questionnaire}
-          refreshQuestionnaire={() => getQuestionnaire(id, true).then(setQuestionnaire)}
-        />
+  return (questionnaire.status === 'NOT_PLAYED'
+    ? <WaitingForStart
+        startsIn={questionnaire.startsIn}
+        onStart={() => getQuestionnaire(id, false).then(setQuestionnaire)}
+      />
     : <CandidateQuestionnaire
         questionnaire={questionnaire}
         onTimeIsUp={() => getQuestionnaire(id, false).then(setQuestionnaire)}
-      />);
+      />
+  );
 };
 
 export default QuestionnairePage;

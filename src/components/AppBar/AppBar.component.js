@@ -38,7 +38,6 @@ const AppBar = ({username, isAdmin}) => {
   const location = useLocation();
   const handleSignOut = () => {
     Auth.signOut()
-      .then((data) => console.log(data))
       .catch((err) => console.log(err));
   };
 

@@ -6,6 +6,8 @@ import moment from 'moment';
 import CandidateQuestionCard from '../CandidateQuestionCard/CandidateQuestionCard.component';
 import Card from '../Card/Card.component';
 import CardContent from '../Card/CardContent/CardContent.component';
+import CardInfo from '../Card/CardInfo/CardInfo.component';
+import InfoIcon from '../InfoIcon/InfoIcon.component';
 
 const InfoCard = styled(Card)`
   position: sticky;
@@ -99,6 +101,9 @@ const Questionnaire = ({ questionnaire: { questions: defaultQuestions, startTime
     <>
       <Card>
         <CardContent>
+          <CardInfo>
+            <InfoIcon/>
+          </CardInfo>
           <Scale scale={scale} />
         </CardContent>
       </Card>

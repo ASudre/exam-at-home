@@ -11,6 +11,7 @@ import CardContent from '../Card/CardContent/CardContent.component';
 import Button from '../Button/Button.component';
 import { generateQuestionnaireReport } from './../../graphql/custom_queries';
 import generateFile from './exportFile.utils';
+import CardInfo from '../Card/CardInfo/CardInfo.component';
 
 const InfoTag = styled.div`
   align-self: flex-end;
@@ -23,12 +24,6 @@ const InfoTag = styled.div`
     margin-left: .5em;
     font-size: small;
   }
-`;
-
-const InfoContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
 `;
 
 const Title = styled.div`
@@ -61,10 +56,10 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
   return (
     <Card>
       <CardContent>
-        <InfoContainer>
+        <CardInfo>
           <InfoTag>{displayDate(questionnaire.startTime)}</InfoTag>
           <InfoTag>{displayDuration(questionnaire.duration)}</InfoTag>
-        </InfoContainer>
+        </CardInfo>
         <Title>{questionnaire.name}</Title>
       </CardContent>
       <CardActions>

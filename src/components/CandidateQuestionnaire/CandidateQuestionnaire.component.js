@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { get } from 'lodash';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import CandidateQuestionCard from '../CandidateQuestionCard/CandidateQuestionCard.component';
 import Card from '../Card/Card.component';
@@ -52,29 +53,23 @@ const Scale = ({ scale }) => {
   </FlexContainer>
 };
 
-const getRemainingTime = (startTime, duration) => {
-  const endTime = new Date(startTime).setMinutes(new Date(startTime).getMinutes() + duration);
-  return Math.floor((endTime - new Date()) / 1000);
-}
+const getEndTime = (startTime, duration) => moment(startTime).add(duration, 'minutes').toISOString();
 
-const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
+const getRemainingTime = (endTime) => Math.floor((new Date(endTime) - new Date()) / 1000);
+
+const Questionnaire = ({ questionnaire: { questions: defaultQuestions, startTime, duration, status }, onTimeIsUp }) => {
   const scale = [2, -0.5, 0];
-  const [remainingTime, setRemainingTime] = useState(getRemainingTime(questionnaire.startTime, questionnaire.duration));
-  const [startTime, setStartTime] = useState(questionnaire.startTime);
-  const [duration, setDuration] = useState(questionnaire.duration);
-  const [status, setStatus] = useState(questionnaire.status);
-  const [questions, setQuestions] = useState(get(questionnaire, 'questions.items', []));
+  const [endTime, setEndTime] = useState(getEndTime(startTime, duration));
+  const [remainingTime, setRemainingTime] = useState(getRemainingTime(endTime));
+  const [questions, setQuestions] = useState(get(defaultQuestions, 'items', []));
   const [answered, setAnswered] = useState(0);
   const [mark, setMark] = useState(0);
   const [maxMark, setMaxMark] = useState(0);
 
   useEffect(() => {
-    setQuestions(get(questionnaire, 'questions.items', []));
-    setStartTime(questionnaire.startTime);
-    setDuration(questionnaire.duration);
-    setRemainingTime(getRemainingTime(questionnaire.startTime, questionnaire.duration));
-    setStatus(questionnaire.status);
-  }, [questionnaire]);
+    setQuestions(get(defaultQuestions, 'items', []));
+    setEndTime(getEndTime(startTime, duration));
+  }, [defaultQuestions, startTime, duration]);
 
   useEffect(() => {
     let timeout = null;
@@ -82,11 +77,11 @@ const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
       if (remainingTime <= 0) {
         onTimeIsUp();
       } else {
-        timeout = setTimeout(() => setRemainingTime(getRemainingTime(startTime, duration)), 1000);
+        timeout = setTimeout(() => setRemainingTime(getRemainingTime(endTime)), 1000);
       }
     }
-    return clearTimeout(timeout);
-  }, [remainingTime, onTimeIsUp, status, duration, startTime]);
+    return () => clearTimeout(timeout);
+  }, [remainingTime, onTimeIsUp, status, endTime]);
 
   useEffect(() => {
     if (status === 'PLAYING') {
@@ -110,8 +105,8 @@ const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
       <InfoCard>
         <Container>
           <InfoCardContent>
-            {questionnaire.status === "PLAYING" && `${toDisplay(remainingTime)} - ${answered} out of ${questions.length} answered`}
-            {questionnaire.status === "PLAYED" && `Your result: ${mark} / ${maxMark} pt${mark > 1 ? 's' : ''}`}
+            {status === "PLAYING" && `${toDisplay(remainingTime)} - ${answered} out of ${questions.length} answered`}
+            {status === "PLAYED" && `Your result: ${mark} / ${maxMark} pt${mark > 1 ? 's' : ''}`}
           </InfoCardContent>
         </Container>
       </InfoCard>
@@ -121,7 +116,7 @@ const Questionnaire = ({ questionnaire, onTimeIsUp }) => {
           question={q}
           onCreateAnswer={() => setAnswered(answered + 1)}
           onDeleteAnswer={() => setAnswered(answered - 1)}
-          disabled={questionnaire.status !== "PLAYING"}
+          disabled={status !== "PLAYING"}
         />
       ))}
     </>

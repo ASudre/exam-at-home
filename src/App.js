@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,9 +9,11 @@ import { ThemeProvider } from 'styled-components';
 import { withAuthenticator, SignIn, ForgotPassword } from 'aws-amplify-react';
 
 import awsconfig from './aws-exports';
-import Questionnaires from './components/QuestionnairesPage/QuestionnairesPage.component';
 import Layout from './components/Layout/Layout.component';
-import QuestionnairePage from './components/QuestionnairePage/QuestionnairePage.component';
+import Loader from './components/Loader/Loader.component';
+
+const QuestionnairePage = lazy(() => import('./components/QuestionnairePage/QuestionnairePage.component'));
+const QuestionnairesPage = lazy(() => import('./components/QuestionnairesPage/QuestionnairesPage.component'));
 
 Amplify.configure(awsconfig);
 const theme = {
@@ -44,14 +46,16 @@ const App = () => {
   return (<ThemeProvider theme={theme} >
     <Router>
       <Layout username={username} isAdmin={isAdmin} >
-        <Switch>
-          <Route path="/questionnaires/:id">
-            <QuestionnairePage isAdmin={isAdmin} />
-          </Route>
-          <Route path="/">
-            <Questionnaires isAdmin={isAdmin} />
-          </Route>
-        </Switch>
+        <Suspense fallback={<Loader/>}>
+          <Switch>
+            <Route path="/questionnaires/:id">
+              <QuestionnairePage isAdmin={isAdmin} />
+            </Route>
+            <Route path="/">
+              <QuestionnairesPage isAdmin={isAdmin} />
+            </Route>
+          </Switch>
+        </Suspense>
       </Layout>
     </Router>
   </ThemeProvider>

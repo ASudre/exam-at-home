@@ -59,8 +59,9 @@ const getEndTime = (startTime, duration) => moment(startTime).add(duration, 'min
 
 const getRemainingTime = (endTime) => Math.floor((new Date(endTime) - new Date()) / 1000);
 
+const scale = [2, -0.5, 0];
+
 const Questionnaire = ({ questionnaire: { questions: defaultQuestions, startTime, duration, status }, onTimeIsUp }) => {
-  const scale = [2, -0.5, 0];
   const [endTime, setEndTime] = useState(getEndTime(startTime, duration));
   const [remainingTime, setRemainingTime] = useState(getRemainingTime(endTime));
   const [questions, setQuestions] = useState(get(defaultQuestions, 'items', []));
@@ -95,7 +96,7 @@ const Questionnaire = ({ questionnaire: { questions: defaultQuestions, startTime
       setMaxMark(questions.length * scale[0]);
       return;
     }
-  }, [status, questions, scale]);
+  }, [status, questions]);
 
   return (
     <>

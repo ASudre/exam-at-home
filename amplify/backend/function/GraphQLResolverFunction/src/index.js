@@ -111,7 +111,7 @@ const resolvers = {
       const { id } = ctx.arguments;
       const scale = {
         'N/A': 0,
-        R: 2,
+        R: 2.5,
         W: -0.5,
       };
 

@@ -112,7 +112,7 @@ const Questionnaire = ({ questionnaire: { questions: defaultQuestions, startTime
         <Container>
           <InfoCardContent>
             {status === "PLAYING" && `${toDisplay(remainingTime)} - ${answered} out of ${questions.length} answered`}
-            {status === "PLAYED" && `Your result: ${mark} / ${maxMark} pt${mark > 1 ? 's' : ''}`}
+            {status === "PLAYED" && `Your result: ${mark} / ${maxMark}`}
           </InfoCardContent>
         </Container>
       </InfoCard>

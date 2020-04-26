@@ -119,6 +119,15 @@ const resolvers = {
         .listUsers({ UserPoolId: process.env.AUTH_EXAMATHOME46B3332A_USERPOOLID }).promise()
         .then(({ Users }) => Users.map((u) => u.Username));
 
+      const adminUsers = await cognitoISP
+        .listUsersInGroup({
+          UserPoolId: process.env.AUTH_EXAMATHOME46B3332A_USERPOOLID,
+          GroupName: 'Admin',
+        }).promise()
+        .then(({ Users }) => Users.map((u) => u.Username));
+
+      const notAdminAndNotTestUsers = users.filter((u) => !(adminUsers.includes(u) || u.includes('+test')));
+
       const { questions } = await getQuestionnaire(getExtendedQuestionnaireQuery, { id });
       if (!questions) {
         return '';
@@ -129,7 +138,7 @@ const resolvers = {
 
       const header = ['Username', ...sortedQuestions.map((_, i) => `Q${i + 1}`), 'Mark'];
 
-      const rows = users.map((u) => {
+      const rows = notAdminAndNotTestUsers.map((u) => {
         const answers = sortedQuestions.map((q) => {
           const answerObj = q.answers.items.find((a) => a.owner === u);
           if (!answerObj) {

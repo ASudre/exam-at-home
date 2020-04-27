@@ -1,5 +1,6 @@
-import { API, graphqlOperation } from 'aws-amplify';
+import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import { get } from 'lodash';
+import awsconfig from '../../aws-exports';
 
 import { listQuestionnaires } from '../../graphql/queries';
 
@@ -8,6 +9,8 @@ import {
   createQuestionnaire as createMutation,
   updateQuestionnaire as updateMutation,
 } from '../../graphql/custom_mutations';
+
+Amplify.configure(awsconfig);
 
 export const save = (mutation) => (questionnaire) => API
   .graphql(graphqlOperation(mutation, { input: questionnaire }))

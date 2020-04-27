@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { API, graphqlOperation } from 'aws-amplify';
+import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import { get } from 'lodash';
+import awsconfig from '../../aws-exports';
 
 import { getAdminQuestionnaire, getCandidateQuestionnaire } from '../../graphql/custom_queries';
 import CandidateQuestionnaire from '../CandidateQuestionnaire/CandidateQuestionnaire.component';
 import AdminQuestionnaire from '../AdminQuestionnaire/AdminQuestionnaire.component';
 import Loader from '../Loader/Loader.component';
 import WaitingForStart from '../WaitingForStart/WaitingForStart.component';
+
+Amplify.configure(awsconfig);
 
 const getQuestionnaire = async (id, isAdmin) => API
   .graphql(

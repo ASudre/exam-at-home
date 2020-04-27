@@ -28,7 +28,9 @@ const CorrectAnswerLabel = styled(Label)`
   color: #00923b;
 `;
 
-const RadioButton = ({ values, setValue, checkedValue, correctAnswer, disabled }) => (
+const RadioButton = ({
+  values, setValue, checkedValue, correctAnswer, disabled,
+}) => (
   <Container>
     {values.map((value) => (
       <RadioContainer key={value}>

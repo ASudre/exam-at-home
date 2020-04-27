@@ -1,5 +1,3 @@
-
-/* eslint-disable no-undef */
 export default async (filename, text) => {
   const pom = document.createElement('a');
   pom.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`);

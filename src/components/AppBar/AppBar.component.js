@@ -34,7 +34,7 @@ const Right = styled.div`
   display: flex;
 `;
 
-const AppBar = ({username, isAdmin}) => {
+const AppBar = ({ username, isAdmin }) => {
   const location = useLocation();
   const handleSignOut = () => {
     Auth.signOut()

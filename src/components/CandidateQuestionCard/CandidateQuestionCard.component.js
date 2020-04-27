@@ -12,7 +12,7 @@ import RadioButtons from '../RadioButtons/RadioButtons.component';
 import {
   createCandidateAnswer as createMutation,
   updateCandidateAnswer as updateMutation,
-  deleteCandidateAnswer as deleteMutation
+  deleteCandidateAnswer as deleteMutation,
 } from '../../graphql/custom_mutations';
 
 const answerValues = ['A', 'B', 'C', 'D'];
@@ -41,7 +41,7 @@ const CandidateQuestionCard = ({
     if (disabled) {
       setAnswerValue(get(question, 'answers.items[0].answer', null));
     }
-  }, [question, disabled])
+  }, [question, disabled]);
 
   const buildInput = () => ({
     id: savedAnswer.id || uuidV4(),
@@ -67,8 +67,8 @@ const CandidateQuestionCard = ({
           disabled={disabled}
         />
       </CardContent>
-      {!disabled &&
-        <CardActions>
+      {!disabled
+        && <CardActions>
           <Button
             disabled={!answerValue || answerValue === savedAnswer.answer}
             onClick={

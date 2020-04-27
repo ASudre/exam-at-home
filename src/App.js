@@ -1,4 +1,6 @@
-import React, { useEffect, useState, Suspense, lazy } from 'react';
+import React, {
+  useEffect, useState, Suspense, lazy,
+} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,8 +14,8 @@ import awsconfig from './aws-exports';
 import Layout from './components/Layout/Layout.component';
 import Loader from './components/Loader/Loader.component';
 
-const QuestionnairePage = lazy(() => import('./components/QuestionnairePage/QuestionnairePage.component'));
-const QuestionnairesPage = lazy(() => import('./components/QuestionnairesPage/QuestionnairesPage.component'));
+const QuestionnairePage = lazy(() => import(/* webpackChunkName: 'QuestionnaireRoute' */ './components/QuestionnairePage/QuestionnairePage.component'));
+const QuestionnairesPage = lazy(() => import(/* webpackChunkName: 'QuestionnairesRoute' */ './components/QuestionnairesPage/QuestionnairesPage.component'));
 
 Amplify.configure(awsconfig);
 const theme = {
@@ -66,6 +68,6 @@ export default withAuthenticator(
   App,
   {
     usernameAttributes: 'email',
-    authenticatorComponents: [<SignIn/>, <ForgotPassword/>]
-  }
+    authenticatorComponents: [<SignIn/>, <ForgotPassword/>],
+  },
 );

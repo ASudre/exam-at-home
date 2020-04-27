@@ -35,8 +35,7 @@ const WaitingForStart = ({ onStart, startTime }) => {
     }
     return () => clearTimeout(timeout);
   }, [countDown, onStart, startTime]);
-
-  return <Container><Counter>Starts in {countDown} second{`${countDown > 1 ? 's' : ''}`}</Counter></Container>
-}
+  return <Container><Counter>Starts in {countDown} second{`${countDown > 1 ? 's' : ''}`}</Counter></Container>;
+};
 
 export default WaitingForStart;

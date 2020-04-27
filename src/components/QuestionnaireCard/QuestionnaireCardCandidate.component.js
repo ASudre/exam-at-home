@@ -9,7 +9,7 @@ import Card from '../Card/Card.component';
 import CardActions from '../Card/CardActions/CardActions.component';
 import CardContent from '../Card/CardContent/CardContent.component';
 import Button from '../Button/Button.component';
-import { generateQuestionnaireReport } from './../../graphql/custom_queries';
+import { generateQuestionnaireReport } from '../../graphql/custom_queries';
 import generateFile from './exportFile.utils';
 import CardInfo from '../Card/CardInfo/CardInfo.component';
 
@@ -36,14 +36,14 @@ const Title = styled.div`
 
 const displayDate = (date) => (date ? moment(date).format('DD/MM/YYYY HH:mm') : 'Undefined');
 
-const displayDuration = (duration) => `${duration} minute${duration > 1 ? 's' : ''}`
+const displayDuration = (duration) => `${duration} minute${duration > 1 ? 's' : ''}`;
 
 const generateReport = async (id) => API
   .graphql(
     graphqlOperation(generateQuestionnaireReport,
-    {
-      id,
-    }),
+      {
+        id,
+      }),
   )
   .then((res) => get(res, 'data.generateQuestionnaireReport', ''))
   .catch((e) => {
@@ -63,8 +63,8 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
         <Title>{questionnaire.name}</Title>
       </CardContent>
       <CardActions>
-        {isAdmin && new Date(questionnaire.startTime) < new Date() &&
-          <Button
+        {isAdmin && new Date(questionnaire.startTime) < new Date()
+          && <Button
             onClick={async () => {
               setExporting(true);
               generateFile('report.csv', await generateReport(questionnaire.id));
@@ -86,7 +86,7 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
         </Link>
       </CardActions>
     </Card>
-  )
+  );
 };
 
 export default QuestionCardCandidate;

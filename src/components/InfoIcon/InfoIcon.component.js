@@ -10,6 +10,6 @@ const InfoIcon = () => (
   <IconContainer>
     <IoIosInformationCircleOutline />
   </IconContainer>
-)
+);
 
 export default InfoIcon;

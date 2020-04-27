@@ -49,7 +49,7 @@ const QuestionnairePage = ({ isAdmin }) => {
     return <AdminQuestionnaire
       questionnaire={questionnaire}
       refreshQuestionnaire={() => getQuestionnaire(id, true).then(setQuestionnaire)}
-    />
+    />;
   }
 
   return (questionnaire.status === 'NOT_PLAYED'

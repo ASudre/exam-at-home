@@ -29,7 +29,8 @@ const toDisplay = (seconds) => (seconds > 0
   ${seconds % 60} sec`
   : '0 sec');
 
-const getAnswered = (questions) => questions.reduce((acc, q) => (q.answers.items.length > 0 ? acc + 1 : acc), 0);
+const getAnswered = (questions) => questions
+  .reduce((acc, q) => (q.answers.items.length > 0 ? acc + 1 : acc), 0);
 
 const getMark = (questions, scale) => questions && questions.reduce((acc, q) => {
   const answer = get(q, 'answers.items[0].answer', null);
@@ -47,12 +48,12 @@ const FlexContainer = styled.div`
 `;
 
 const Scale = ({ scale }) => {
-  const format = (nbPts => `${nbPts}pt${Math.abs(nbPts) > 1 ? 's' : ''}`);
+  const format = ((nbPts) => `${nbPts}pt${Math.abs(nbPts) > 1 ? 's' : ''}`);
   return <FlexContainer>
     <div>Correct answer: {format(scale[0])}</div>
     <div>Wrong answer: {format(scale[1])}</div>
     <div>No answer: {format(scale[2])}</div>
-  </FlexContainer>
+  </FlexContainer>;
 };
 
 const getEndTime = (startTime, duration) => moment(startTime).add(duration, 'minutes').toISOString();
@@ -61,7 +62,11 @@ const getRemainingTime = (endTime) => Math.floor((new Date(endTime) - new Date()
 
 const scale = [2.5, -0.5, 0];
 
-const Questionnaire = ({ questionnaire: { questions: defaultQuestions, startTime, duration, status }, onTimeIsUp }) => {
+const Questionnaire = ({
+  questionnaire: {
+    questions: defaultQuestions, startTime, duration, status,
+  }, onTimeIsUp,
+}) => {
   const [endTime, setEndTime] = useState(getEndTime(startTime, duration));
   const [remainingTime, setRemainingTime] = useState(getRemainingTime(endTime));
   const [questions, setQuestions] = useState(get(defaultQuestions, 'items', []));
@@ -94,7 +99,6 @@ const Questionnaire = ({ questionnaire: { questions: defaultQuestions, startTime
     if (status === 'PLAYED') {
       setMark(getMark(questions, scale));
       setMaxMark(questions.length * scale[0]);
-      return;
     }
   }, [status, questions]);
 
@@ -111,8 +115,8 @@ const Questionnaire = ({ questionnaire: { questions: defaultQuestions, startTime
       <InfoCard>
         <Container>
           <InfoCardContent>
-            {status === "PLAYING" && `${toDisplay(remainingTime)} - ${answered} out of ${questions.length} answered`}
-            {status === "PLAYED" && `Your result: ${mark} / ${maxMark}`}
+            {status === 'PLAYING' && `${toDisplay(remainingTime)} - ${answered} out of ${questions.length} answered`}
+            {status === 'PLAYED' && `Your result: ${mark} / ${maxMark}`}
           </InfoCardContent>
         </Container>
       </InfoCard>
@@ -122,7 +126,7 @@ const Questionnaire = ({ questionnaire: { questions: defaultQuestions, startTime
           question={q}
           onCreateAnswer={() => setAnswered(answered + 1)}
           onDeleteAnswer={() => setAnswered(answered - 1)}
-          disabled={status !== "PLAYING"}
+          disabled={status !== 'PLAYING'}
         />
       ))}
     </>

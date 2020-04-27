@@ -9,6 +9,8 @@ import {
 import Amplify, { Auth } from 'aws-amplify';
 import { ThemeProvider } from 'styled-components';
 import { withAuthenticator, SignIn, ForgotPassword } from 'aws-amplify-react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import '@aws-amplify/ui/dist/style.css';
 
 import awsconfig from './aws-exports';
 import Layout from './components/Layout/Layout.component';

@@ -31,7 +31,6 @@ const QuestionCard = ({
         question={question}
         onSave={(q) => updateQuestion(q)}
         onDelete={(q) => deleteQuestion(q).then(refreshQuestionnaire)}
-        update
       />)
   : (<QuestionCardCreate
         questionnaireId={questionnaireId}

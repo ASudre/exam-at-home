@@ -29,13 +29,13 @@ const QuestionCard = ({
 }) => (update
   ? (<QuestionCardUpdate
         question={question}
-        onSave={(f, q) => updateQuestion(f, q)}
+        onSave={(q) => updateQuestion(q)}
         onDelete={(q) => deleteQuestion(q).then(refreshQuestionnaire)}
         update
       />)
   : (<QuestionCardCreate
         questionnaireId={questionnaireId}
-        onSave={(f, q) => createQuestion(f, q).then(refreshQuestionnaire)}
+        onSave={(q, f) => createQuestion(q, f).then(refreshQuestionnaire)}
       />));
 
 export default QuestionCard;

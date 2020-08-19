@@ -702,9 +702,7 @@
                         "Fn::Join": [
                             "",
                             [
-                                {
-                                    "Ref": "authexamathome46b3332aUserPoolId"
-                                },
+                                "eu-west-1_U87bICFFX",
                                 "-AdminGroupRole"
                             ]
                         ]

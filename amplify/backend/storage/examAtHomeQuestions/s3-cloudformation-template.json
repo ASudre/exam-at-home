@@ -84,8 +84,7 @@
             "Type": "String"
         },
         "authexamathome46b3332aUserPoolId": {
-            "Type": "String",
-            "Default": "authexamathome46b3332aUserPoolId"
+            "Type": "String"
         },
         "authuserPoolGroupsAdminGroupRole": {
             "Type": "String",

@@ -1,42 +1,40 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CloseIcon from '../CloseIcon/CloseIcon.component';
 
-let ref;
 const Container = styled.div`
-  display: fixed;
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
   background-color: ${(props) => props.theme.color.primary};
   color: white;
   animation: slideout .3s, slidein .3s 6s;
   animation-timing-function: cubic-bezier(.4, 0, .2, 1);
-  padding: 5px;
   @keyframes slidein {
     from {
-      height: ${`${ref?.current?.clientHeight ?? 18}px`};
+      bottom: 0;
     }
     to {
-      height: 0;
+      bottom: -100px
     }
   }
   @keyframes slideout {
     from {
-      height: 0;
+      bottom: -100px
     }
     to {
-      height: ${`${ref?.current?.clientHeight ?? 18}px`};
+      bottom: 0
     }
   }
-`;
-
-const Content = styled.div`
-  display: flex;
-  width: 100%;
 `;
 
 const Info = styled.div`
   display: flex;
   flex-grow: 1;
-  justify-content: center;
+  align-items: center;
   color: ${(props) => (props.onClick ? props.theme.backgroundColor.primary : props.theme.color.secondary)};
   cursor: ${(props) => (props.onClick ? 'pointer' : 'default')};
 `;
@@ -55,7 +53,6 @@ const Snackbar = () => {
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState('');
   const [action, setAction] = useState();
-  ref = createRef();
 
   useEffect(() => {
     document.addEventListener(eventName, (e) => {
@@ -72,12 +69,10 @@ const Snackbar = () => {
   }, []);
 
   return visible && (<Container>
-    <Content ref={ref}>
       <Info onClick={action}>
         {message}
       </Info>
       <CloseIcon onClick={() => setVisible(false)} />
-    </Content>
   </Container>
   );
 };

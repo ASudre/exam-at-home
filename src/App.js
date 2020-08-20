@@ -8,7 +8,9 @@ import {
 } from 'react-router-dom';
 import Amplify, { Auth } from 'aws-amplify';
 import { ThemeProvider } from 'styled-components';
-import { withAuthenticator, SignIn, ForgotPassword, RequireNewPassword } from 'aws-amplify-react';
+import {
+  withAuthenticator, SignIn, ForgotPassword, RequireNewPassword,
+} from 'aws-amplify-react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@aws-amplify/ui/dist/style.css';
 

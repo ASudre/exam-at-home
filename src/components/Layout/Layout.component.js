@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import AppBar from '../AppBar/AppBar.component';
+import Snackbar from '../Snackbar/Snackbar.component';
 
 const Container = styled.div`
   background-color: white;
@@ -29,6 +30,7 @@ const Layout = ({ username, isAdmin, children }) => (
     <Content>
       {children}
     </Content>
+    <Snackbar/>
   </Container>
 );
 

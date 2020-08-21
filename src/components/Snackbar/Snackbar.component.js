@@ -40,7 +40,7 @@ const Info = styled.div`
 `;
 
 const eventName = 'showSnackbar';
-window.showSnackbar = (message, action) => {
+export const showSnackbar = (message, action) => {
   document.dispatchEvent(new MessageEvent(eventName, {
     data: {
       message,

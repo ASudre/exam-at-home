@@ -27,6 +27,7 @@ const deleteAnswer = save(deleteMutation);
 
 const CandidateQuestionCard = ({
   question,
+  onUpdateAnswer,
   onCreateAnswer,
   onDeleteAnswer,
   disabled,
@@ -73,7 +74,7 @@ const CandidateQuestionCard = ({
             disabled={!answerValue || answerValue === savedAnswer.answer}
             onClick={
               () => (savedAnswer.id
-                ? updateAnswer(buildInput()).then(onSave(true))
+                ? updateAnswer(buildInput()).then(onSave(true)).then(onUpdateAnswer)
                 : createAnswer(buildInput()).then(onSave(false)).then(onCreateAnswer)
               )}
           >

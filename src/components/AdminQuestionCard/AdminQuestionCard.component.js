@@ -8,6 +8,7 @@ import {
 } from '../../graphql/custom_mutations';
 import QuestionCardCreate from './AdminQuestionCardCreate.component';
 import QuestionCardUpdate from './AdminQuestionCardUpdate.component';
+import { showSnackbar } from '../Snackbar/Snackbar.component';
 
 const save = (mutation) => (questionToSave, fileToStore = {}) => (
   fileToStore.name
@@ -29,12 +30,12 @@ const QuestionCard = ({
 }) => (update
   ? (<QuestionCardUpdate
         question={question}
-        onSave={(q) => updateQuestion(q)}
-        onDelete={(q) => deleteQuestion(q).then(refreshQuestionnaire)}
+        onSave={(q) => updateQuestion(q).then(() => showSnackbar('updated'))}
+        onDelete={(q) => deleteQuestion(q).then(() => showSnackbar('deleted')).then(refreshQuestionnaire)}
       />)
   : (<QuestionCardCreate
         questionnaireId={questionnaireId}
-        onSave={(q, f) => createQuestion(q, f).then(refreshQuestionnaire)}
+        onSave={(q, f) => createQuestion(q, f).then(() => showSnackbar('created')).then(refreshQuestionnaire)}
       />));
 
 export default QuestionCard;

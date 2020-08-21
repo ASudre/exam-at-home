@@ -7,6 +7,7 @@ import AddIcon from '../AddIcon/AddIcon.component';
 import {
   listSortedQuestionnaires, updateQuestionnaire, deleteQuestionnaire, createQuestionnaire,
 } from './QuestionnairesPage.util';
+import { showSnackbar } from '../Snackbar/Snackbar.component';
 
 const QuestionnairesPage = ({ isAdmin }) => {
   const [questionnaires, setQuestionnaires] = useState(null);
@@ -24,8 +25,8 @@ const QuestionnairesPage = ({ isAdmin }) => {
         <QuestionnaireCard
           key={q.id}
           questionnaire={q}
-          onUpdate={(questionnaire) => updateQuestionnaire(questionnaire)}
-          onDelete={(questionnaire) => deleteQuestionnaire(questionnaire)
+          onUpdate={(questionnaire) => updateQuestionnaire(questionnaire).then((uq) => { showSnackbar('updated'); return uq; })}
+          onDelete={(questionnaire) => deleteQuestionnaire(questionnaire).then(() => showSnackbar('deleted'))
             .then(listSortedQuestionnaires)
             .then(setQuestionnaires)
           }
@@ -36,6 +37,7 @@ const QuestionnairesPage = ({ isAdmin }) => {
         ? <QuestionnaireCardEdit
             onClose={() => setAddQuestionnaireOpened(false)}
             onCreate={(questionnaire) => createQuestionnaire(questionnaire)
+              .then(() => showSnackbar('created'))
               .then(listSortedQuestionnaires)
               .then(setQuestionnaires)
               .then(() => setAddQuestionnaireOpened(false))

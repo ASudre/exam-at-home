@@ -8,6 +8,7 @@ import Card from '../Card/Card.component';
 import CardContent from '../Card/CardContent/CardContent.component';
 import CardInfo from '../Card/CardInfo/CardInfo.component';
 import InfoIcon from '../InfoIcon/InfoIcon.component';
+import { showSnackbar } from '../Snackbar/Snackbar.component';
 
 const InfoCard = styled(Card)`
   position: sticky;
@@ -124,8 +125,9 @@ const Questionnaire = ({
         <CandidateQuestionCard
           key={q.id}
           question={q}
-          onCreateAnswer={() => setAnswered(answered + 1)}
-          onDeleteAnswer={() => setAnswered(answered - 1)}
+          onUpdateAnswer={() => showSnackbar('updated')}
+          onCreateAnswer={() => { setAnswered(answered + 1); showSnackbar('created'); }}
+          onDeleteAnswer={() => { setAnswered(answered - 1); showSnackbar('deleted'); }}
           disabled={status !== 'PLAYING'}
         />
       ))}

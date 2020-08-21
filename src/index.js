@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { showSnackbar } from './components/Snackbar/Snackbar.component';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +19,7 @@ const onUpdate = (registration) => {
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
-  window.showSnackbar('Install the app on your home screen', () => {
+  showSnackbar('Install the app on your home screen', () => {
     document.cookie = `installPromptCount=${0}`;
     e.prompt();
     e.userChoice.then((choiceResult) => {

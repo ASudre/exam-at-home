@@ -1,0 +1,5 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target" : { "namespace": "android_app", "package_name": "com.amplifyapp.d2y72tcc4145wg.feat_android_app.twa",
+                   "sha256_cert_fingerprints": ["A3:5C:D6:13:B0:AE:B3:04:07:18:E0:FD:39:D1:91:7E:BB:27:A1:90:7B:5A:67:5E:1B:8A:DC:12:13:20:71:A5"] }
+    }]

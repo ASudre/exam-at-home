@@ -125,9 +125,9 @@ const Questionnaire = ({
         <CandidateQuestionCard
           key={q.id}
           question={q}
-          onUpdateAnswer={() => showSnackbar('updated')}
-          onCreateAnswer={() => { setAnswered(answered + 1); showSnackbar('created'); }}
-          onDeleteAnswer={() => { setAnswered(answered - 1); showSnackbar('deleted'); }}
+          onUpdateAnswer={() => showSnackbar('answered')}
+          onCreateAnswer={() => { setAnswered(answered + 1); showSnackbar('answered'); }}
+          onDeleteAnswer={() => { setAnswered(answered - 1); showSnackbar('answer canceled'); }}
           disabled={status !== 'PLAYING'}
         />
       ))}

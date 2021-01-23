@@ -1,13 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider } from 'styled-components';
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { showSnackbar } from './components/Snackbar/Snackbar.component';
 
+const theme = {
+  backgroundColor: {
+    primary: '#ff9900',
+    secondary: '#ffc165',
+    ternary: '#1529390f',
+  },
+  color: {
+    primary: '#152939',
+    secondary: 'white',
+  },
+};
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme} >
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

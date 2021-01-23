@@ -22,11 +22,16 @@ const Label = styled.div`
 `;
 
 const TextField = ({
-  value, label, placeholder, onChange,
+  value, label, placeholder, onChange, type,
 }) => (
   <InputContainer>
     <Label>{label}</Label>
-    <Input value={value} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} />
+    <Input
+      value={value}
+      type={type || 'text'}
+      placeholder={placeholder}
+      onChange={(e) => onChange(e.target.value)}
+    />
   </InputContainer>
 );
 

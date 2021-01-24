@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
+import styled from 'styled-components';
 
 import TextField from '../TextField/TextField.component';
 import Button from '../Button/Button.component';
 import CardActions from '../Card/CardActions/CardActions.component';
 import CardContent from '../Card/CardContent/CardContent.component';
+import CardTitle from '../Card/CardTitle/CardTitle.component';
+
+const Error = styled.div`
+  color: red;
+`;
 
 const ForgotPassword = (props) => {
   const { onStateChange } = props;
@@ -13,20 +19,32 @@ const ForgotPassword = (props) => {
   const [newPassword, setNewPassword] = useState();
   const [newPasswordBis, setNewPasswordBis] = useState();
   const [code, setCode] = useState();
+  const [error, setError] = useState();
   const sendCode = async () => {
+    setError(null);
     if (!isCodeSent) {
-      await Auth.forgotPassword(email);
-      setIsCodeSent(true);
+      try {
+        await Auth.forgotPassword(email);
+        setIsCodeSent(true);
+      } catch (e) {
+        console.log('e1', e);
+        setError('Could not send the code. Please check your email.');
+      }
     } else {
-      await Auth.forgotPasswordSubmit(email, code, newPassword);
-      onStateChange('signIn');
+      try {
+        await Auth.forgotPasswordSubmit(email, code, newPassword);
+        onStateChange('signIn');
+      } catch (e) {
+        console.log('e2', e);
+        setError('Error while renewing your password. Please check your code.');
+      }
     }
   };
   return (
     <>
       <CardContent>
-        {!isCodeSent && (<h3>Enter your email to receive a code</h3>)}
-        {isCodeSent && (<h3>Enter the code received by email and change your password</h3>)}
+        {!isCodeSent && (<CardTitle>Enter your email to receive a code</CardTitle>)}
+        {isCodeSent && (<CardTitle>Enter the code received by email and change your password</CardTitle>)}
         {!isCodeSent && <TextField
           label="email *"
           value={email}
@@ -57,6 +75,7 @@ const ForgotPassword = (props) => {
             />
           </>
         )}
+        {error && <Error>{error}</Error>}
       </CardContent>
       <CardActions>
         <Button

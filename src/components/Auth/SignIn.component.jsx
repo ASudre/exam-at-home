@@ -1,23 +1,35 @@
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
+import styled from 'styled-components';
 
 import TextField from '../TextField/TextField.component';
 import Button from '../Button/Button.component';
 import CardActions from '../Card/CardActions/CardActions.component';
 import CardContent from '../Card/CardContent/CardContent.component';
+import CardTitle from '../Card/CardTitle/CardTitle.component';
+
+const Error = styled.div`
+  color: red;
+`;
 
 const SignIn = (props) => {
   const { onStateChange } = props;
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [error, setError] = useState(false);
   const signIn = async () => {
-    await Auth.signIn(email, password);
-    onStateChange('signedIn');
+    setError(false);
+    try {
+      await Auth.signIn(email, password);
+      onStateChange('signedIn');
+    } catch (e) {
+      setError(true);
+    }
   };
   return (
     <>
       <CardContent>
-        <h3>Sign in to your account</h3>
+        <CardTitle>Sign in to your account</CardTitle>
         <TextField
           label="email *"
           value={email}
@@ -31,6 +43,10 @@ const SignIn = (props) => {
           onChange={setPassword}
           type="password"
         />
+        {error && <Error>
+          Could not log you in. Check your email or password.
+          If it is your first time on the website, use "Initialize account".
+        </Error>}
       </CardContent>
       <CardActions>
         <Button

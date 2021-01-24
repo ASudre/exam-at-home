@@ -12,6 +12,7 @@ import Button from '../Button/Button.component';
 import { generateQuestionnaireReport } from '../../graphql/custom_queries';
 import generateFile from './exportFile.utils';
 import CardInfo from '../Card/CardInfo/CardInfo.component';
+import CardTitle from '../Card/CardTitle/CardTitle.component';
 
 const InfoTag = styled.div`
   align-self: flex-end;
@@ -23,14 +24,6 @@ const InfoTag = styled.div`
   @media (max-width: 768px) {
     margin-left: .5em;
     font-size: small;
-  }
-`;
-
-const Title = styled.h3`
-  font-size: 1.1em;
-  margin: 5px 5px 0;
-  @media (max-width: 768px) {
-    margin: 10px 5px 0;
   }
 `;
 
@@ -60,7 +53,7 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
           <InfoTag>{displayDate(questionnaire.startTime)}</InfoTag>
           <InfoTag>{displayDuration(questionnaire.duration)}</InfoTag>
         </CardInfo>
-        <Title>{questionnaire.name}</Title>
+        <CardTitle>{questionnaire.name}</CardTitle>
       </CardContent>
       <CardActions>
         {isAdmin && new Date(questionnaire.startTime) < new Date()

@@ -8,7 +8,7 @@ export default {
     'Reset Password': 'Mot de passe oublié',
     'Could not send the code. Please check your email': 'Code non envoyé. Veuillez vérifier votre email',
     'Error while renewing your password. Please check your code. Minimum 8 characters for the password': 'Erreur de renouvellement du mot de passe. Veuillez vérifier votre code. Le mot de passe doit faire au moins 8 caractères',
-    'Could not log you in. Check your email or password. If it is your first time on the website, use "Initialize account"': "Vérifier votre email ou mot de passe. Si c'est votre première venue, cliquez sur \"S'inscrire\"",
+    'Could not log you in. Check your email or password. If it is your first time on the website, use "Initialize account"': "Vérifiez votre email ou mot de passe. Si c'est votre première venue, cliquez sur \"S'inscrire\"",
     'Enter your email to receive a verification code': 'Entrez votre email pour recevoir un code de vérification',
     'Enter the code received by email and change your password': 'Entrez le code reçu par email et changez votre mot de passe',
     Validate: 'Valider',

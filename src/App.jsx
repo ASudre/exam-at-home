@@ -14,12 +14,12 @@ import {
 import '@aws-amplify/ui/dist/style.css';
 
 import awsconfig from './aws-exports';
-import Layout from './components/Layout/Layout.component';
-import Loader from './components/Loader/Loader.component';
-import AuthComponent from './components/Auth/Auth.component';
+import Layout from './components/Layout/Layout.component.jsx';
+import Loader from './components/Loader/Loader.component.jsx';
+import AuthComponent from './components/Auth/Auth.component.jsx';
 
-const QuestionnairePage = lazy(() => import(/* webpackChunkName: 'QuestionnaireRoute' */ './components/QuestionnairePage/QuestionnairePage.component'));
-const QuestionnairesPage = lazy(() => import(/* webpackChunkName: 'QuestionnairesRoute' */ './components/QuestionnairesPage/QuestionnairesPage.component'));
+const QuestionnairePage = lazy(() => import(/* webpackChunkName: 'QuestionnaireRoute' */ './components/QuestionnairePage/QuestionnairePage.component.jsx'));
+const QuestionnairesPage = lazy(() => import(/* webpackChunkName: 'QuestionnairesRoute' */ './components/QuestionnairesPage/QuestionnairesPage.component.jsx'));
 
 Amplify.configure(awsconfig);
 

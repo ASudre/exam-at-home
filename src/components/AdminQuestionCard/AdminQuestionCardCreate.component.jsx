@@ -2,13 +2,13 @@ import React, { useState, useRef } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 import { I18n } from 'aws-amplify';
 
-import Button from '../Button/Button.component';
-import CardContent from '../Card/CardContent/CardContent.component';
-import CardActions from '../Card/CardActions/CardActions.component';
-import Card from '../Card/Card.component';
-import RadioButtons from '../RadioButtons/RadioButtons.component';
-import FileInput from '../FileInput/FileInput.component';
-import AddIcon from '../AddIcon/AddIcon.component';
+import Button from '../Button/Button.component.jsx';
+import CardContent from '../Card/CardContent/CardContent.component.jsx';
+import CardActions from '../Card/CardActions/CardActions.component.jsx';
+import Card from '../Card/Card.component.jsx';
+import RadioButtons from '../RadioButtons/RadioButtons.component.jsx';
+import FileInput from '../FileInput/FileInput.component.jsx';
+import AddIcon from '../AddIcon/AddIcon.component.jsx';
 
 const answerValues = ['A', 'B', 'C', 'D'];
 

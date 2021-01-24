@@ -5,14 +5,14 @@ import moment from 'moment';
 import { graphqlOperation, API, I18n } from 'aws-amplify';
 import { get } from 'lodash';
 
-import Card from '../Card/Card.component';
-import CardActions from '../Card/CardActions/CardActions.component';
-import CardContent from '../Card/CardContent/CardContent.component';
-import Button from '../Button/Button.component';
+import Card from '../Card/Card.component.jsx';
+import CardActions from '../Card/CardActions/CardActions.component.jsx';
+import CardContent from '../Card/CardContent/CardContent.component.jsx';
+import Button from '../Button/Button.component.jsx';
 import { generateQuestionnaireReport } from '../../graphql/custom_queries';
 import generateFile from './exportFile.utils';
-import CardInfo from '../Card/CardInfo/CardInfo.component';
-import CardTitle from '../Card/CardTitle/CardTitle.component';
+import CardInfo from '../Card/CardInfo/CardInfo.component.jsx';
+import CardTitle from '../Card/CardTitle/CardTitle.component.jsx';
 
 const InfoTag = styled.div`
   align-self: flex-end;

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { S3Image } from 'aws-amplify-react';
 import { I18n } from 'aws-amplify';
 
-import Button from '../Button/Button.component';
-import CardContent from '../Card/CardContent/CardContent.component';
-import Card from '../Card/Card.component';
-import CardActions from '../Card/CardActions/CardActions.component';
-import RadioButtons from '../RadioButtons/RadioButtons.component';
+import Button from '../Button/Button.component.jsx';
+import CardContent from '../Card/CardContent/CardContent.component.jsx';
+import Card from '../Card/Card.component.jsx';
+import CardActions from '../Card/CardActions/CardActions.component.jsx';
+import RadioButtons from '../RadioButtons/RadioButtons.component.jsx';
 
 const answerValues = ['A', 'B', 'C', 'D'];
 

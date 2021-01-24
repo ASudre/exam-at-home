@@ -3,12 +3,12 @@ import { v4 as uuidV4 } from 'uuid';
 import moment from 'moment';
 import { I18n } from 'aws-amplify';
 
-import Card from '../Card/Card.component';
-import CardActions from '../Card/CardActions/CardActions.component';
-import CardContent from '../Card/CardContent/CardContent.component';
-import CardTitle from '../Card/CardTitle/CardTitle.component';
-import Button from '../Button/Button.component';
-import TextField from '../TextField/TextField.component';
+import Card from '../Card/Card.component.jsx';
+import CardActions from '../Card/CardActions/CardActions.component.jsx';
+import CardContent from '../Card/CardContent/CardContent.component.jsx';
+import CardTitle from '../Card/CardTitle/CardTitle.component.jsx';
+import Button from '../Button/Button.component.jsx';
+import TextField from '../TextField/TextField.component.jsx';
 
 const dateFormat = 'DD/MM/YYYY HH:mm';
 const defaultQuestionnaire = {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Auth, I18n } from 'aws-amplify';
 import { Link, useLocation } from 'react-router-dom';
 
-import Button from '../Button/Button.component';
+import Button from '../Button/Button.component.jsx';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.backgroundColor.primary};

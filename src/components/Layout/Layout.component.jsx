@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import AppBar from '../AppBar/AppBar.component';
-import Snackbar from '../Snackbar/Snackbar.component';
+import AppBar from '../AppBar/AppBar.component.jsx';
+import Snackbar from '../Snackbar/Snackbar.component.jsx';
 
 const Container = styled.div`
   background-color: white;

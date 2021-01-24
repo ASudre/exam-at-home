@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SignIn from './SignIn.component';
-import ForgotPassword from './ForgotPassword.component';
-import Card from '../Card/Card.component';
+import SignIn from './SignIn.component.jsx';
+import ForgotPassword from './ForgotPassword.component.jsx';
+import Card from '../Card/Card.component.jsx';
 
 const Container = styled.div`
   display: flex;

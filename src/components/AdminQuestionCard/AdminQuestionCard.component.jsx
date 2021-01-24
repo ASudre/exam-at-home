@@ -6,9 +6,9 @@ import {
   deleteQuestion as deleteMutation,
   updateQuestion as updateMutation,
 } from '../../graphql/custom_mutations';
-import QuestionCardCreate from './AdminQuestionCardCreate.component';
-import QuestionCardUpdate from './AdminQuestionCardUpdate.component';
-import { showSnackbar } from '../Snackbar/Snackbar.component';
+import QuestionCardCreate from './AdminQuestionCardCreate.component.jsx';
+import QuestionCardUpdate from './AdminQuestionCardUpdate.component.jsx';
+import { showSnackbar } from '../Snackbar/Snackbar.component.jsx';
 
 const save = (mutation) => (questionToSave, fileToStore = {}) => (
   fileToStore.name

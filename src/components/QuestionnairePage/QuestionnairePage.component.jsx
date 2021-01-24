@@ -5,10 +5,10 @@ import { get } from 'lodash';
 import awsconfig from '../../aws-exports';
 
 import { getAdminQuestionnaire, getCandidateQuestionnaire } from '../../graphql/custom_queries';
-import CandidateQuestionnaire from '../CandidateQuestionnaire/CandidateQuestionnaire.component';
-import AdminQuestionnaire from '../AdminQuestionnaire/AdminQuestionnaire.component';
-import Loader from '../Loader/Loader.component';
-import WaitingForStart from '../WaitingForStart/WaitingForStart.component';
+import CandidateQuestionnaire from '../CandidateQuestionnaire/CandidateQuestionnaire.component.jsx';
+import AdminQuestionnaire from '../AdminQuestionnaire/AdminQuestionnaire.component.jsx';
+import Loader from '../Loader/Loader.component.jsx';
+import WaitingForStart from '../WaitingForStart/WaitingForStart.component.jsx';
 
 Amplify.configure(awsconfig);
 

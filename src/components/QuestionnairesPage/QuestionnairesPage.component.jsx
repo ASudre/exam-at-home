@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-import Loader from '../Loader/Loader.component';
-import QuestionnaireCardEdit from '../QuestionnaireCard/QuestionnaireCardEdit.component';
-import QuestionnaireCard from '../QuestionnaireCard/QuestionnaireCard.component';
-import AddIcon from '../AddIcon/AddIcon.component';
+import Loader from '../Loader/Loader.component.jsx';
+import QuestionnaireCardEdit from '../QuestionnaireCard/QuestionnaireCardEdit.component.jsx';
+import QuestionnaireCard from '../QuestionnaireCard/QuestionnaireCard.component.jsx';
+import AddIcon from '../AddIcon/AddIcon.component.jsx';
 import {
   listSortedQuestionnaires, updateQuestionnaire, deleteQuestionnaire, createQuestionnaire,
 } from './QuestionnairesPage.util';
-import { showSnackbar } from '../Snackbar/Snackbar.component';
+import { showSnackbar } from '../Snackbar/Snackbar.component.jsx';
 
 const QuestionnairesPage = ({ isAdmin }) => {
   const [questionnaires, setQuestionnaires] = useState(null);

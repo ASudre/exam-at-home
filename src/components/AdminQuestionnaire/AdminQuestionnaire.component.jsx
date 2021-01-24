@@ -1,7 +1,7 @@
 import React from 'react';
 import { get } from 'lodash';
 
-import QuestionCard from '../AdminQuestionCard/AdminQuestionCard.component';
+import QuestionCard from '../AdminQuestionCard/AdminQuestionCard.component.jsx';
 
 const AdminQuestionnaire = ({ questionnaire, refreshQuestionnaire }) => (
   <>

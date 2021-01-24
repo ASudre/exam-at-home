@@ -3,12 +3,12 @@ import { get } from 'lodash';
 import styled from 'styled-components';
 import moment from 'moment';
 
-import CandidateQuestionCard from '../CandidateQuestionCard/CandidateQuestionCard.component';
-import Card from '../Card/Card.component';
-import CardContent from '../Card/CardContent/CardContent.component';
-import CardInfo from '../Card/CardInfo/CardInfo.component';
-import InfoIcon from '../InfoIcon/InfoIcon.component';
-import { showSnackbar } from '../Snackbar/Snackbar.component';
+import CandidateQuestionCard from '../CandidateQuestionCard/CandidateQuestionCard.component.jsx';
+import Card from '../Card/Card.component.jsx';
+import CardContent from '../Card/CardContent/CardContent.component.jsx';
+import CardInfo from '../Card/CardInfo/CardInfo.component.jsx';
+import InfoIcon from '../InfoIcon/InfoIcon.component.jsx';
+import { showSnackbar } from '../Snackbar/Snackbar.component.jsx';
 
 const InfoCard = styled(Card)`
   position: sticky;

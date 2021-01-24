@@ -5,11 +5,11 @@ import { v4 as uuidV4 } from 'uuid';
 import { get } from 'lodash';
 import { I18n } from 'aws-amplify';
 
-import Button from '../Button/Button.component';
-import CardContent from '../Card/CardContent/CardContent.component';
-import Card from '../Card/Card.component';
-import CardActions from '../Card/CardActions/CardActions.component';
-import RadioButtons from '../RadioButtons/RadioButtons.component';
+import Button from '../Button/Button.component.jsx';
+import CardContent from '../Card/CardContent/CardContent.component.jsx';
+import Card from '../Card/Card.component.jsx';
+import CardActions from '../Card/CardActions/CardActions.component.jsx';
+import RadioButtons from '../RadioButtons/RadioButtons.component.jsx';
 import {
   createCandidateAnswer as createMutation,
   updateCandidateAnswer as updateMutation,

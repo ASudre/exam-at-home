@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import CloseIcon from '../CloseIcon/CloseIcon.component';
+import CloseIcon from '../CloseIcon/CloseIcon.component.jsx';
 
 const Container = styled.div`
   position: fixed;

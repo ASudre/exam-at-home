@@ -4,11 +4,11 @@ import { ThemeProvider } from 'styled-components';
 
 import './index.css';
 import { I18n } from 'aws-amplify';
-import App from './App';
+import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
 
 import dict from './translations';
-import { showSnackbar } from './components/Snackbar/Snackbar.component';
+import { showSnackbar } from './components/Snackbar/Snackbar.component.jsx';
 
 const theme = {
   backgroundColor: {

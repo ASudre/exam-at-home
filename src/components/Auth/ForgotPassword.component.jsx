@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Auth, I18n } from 'aws-amplify';
 import styled from 'styled-components';
 
-import TextField from '../TextField/TextField.component';
-import Button from '../Button/Button.component';
-import CardActions from '../Card/CardActions/CardActions.component';
-import CardContent from '../Card/CardContent/CardContent.component';
-import CardTitle from '../Card/CardTitle/CardTitle.component';
+import TextField from '../TextField/TextField.component.jsx';
+import Button from '../Button/Button.component.jsx';
+import CardActions from '../Card/CardActions/CardActions.component.jsx';
+import CardContent from '../Card/CardContent/CardContent.component.jsx';
+import CardTitle from '../Card/CardTitle/CardTitle.component.jsx';
 
 const Error = styled.div`
   color: red;

@@ -13,6 +13,7 @@ export default styled.button`
   border: 0;
   padding: 0.8em 1em;
   border-radius: 2px;
+  margin: 0;
 
   & > a {
     color: ${(props) => props.theme.color.primary};

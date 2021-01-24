@@ -34,49 +34,49 @@ const QuestionnaireCard = ({
   });
 
   return <Card>
-        <CardContent>
-            <TextField
-              label="Name"
-              value={name}
-              placeholder="name"
-              onChange={setName}
-            />
-            <TextField
-              label="Date"
-              value={startTime}
-              placeholder="01/01/2020 16:00"
-              onChange={setStartTime}
-            />
-            <TextField
-              label="Duration (minutes)"
-              value={duration}
-              placeholder="20"
-              onChange={setDuration}
-            />
-        </CardContent>
-        <CardActions>
-          <Button onClick={() => onClose()}>
-            Cancel
+    <CardContent>
+      <TextField
+        label="Name"
+        value={name}
+        placeholder="name"
+        onChange={setName}
+      />
+      <TextField
+        label="Date"
+        value={startTime}
+        placeholder="01/01/2020 16:00"
+        onChange={setStartTime}
+      />
+      <TextField
+        label="Duration (minutes)"
+        value={duration}
+        placeholder="20"
+        onChange={setDuration}
+      />
+    </CardContent>
+    <CardActions>
+      <Button onClick={() => onClose()}>
+        Cancel
           </Button>
-          <Button onClick={() => ((questionnaire.id
-            ? onUpdate(buildInput())
-            : onCreate(buildInput()).then(() => {
-              setStartTime(defaultQuestionnaire.startTime);
-              setDuration(defaultQuestionnaire.duration);
-              setName(defaultQuestionnaire.name);
-            })
-          ))}>
-            Save
+      <Button onClick={() => ((questionnaire.id
+        ? onUpdate(buildInput())
+        : onCreate(buildInput()).then(() => {
+          setStartTime(defaultQuestionnaire.startTime);
+          setDuration(defaultQuestionnaire.duration);
+          setName(defaultQuestionnaire.name);
+        })
+      ))}>
+        Save
           </Button>
-          {questionnaire.id
-            && <Button
-              onClick={() => onDelete({ id: questionnaire.id })}
-            >
-              Delete
+      {questionnaire.id
+        && <Button
+          onClick={() => onDelete({ id: questionnaire.id })}
+        >
+          Delete
             </Button>
-          }
-        </CardActions>
-      </Card>;
+      }
+    </CardActions>
+  </Card>;
 };
 
 export default QuestionnaireCard;

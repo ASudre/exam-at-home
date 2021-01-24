@@ -27,7 +27,7 @@ const Layout = ({ username, isAdmin, children }) => (
     <Content>
       {children}
     </Content>
-    <Snackbar/>
+    <Snackbar />
   </Container>
 );
 

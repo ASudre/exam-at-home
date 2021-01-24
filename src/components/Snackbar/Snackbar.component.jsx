@@ -69,10 +69,10 @@ const Snackbar = () => {
   }, []);
 
   return visible && (<Container>
-      <Info onClick={action}>
-        {message}
-      </Info>
-      <CloseIcon onClick={() => setVisible(false)} />
+    <Info onClick={action}>
+      {message}
+    </Info>
+    <CloseIcon onClick={() => setVisible(false)} />
   </Container>
   );
 };

@@ -29,13 +29,13 @@ const QuestionCard = ({
   question, refreshQuestionnaire, questionnaireId, update,
 }) => (update
   ? (<QuestionCardUpdate
-        question={question}
-        onSave={(q) => updateQuestion(q).then(() => showSnackbar('updated'))}
-        onDelete={(q) => deleteQuestion(q).then(() => showSnackbar('deleted')).then(refreshQuestionnaire)}
-      />)
+    question={question}
+    onSave={(q) => updateQuestion(q).then(() => showSnackbar('updated'))}
+    onDelete={(q) => deleteQuestion(q).then(() => showSnackbar('deleted')).then(refreshQuestionnaire)}
+  />)
   : (<QuestionCardCreate
-        questionnaireId={questionnaireId}
-        onSave={(q, f) => createQuestion(q, f).then(() => showSnackbar('created')).then(refreshQuestionnaire)}
-      />));
+    questionnaireId={questionnaireId}
+    onSave={(q, f) => createQuestion(q, f).then(() => showSnackbar('created')).then(refreshQuestionnaire)}
+  />));
 
 export default QuestionCard;

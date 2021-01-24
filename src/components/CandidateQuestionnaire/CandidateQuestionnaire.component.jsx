@@ -108,7 +108,7 @@ const Questionnaire = ({
       <Card>
         <CardContent>
           <CardInfo>
-            <InfoIcon/>
+            <InfoIcon />
           </CardInfo>
           <Scale scale={scale} />
         </CardContent>

@@ -21,20 +21,20 @@ const QuestionnairesPage = ({ isAdmin }) => {
     !questionnaires
       ? <Loader />
       : <>
-      {questionnaires.map((q) => (
-        <QuestionnaireCard
-          key={q.id}
-          questionnaire={q}
-          onUpdate={(questionnaire) => updateQuestionnaire(questionnaire).then((uq) => { showSnackbar('updated'); return uq; })}
-          onDelete={(questionnaire) => deleteQuestionnaire(questionnaire).then(() => showSnackbar('deleted'))
-            .then(listSortedQuestionnaires)
-            .then(setQuestionnaires)
-          }
-          isAdmin={isAdmin}
-        />
-      ))}
-      {isAdmin && (addQuestionnaireOpened
-        ? <QuestionnaireCardEdit
+        {questionnaires.map((q) => (
+          <QuestionnaireCard
+            key={q.id}
+            questionnaire={q}
+            onUpdate={(questionnaire) => updateQuestionnaire(questionnaire).then((uq) => { showSnackbar('updated'); return uq; })}
+            onDelete={(questionnaire) => deleteQuestionnaire(questionnaire).then(() => showSnackbar('deleted'))
+              .then(listSortedQuestionnaires)
+              .then(setQuestionnaires)
+            }
+            isAdmin={isAdmin}
+          />
+        ))}
+        {isAdmin && (addQuestionnaireOpened
+          ? <QuestionnaireCardEdit
             onClose={() => setAddQuestionnaireOpened(false)}
             onCreate={(questionnaire) => createQuestionnaire(questionnaire)
               .then(() => showSnackbar('created'))
@@ -43,11 +43,11 @@ const QuestionnairesPage = ({ isAdmin }) => {
               .then(() => setAddQuestionnaireOpened(false))
             }
           />
-        : <AddIcon
+          : <AddIcon
             onClick={() => setAddQuestionnaireOpened(true)}
           />
-      )}
-    </>
+        )}
+      </>
   );
 };
 

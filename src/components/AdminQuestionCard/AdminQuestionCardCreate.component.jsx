@@ -42,33 +42,33 @@ const QuestionCardCreate = ({
     !addQuestionFormOpened
       ? <AddIcon onClick={() => setAddQuestionFormOpened(true)} />
       : (<Card>
-          <CardContent>
-            <Button onClick={onImageInputClick}>
-              {imageFile.name || 'Select image'}
+        <CardContent>
+          <Button onClick={onImageInputClick}>
+            {imageFile.name || 'Select image'}
+          </Button>
+          <FileInput ref={imageInput} setFile={setImageFile} />
+          <RadioButtons
+            values={answerValues}
+            setValue={setAnswer}
+            checkedValue={answer}
+          />
+        </CardContent>
+        <CardActions>
+          <Button onClick={() => setAddQuestionFormOpened(false)}>
+            Cancel
             </Button>
-            <FileInput ref={imageInput} setFile={setImageFile} />
-            <RadioButtons
-              values={answerValues}
-              setValue={setAnswer}
-              checkedValue={answer}
-            />
-          </CardContent>
-          <CardActions>
-            <Button onClick={() => setAddQuestionFormOpened(false)}>
-              Cancel
+          <Button
+            disabled={!imageFile.name || !answer}
+            onClick={() => onSave(buildInput(), imageFile).then(() => {
+              setImageFile(initState.imageFile);
+              setAnswer(initState.answer);
+              setAddQuestionFormOpened(false);
+            })}
+          >
+            Save
             </Button>
-            <Button
-              disabled={!imageFile.name || !answer}
-              onClick={() => onSave(buildInput(), imageFile).then(() => {
-                setImageFile(initState.imageFile);
-                setAnswer(initState.answer);
-                setAddQuestionFormOpened(false);
-              })}
-            >
-              Save
-            </Button>
-          </CardActions>
-        </Card>
+        </CardActions>
+      </Card>
       )
   );
 };

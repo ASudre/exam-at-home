@@ -24,7 +24,7 @@ const QuestionCardUpdate = ({
   return (
     <Card>
       <CardContent>
-        <S3Image theme={{ photoImg: { width: '100%' } }} imgKey={question.imageKey} alt="question"/>
+        <S3Image theme={{ photoImg: { width: '100%' } }} imgKey={question.imageKey} alt="question" />
         <RadioButtons
           values={answerValues}
           setValue={setAnswer}

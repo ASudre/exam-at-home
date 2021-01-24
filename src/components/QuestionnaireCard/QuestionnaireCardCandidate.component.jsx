@@ -69,7 +69,7 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
           </Button>
         }
         {isAdmin && <Button onClick={onEdit}>
-            Edit
+          Edit
           </Button>
         }
         <Link to={`/questionnaires/${questionnaire.id}`}>

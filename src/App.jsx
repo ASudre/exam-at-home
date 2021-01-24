@@ -39,19 +39,19 @@ const App = () => {
   }, []);
 
   return (<Router>
-      <Layout username={username} isAdmin={isAdmin} >
-        <Suspense fallback={<Loader/>}>
-          <Switch>
-            <Route path="/questionnaires/:id">
-              <QuestionnairePage isAdmin={isAdmin} />
-            </Route>
-            <Route path="/">
-              <QuestionnairesPage isAdmin={isAdmin} />
-            </Route>
-          </Switch>
-        </Suspense>
-      </Layout>
-    </Router>
+    <Layout username={username} isAdmin={isAdmin} >
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route path="/questionnaires/:id">
+            <QuestionnairePage isAdmin={isAdmin} />
+          </Route>
+          <Route path="/">
+            <QuestionnairesPage isAdmin={isAdmin} />
+          </Route>
+        </Switch>
+      </Suspense>
+    </Layout>
+  </Router>
   );
 };
 
@@ -59,6 +59,6 @@ export default withAuthenticator(
   App,
   {
     usernameAttributes: 'email',
-    authenticatorComponents: [<AuthComponent/>],
+    authenticatorComponents: [<AuthComponent />],
   },
 );

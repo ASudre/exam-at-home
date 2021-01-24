@@ -48,13 +48,13 @@ const AppBar = ({ username, isAdmin }) => {
       </Left>
       <Right>
         <ButtonContainer>
-        {location.pathname !== '/' && (
-          <Link to="/">
-            <Button>
-              Home
+          {location.pathname !== '/' && (
+            <Link to="/">
+              <Button>
+                Home
             </Button>
-          </Link>
-        )}
+            </Link>
+          )}
         </ButtonContainer>
         <ButtonContainer>
           <Button onClick={handleSignOut}>Sign out</Button>

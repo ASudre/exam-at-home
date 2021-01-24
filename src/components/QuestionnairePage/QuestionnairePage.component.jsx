@@ -14,12 +14,14 @@ Amplify.configure(awsconfig);
 
 const getQuestionnaire = async (id, isAdmin) => API
   .graphql(
-    graphqlOperation(isAdmin
-      ? getAdminQuestionnaire
-      : getCandidateQuestionnaire,
-    {
-      id,
-    }),
+    graphqlOperation(
+      isAdmin
+        ? getAdminQuestionnaire
+        : getCandidateQuestionnaire,
+      {
+        id,
+      },
+    ),
   )
   .then((res) => get(res, isAdmin ? 'data.getQuestionnaire' : 'data.getCandidateQuestionnaire', {}))
   .then((q) => ({
@@ -41,8 +43,7 @@ const QuestionnairePage = ({ isAdmin }) => {
     if (isAdmin !== null) {
       getQuestionnaire(id, isAdmin).then(setQuestionnaire);
     }
-  },
-  [id, isAdmin]);
+  }, [id, isAdmin]);
 
   if (isAdmin === null || !questionnaire) {
     return <Loader />;
@@ -57,14 +58,14 @@ const QuestionnairePage = ({ isAdmin }) => {
 
   return (questionnaire.status === 'NOT_PLAYED'
     ? <WaitingForStart
-        startsIn={questionnaire.startsIn}
-        startTime={questionnaire.startTime}
-        onStart={() => getQuestionnaire(id, false).then(setQuestionnaire)}
-      />
+      startsIn={questionnaire.startsIn}
+      startTime={questionnaire.startTime}
+      onStart={() => getQuestionnaire(id, false).then(setQuestionnaire)}
+    />
     : <CandidateQuestionnaire
-        questionnaire={questionnaire}
-        onTimeIsUp={() => getQuestionnaire(id, false).then(setQuestionnaire)}
-      />
+      questionnaire={questionnaire}
+      onTimeIsUp={() => getQuestionnaire(id, false).then(setQuestionnaire)}
+    />
   );
 };
 

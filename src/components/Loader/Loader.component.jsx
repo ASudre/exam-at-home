@@ -14,10 +14,10 @@ const LoaderComponent = () => {
   return (
     <LoaderContainer>
       <Loader
-          type="Puff"
-          color={themeContext.color.primary}
-          height={100}
-          width={100}
+        type="Puff"
+        color={themeContext.color.primary}
+        height={100}
+        width={100}
       />
     </LoaderContainer>
   );

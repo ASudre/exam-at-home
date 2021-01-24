@@ -9,8 +9,8 @@ const IconContainer = styled.div`
 `;
 
 const InfoIcon = ({ onClick }) => (
-<IconContainer isClickable={!!onClick} >
-  <IoIosClose onClick={onClick} />
-</IconContainer>);
+  <IconContainer isClickable={!!onClick} >
+    <IoIosClose onClick={onClick} />
+  </IconContainer>);
 
 export default InfoIcon;

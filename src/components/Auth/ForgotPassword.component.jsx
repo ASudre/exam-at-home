@@ -44,7 +44,9 @@ const ForgotPassword = (props) => {
     <>
       <CardContent>
         {!isCodeSent && (<CardTitle>Enter your email to receive a code</CardTitle>)}
-        {isCodeSent && (<CardTitle>Enter the code received by email and change your password</CardTitle>)}
+        {isCodeSent && (
+          <CardTitle>Enter the code received by email and change your password</CardTitle>
+        )}
         {!isCodeSent && <TextField
           label="email *"
           value={email}

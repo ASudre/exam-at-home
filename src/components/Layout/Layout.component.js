@@ -11,9 +11,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   color: white;
-  @media (min-width: 768px) {
-    font-size: larger;
-  }
 `;
 
 const Content = styled.div`

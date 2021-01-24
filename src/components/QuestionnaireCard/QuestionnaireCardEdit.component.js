@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { v4 as uuidV4 } from 'uuid';
 import moment from 'moment';
 
@@ -15,11 +14,6 @@ const defaultQuestionnaire = {
   startTime: '',
   duration: '',
 };
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const QuestionnaireCard = ({
   questionnaire = defaultQuestionnaire, onClose, onUpdate, onDelete, onCreate,
@@ -41,7 +35,6 @@ const QuestionnaireCard = ({
 
   return <Card>
         <CardContent>
-          <Form>
             <TextField
               label="Name"
               value={name}
@@ -60,7 +53,6 @@ const QuestionnaireCard = ({
               placeholder="20"
               onChange={setDuration}
             />
-          </Form>
         </CardContent>
         <CardActions>
           <Button onClick={() => onClose()}>

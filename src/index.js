@@ -17,6 +17,9 @@ const theme = {
     primary: '#152939',
     secondary: 'white',
   },
+  border: {
+    primary: '#c4c4c4',
+  },
 };
 
 ReactDOM.render(

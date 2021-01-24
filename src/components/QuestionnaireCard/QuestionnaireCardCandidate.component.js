@@ -26,7 +26,7 @@ const InfoTag = styled.div`
   }
 `;
 
-const Title = styled.div`
+const Title = styled.h3`
   font-size: 1.1em;
   margin: 5px 5px 0;
   @media (max-width: 768px) {

@@ -13,7 +13,6 @@ const AddIconContainer = styled.div`
   justify-content: center;
   > svg {
     cursor: pointer;
-    border: ${(props) => `1px solid ${props.theme.color.primary}`};
     background-color: ${(props) => props.theme.backgroundColor.primary};
     :hover {
       background-color: ${(props) => props.theme.backgroundColor.secondary};

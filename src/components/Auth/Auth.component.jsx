@@ -7,23 +7,23 @@ import Card from '../Card/Card.component';
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   height: 100vh;
 `;
 
 const Image = styled.img`
-  position: absolute;
-  margin: auto;
   width: 100%;
+  padding-bottom: 1em;
 `;
 
 const Auth = (props) => {
   const { authState, onStateChange } = props;
 
   return (<>
-    <Image src="/header.png" alt="header" />
     <Container>
+      <Image src="/header.png" alt="header" />
       <Card>
         {authState === 'signIn' && (<SignIn onStateChange={onStateChange} />)}
         {['forgotPassword', 'resettingPassword'].includes(authState) && (<ForgotPassword onStateChange={onStateChange} />)}

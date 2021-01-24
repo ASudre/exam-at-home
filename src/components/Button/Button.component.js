@@ -14,9 +14,9 @@ export default styled.button`
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   font-size: 1em;
-  padding: 0.3em 1em;
-  border: ${(props) => `1px solid ${props.theme.color.primary}`};
-  border-radius: 7px;
+  border: 0;
+  padding: 0.8em 1em;
+  border-radius: 2px;
 
   & > a {
     color: ${color};

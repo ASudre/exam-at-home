@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
-import styled from 'styled-components';
 
 import TextField from '../TextField/TextField.component';
 import Button from '../Button/Button.component';
 import CardActions from '../Card/CardActions/CardActions.component';
 import CardContent from '../Card/CardContent/CardContent.component';
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const SignIn = (props) => {
   const { onStateChange } = props;
@@ -23,21 +17,20 @@ const SignIn = (props) => {
   return (
     <>
       <CardContent>
-        <Form>
-          <TextField
-            label="email"
-            value={email}
-            placeholder="name"
-            onChange={setEmail}
-          />
-          <TextField
-            label="Password"
-            value={password}
-            placeholder="password"
-            onChange={setPassword}
-            type="password"
-          />
-        </Form>
+        <h3>Sign in to your account</h3>
+        <TextField
+          label="email *"
+          value={email}
+          placeholder="name"
+          onChange={setEmail}
+        />
+        <TextField
+          label="password *"
+          value={password}
+          placeholder="password"
+          onChange={setPassword}
+          type="password"
+        />
       </CardContent>
       <CardActions>
         <Button
@@ -52,7 +45,6 @@ const SignIn = (props) => {
         </Button>
         <Button
           onClick={signIn}
-          disabled={!email || !password}
         >
           Log in
         </Button>

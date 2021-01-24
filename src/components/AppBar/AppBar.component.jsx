@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Auth } from 'aws-amplify';
+import { Auth, I18n } from 'aws-amplify';
 import { Link, useLocation } from 'react-router-dom';
 
 import Button from '../Button/Button.component';
@@ -50,14 +50,14 @@ const AppBar = ({ username, isAdmin }) => {
         <ButtonContainer>
           {location.pathname !== '/' && (
             <Link to="/">
-              <Button>
-                Home
-            </Button>
+              <Button secondary>
+                {I18n.get('Home')}
+              </Button>
             </Link>
           )}
         </ButtonContainer>
         <ButtonContainer>
-          <Button onClick={handleSignOut}>Sign out</Button>
+          <Button secondary onClick={handleSignOut}>{I18n.get('Sign Out')}</Button>
         </ButtonContainer>
       </Right>
     </Container>

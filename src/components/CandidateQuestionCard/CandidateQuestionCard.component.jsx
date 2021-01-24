@@ -3,6 +3,7 @@ import { S3Image } from 'aws-amplify-react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { v4 as uuidV4 } from 'uuid';
 import { get } from 'lodash';
+import { I18n } from 'aws-amplify';
 
 import Button from '../Button/Button.component';
 import CardContent from '../Card/CardContent/CardContent.component';
@@ -78,7 +79,7 @@ const CandidateQuestionCard = ({
                 : createAnswer(buildInput()).then(onSave(false)).then(onCreateAnswer)
               )}
           >
-            Answer
+            {I18n.get('Answer')}
           </Button>
           <Button
             disabled={!savedAnswer.id}
@@ -91,7 +92,7 @@ const CandidateQuestionCard = ({
                 .then(onDeleteAnswer)
             }
           >
-            Cancel
+            {I18n.get('Cancel')}
           </Button>
         </CardActions>
       }

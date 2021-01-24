@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { v4 as uuidV4 } from 'uuid';
+import { I18n } from 'aws-amplify';
 
 import Button from '../Button/Button.component';
 import CardContent from '../Card/CardContent/CardContent.component';
@@ -55,8 +56,8 @@ const QuestionCardCreate = ({
         </CardContent>
         <CardActions>
           <Button onClick={() => setAddQuestionFormOpened(false)}>
-            Cancel
-            </Button>
+            {I18n.get('Cancel')}
+          </Button>
           <Button
             disabled={!imageFile.name || !answer}
             onClick={() => onSave(buildInput(), imageFile).then(() => {
@@ -65,8 +66,8 @@ const QuestionCardCreate = ({
               setAddQuestionFormOpened(false);
             })}
           >
-            Save
-            </Button>
+            {I18n.get('Save')}
+          </Button>
         </CardActions>
       </Card>
       )

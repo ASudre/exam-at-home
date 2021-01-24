@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { S3Image } from 'aws-amplify-react';
+import { I18n } from 'aws-amplify';
 
 import Button from '../Button/Button.component';
 import CardContent from '../Card/CardContent/CardContent.component';
@@ -39,12 +40,12 @@ const QuestionCardUpdate = ({
             setSavedAnswer(answer);
           })}
         >
-          Update
+          {I18n.get('Update')}
         </Button>
         <Button
           onClick={() => onDelete(question)}
         >
-          Delete
+          {I18n.get('Delete')}
         </Button>
       </CardActions>
     </Card>

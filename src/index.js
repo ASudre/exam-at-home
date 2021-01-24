@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 
 import './index.css';
+import { I18n } from 'aws-amplify';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import dict from './translations';
 import { showSnackbar } from './components/Snackbar/Snackbar.component';
 
 const theme = {
@@ -21,6 +24,9 @@ const theme = {
     primary: '#c4c4c4',
   },
 };
+
+I18n.putVocabularies(dict);
+I18n.setLanguage('fr');
 
 ReactDOM.render(
   <React.StrictMode>

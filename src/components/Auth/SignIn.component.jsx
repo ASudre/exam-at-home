@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Auth } from 'aws-amplify';
+import { Auth, I18n } from 'aws-amplify';
 import styled from 'styled-components';
 
 import TextField from '../TextField/TextField.component';
@@ -29,40 +29,39 @@ const SignIn = (props) => {
   return (
     <>
       <CardContent>
-        <CardTitle>Sign in to your account</CardTitle>
+        <CardTitle>{I18n.get('Sign in to your account')}</CardTitle>
         <TextField
-          label="email *"
+          label={`${I18n.get('Email')} *`}
           value={email}
-          placeholder="name"
+          placeholder={I18n.get('Email').toLowerCase()}
           onChange={setEmail}
         />
         <TextField
-          label="password *"
+          label={`${I18n.get('Password')} *`}
           value={password}
-          placeholder="password"
+          placeholder={I18n.get('Password').toLowerCase()}
           onChange={setPassword}
           type="password"
         />
         {error && <Error>
-          Could not log you in. Check your email or password.
-          If it is your first time on the website, use "Initialize account".
+          {I18n.get('Could not log you in. Check your email or password. If it is your first time on the website, use "Initialize account"')}
         </Error>}
       </CardContent>
       <CardActions>
         <Button
           onClick={() => onStateChange('resettingPassword')}
         >
-          Initialize account
+          {I18n.get('Sign Up')}
         </Button>
         <Button
           onClick={() => onStateChange('forgotPassword')}
         >
-          Reset Password
+          {I18n.get('Reset Password')}
         </Button>
         <Button
           onClick={signIn}
         >
-          Log in
+          {I18n.get('Sign In')}
         </Button>
       </CardActions>
     </>

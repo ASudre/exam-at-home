@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Auth } from 'aws-amplify';
+import { Auth, I18n } from 'aws-amplify';
 import styled from 'styled-components';
 
 import TextField from '../TextField/TextField.component';
@@ -27,51 +27,49 @@ const ForgotPassword = (props) => {
         await Auth.forgotPassword(email);
         setIsCodeSent(true);
       } catch (e) {
-        console.log('e1', e);
-        setError('Could not send the code. Please check your email.');
+        setError(I18n.get('Could not send the code. Please check your email'));
       }
     } else {
       try {
         await Auth.forgotPasswordSubmit(email, code, newPassword);
         onStateChange('signIn');
       } catch (e) {
-        console.log('e2', e);
-        setError('Error while renewing your password. Please check your code.');
+        setError(I18n.get('Error while renewing your password. Please check your code. Minimum 8 characters for the password'));
       }
     }
   };
   return (
     <>
       <CardContent>
-        {!isCodeSent && (<CardTitle>Enter your email to receive a code</CardTitle>)}
+        {!isCodeSent && (<CardTitle>{I18n.get('Enter your email to receive a verification code')}</CardTitle>)}
         {isCodeSent && (
-          <CardTitle>Enter the code received by email and change your password</CardTitle>
+          <CardTitle>{I18n.get('Enter the code received by email and change your password')}</CardTitle>
         )}
         {!isCodeSent && <TextField
-          label="email *"
+          label={`${I18n.get('Email')} *`}
           value={email}
-          placeholder="name"
+          placeholder={`${I18n.get('Email').toLowerCase()} *`}
           onChange={setEmail}
         />}
         {isCodeSent && (
           <>
             <TextField
-              label="Code *"
+              label={`${I18n.get('Code')} *`}
               value={code}
-              placeholder="code"
+              placeholder={I18n.get('Code').toLowerCase()}
               onChange={setCode}
             />
             <TextField
-              label="New password *"
+              label={`${I18n.get('New Password')} *`}
               value={newPassword}
-              placeholder="new password"
+              placeholder={I18n.get('New Password').toLowerCase()}
               onChange={setNewPassword}
               type="password"
             />
             <TextField
-              label="Confirm new password *"
+              label={`${I18n.get('Confirm New Password')} *`}
               value={newPasswordBis}
-              placeholder="confirm new password"
+              placeholder={I18n.get('Confirm New Password').toLowerCase()}
               onChange={setNewPasswordBis}
               type="password"
             />
@@ -83,12 +81,14 @@ const ForgotPassword = (props) => {
         <Button
           onClick={() => onStateChange('signIn')}
         >
-          Back to Sign In
+          {I18n.get('Back to Sign In')}
         </Button>
         <Button
           onClick={sendCode}
         >
-          Send code
+          {!isCodeSent
+            ? I18n.get('Send code')
+            : I18n.get('Validate')}
         </Button>
       </CardActions>
     </>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
-import { graphqlOperation, API } from 'aws-amplify';
+import { graphqlOperation, API, I18n } from 'aws-amplify';
 import { get } from 'lodash';
 
 import Card from '../Card/Card.component';
@@ -29,7 +29,7 @@ const InfoTag = styled.div`
 
 const displayDate = (date) => (date ? moment(date).format('DD/MM/YYYY HH:mm') : 'Undefined');
 
-const displayDuration = (duration) => `${duration} minute${duration > 1 ? 's' : ''}`;
+const displayDuration = (duration) => `${duration} ${I18n.get('Minutes').toLowerCase()}${duration > 1 ? 's' : ''}`;
 
 const generateReport = async (id) => API
   .graphql(
@@ -65,16 +65,19 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
             }}
             disabled={exporting}
           >
-            Export
+            {I18n.get('Export')}
           </Button>
         }
         {isAdmin && <Button onClick={onEdit}>
-          Edit
-          </Button>
+          {I18n.get('Configure')}
+        </Button>
         }
         <Link to={`/questionnaires/${questionnaire.id}`}>
           <Button>
-            Start
+            {isAdmin
+              ? I18n.get('Edit Questions')
+              : I18n.get('Start')
+            }
           </Button>
         </Link>
       </CardActions>

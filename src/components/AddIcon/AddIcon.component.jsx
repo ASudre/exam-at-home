@@ -15,7 +15,7 @@ const AddIconContainer = styled.div`
     cursor: pointer;
     background-color: ${(props) => props.theme.backgroundColor.primary};
     :hover {
-      background-color: ${(props) => props.theme.backgroundColor.secondary};
+      opacity: 0.8;
     }
     border-radius: 50%;
   }

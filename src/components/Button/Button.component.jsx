@@ -4,13 +4,9 @@ const backgroundColor = (props) => (props.secondary
   ? props.theme.backgroundColor.secondary
   : props.theme.backgroundColor.primary);
 
-const color = (props) => (props.secondary
-  ? props.theme.color.secondary
-  : props.theme.color.primary);
-
 export default styled.button`
   background-color: ${backgroundColor};
-  color: ${color};
+  color: ${(props) => props.theme.color.primary};
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   font-size: 1em;
@@ -19,7 +15,7 @@ export default styled.button`
   border-radius: 2px;
 
   & > a {
-    color: ${color};
+    color: ${(props) => props.theme.color.primary};
     text-decoration: none;
   }
 
@@ -28,7 +24,7 @@ export default styled.button`
   }
 
   &:hover {
-    background-color: ${(props) => (!props.disabled && props.theme.backgroundColor.secondary)};
+    opacity: ${(props) => (!props.disabled && 0.8)};
   }
 
 `;

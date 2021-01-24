@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 import moment from 'moment';
+import { I18n } from 'aws-amplify';
 
 import Card from '../Card/Card.component';
 import CardActions from '../Card/CardActions/CardActions.component';
 import CardContent from '../Card/CardContent/CardContent.component';
+import CardTitle from '../Card/CardTitle/CardTitle.component';
 import Button from '../Button/Button.component';
 import TextField from '../TextField/TextField.component';
 
@@ -35,20 +37,24 @@ const QuestionnaireCard = ({
 
   return <Card>
     <CardContent>
+      <CardTitle>{questionnaire.id
+        ? I18n.get('Edit a questionnaire')
+        : I18n.get('Create a questionnaire')
+      }</CardTitle>
       <TextField
-        label="Name"
+        label={I18n.get('Name')}
         value={name}
-        placeholder="name"
+        placeholder={I18n.get('Name').toLowerCase()}
         onChange={setName}
       />
       <TextField
-        label="Date"
+        label={I18n.get('Date')}
         value={startTime}
         placeholder="01/01/2020 16:00"
         onChange={setStartTime}
       />
       <TextField
-        label="Duration (minutes)"
+        label={`${I18n.get('Duration')} (${I18n.get('Minutes').toLowerCase()}s)`}
         value={duration}
         placeholder="20"
         onChange={setDuration}
@@ -56,8 +62,8 @@ const QuestionnaireCard = ({
     </CardContent>
     <CardActions>
       <Button onClick={() => onClose()}>
-        Cancel
-          </Button>
+        {I18n.get('Cancel')}
+      </Button>
       <Button onClick={() => ((questionnaire.id
         ? onUpdate(buildInput())
         : onCreate(buildInput()).then(() => {
@@ -66,14 +72,14 @@ const QuestionnaireCard = ({
           setName(defaultQuestionnaire.name);
         })
       ))}>
-        Save
-          </Button>
+        {I18n.get('Save')}
+      </Button>
       {questionnaire.id
         && <Button
           onClick={() => onDelete({ id: questionnaire.id })}
         >
-          Delete
-            </Button>
+          {I18n.get('Delete')}
+        </Button>
       }
     </CardActions>
   </Card>;

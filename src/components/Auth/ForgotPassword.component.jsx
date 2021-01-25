@@ -39,7 +39,12 @@ const ForgotPassword = (props) => {
     }
   };
   return (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        sendCode();
+      }}
+    >
       <CardContent>
         {!isCodeSent && (<CardTitle>{I18n.get('Enter your email to receive a verification code')}</CardTitle>)}
         {isCodeSent && (
@@ -81,18 +86,20 @@ const ForgotPassword = (props) => {
       <CardActions>
         <Button
           onClick={() => onStateChange('signIn')}
+          type="button"
         >
           {I18n.get('Back to Sign In')}
         </Button>
         <Button
           onClick={sendCode}
+          type="submit"
         >
           {!isCodeSent
             ? I18n.get('Send code')
             : I18n.get('Validate')}
         </Button>
       </CardActions>
-    </>
+    </form>
   );
 };
 

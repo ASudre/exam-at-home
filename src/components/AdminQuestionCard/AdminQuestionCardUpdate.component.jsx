@@ -34,6 +34,11 @@ const QuestionCardUpdate = ({
       </CardContent>
       <CardActions>
         <Button
+          onClick={() => onDelete(question)}
+        >
+          {I18n.get('Delete')}
+        </Button>
+        <Button
           disabled={answer === savedAnswer}
           onClick={() => onSave(buildInput()).then(() => {
             // why data.updateQuestion.answer is null?
@@ -41,11 +46,6 @@ const QuestionCardUpdate = ({
           })}
         >
           {I18n.get('Update')}
-        </Button>
-        <Button
-          onClick={() => onDelete(question)}
-        >
-          {I18n.get('Delete')}
         </Button>
       </CardActions>
     </Card>

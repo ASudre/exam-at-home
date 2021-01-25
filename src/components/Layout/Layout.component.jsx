@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import AppBar from '../AppBar/AppBar.component.jsx';
 import Snackbar from '../Snackbar/Snackbar.component.jsx';
 
 const Container = styled.div`
@@ -16,14 +15,17 @@ const Container = styled.div`
 const Content = styled.div`
   flex: 1;
   display: flex;
-  padding: 2em 1em;
+  padding: 1.6em 1em;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 768px) {
+    align-items: initial;
+  }
 `;
 
-const Layout = ({ username, isAdmin, children }) => (
+const Layout = ({ header, children }) => (
   <Container>
-    <AppBar username={username} isAdmin={isAdmin} />
+    {header}
     <Content>
       {children}
     </Content>

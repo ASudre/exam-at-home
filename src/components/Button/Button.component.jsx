@@ -12,7 +12,7 @@ export default styled.button`
   font-size: 1em;
   border: 0;
   padding: 0.8em 1em;
-  border-radius: 2px;
+  border-radius: 3px;
   margin: 0;
 
   & > a {

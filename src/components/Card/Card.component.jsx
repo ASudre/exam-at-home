@@ -13,11 +13,10 @@ export default styled.div`
   font-size: 1em;
   flex-direction: column;
   margin-bottom: 1.6em;
-  width: 100%;
   @media (min-width: 768px) {
     width: 600px;
   }
   &:last-child {
-    margin: 0;
+    margin-bottom: 0;
   }
 `;

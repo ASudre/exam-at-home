@@ -14,6 +14,7 @@ import {
 import '@aws-amplify/ui/dist/style.css';
 
 import awsconfig from './aws-exports';
+import AppBar from './components/AppBar/AppBar.component.jsx';
 import Layout from './components/Layout/Layout.component.jsx';
 import Loader from './components/Loader/Loader.component.jsx';
 import AuthComponent from './components/Auth/Auth.component.jsx';
@@ -39,7 +40,7 @@ const App = () => {
   }, []);
 
   return (<Router>
-    <Layout username={username} isAdmin={isAdmin} >
+    <Layout header={<AppBar username={username} isAdmin={isAdmin} />}>
       <Suspense fallback={<Loader />}>
         <Switch>
           <Route path="/questionnaires/:id">
@@ -51,7 +52,7 @@ const App = () => {
         </Switch>
       </Suspense>
     </Layout>
-  </Router>
+  </Router >
   );
 };
 

@@ -39,7 +39,12 @@ const ForgotPassword = (props) => {
     }
   };
   return (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        sendCode();
+      }}
+    >
       <CardContent>
         {!isCodeSent && (<CardTitle>{I18n.get('Enter your email to receive a verification code')}</CardTitle>)}
         {isCodeSent && (
@@ -48,8 +53,9 @@ const ForgotPassword = (props) => {
         {!isCodeSent && <TextField
           label={`${I18n.get('Email')} *`}
           value={email}
-          placeholder={`${I18n.get('Email').toLowerCase()} *`}
+          placeholder={I18n.get('Email').toLowerCase()}
           onChange={setEmail}
+          type="email"
         />}
         {isCodeSent && (
           <>
@@ -80,18 +86,20 @@ const ForgotPassword = (props) => {
       <CardActions>
         <Button
           onClick={() => onStateChange('signIn')}
+          type="button"
         >
           {I18n.get('Back to Sign In')}
         </Button>
         <Button
           onClick={sendCode}
+          type="submit"
         >
           {!isCodeSent
             ? I18n.get('Send code')
             : I18n.get('Validate')}
         </Button>
       </CardActions>
-    </>
+    </form>
   );
 };
 

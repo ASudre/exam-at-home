@@ -27,7 +27,12 @@ const SignIn = (props) => {
     }
   };
   return (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        signIn();
+      }}
+    >
       <CardContent>
         <CardTitle>{I18n.get('Sign in to your account')}</CardTitle>
         <TextField
@@ -35,6 +40,7 @@ const SignIn = (props) => {
           value={email}
           placeholder={I18n.get('Email').toLowerCase()}
           onChange={setEmail}
+          type="email"
         />
         <TextField
           label={`${I18n.get('Password')} *`}
@@ -50,21 +56,23 @@ const SignIn = (props) => {
       <CardActions>
         <Button
           onClick={() => onStateChange('resettingPassword')}
+          type="button"
         >
           {I18n.get('Sign Up')}
         </Button>
         <Button
           onClick={() => onStateChange('forgotPassword')}
+          type="button"
         >
           {I18n.get('Reset Password')}
         </Button>
         <Button
-          onClick={signIn}
+          type="submit"
         >
           {I18n.get('Sign In')}
         </Button>
       </CardActions>
-    </>
+    </form>
   );
 };
 

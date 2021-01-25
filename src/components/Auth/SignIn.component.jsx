@@ -35,6 +35,7 @@ const SignIn = (props) => {
           value={email}
           placeholder={I18n.get('Email').toLowerCase()}
           onChange={setEmail}
+          type="email"
         />
         <TextField
           label={`${I18n.get('Password')} *`}

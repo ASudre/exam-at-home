@@ -50,6 +50,7 @@ const ForgotPassword = (props) => {
           value={email}
           placeholder={I18n.get('Email').toLowerCase()}
           onChange={setEmail}
+          type="email"
         />}
         {isCodeSent && (
           <>

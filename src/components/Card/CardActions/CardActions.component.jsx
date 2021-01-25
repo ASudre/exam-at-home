@@ -5,7 +5,7 @@ export default styled.div`
   flex-direction: row;
   justify-content: flex-end;
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
   > button, > a {
     margin: .8em .4em 0;

@@ -48,7 +48,7 @@ const ForgotPassword = (props) => {
         {!isCodeSent && <TextField
           label={`${I18n.get('Email')} *`}
           value={email}
-          placeholder={`${I18n.get('Email').toLowerCase()} *`}
+          placeholder={I18n.get('Email').toLowerCase()}
           onChange={setEmail}
         />}
         {isCodeSent && (

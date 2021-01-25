@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { S3Image } from 'aws-amplify-react';
-import { API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation, I18n } from 'aws-amplify';
 import { v4 as uuidV4 } from 'uuid';
 import { get } from 'lodash';
-import { I18n } from 'aws-amplify';
 
 import Button from '../Button/Button.component.jsx';
 import CardContent from '../Card/CardContent/CardContent.component.jsx';
@@ -72,16 +71,6 @@ const CandidateQuestionCard = ({
       {!disabled
         && <CardActions>
           <Button
-            disabled={!answerValue || answerValue === savedAnswer.answer}
-            onClick={
-              () => (savedAnswer.id
-                ? updateAnswer(buildInput()).then(onSave(true)).then(onUpdateAnswer)
-                : createAnswer(buildInput()).then(onSave(false)).then(onCreateAnswer)
-              )}
-          >
-            {I18n.get('Answer')}
-          </Button>
-          <Button
             disabled={!savedAnswer.id}
             onClick={
               () => deleteAnswer(buildInput())
@@ -93,6 +82,16 @@ const CandidateQuestionCard = ({
             }
           >
             {I18n.get('Cancel')}
+          </Button>
+          <Button
+            disabled={!answerValue || answerValue === savedAnswer.answer}
+            onClick={
+              () => (savedAnswer.id
+                ? updateAnswer(buildInput()).then(onSave(true)).then(onUpdateAnswer)
+                : createAnswer(buildInput()).then(onSave(false)).then(onCreateAnswer)
+              )}
+          >
+            {I18n.get('Answer')}
           </Button>
         </CardActions>
       }

@@ -61,6 +61,13 @@ const QuestionnaireCard = ({
       />
     </CardContent>
     <CardActions>
+      {questionnaire.id
+        && <Button
+          onClick={() => onDelete({ id: questionnaire.id })}
+        >
+          {I18n.get('Delete')}
+        </Button>
+      }
       <Button onClick={() => onClose()}>
         {I18n.get('Cancel')}
       </Button>
@@ -74,13 +81,6 @@ const QuestionnaireCard = ({
       ))}>
         {I18n.get('Save')}
       </Button>
-      {questionnaire.id
-        && <Button
-          onClick={() => onDelete({ id: questionnaire.id })}
-        >
-          {I18n.get('Delete')}
-        </Button>
-      }
     </CardActions>
   </Card>;
 };

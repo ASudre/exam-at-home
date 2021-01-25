@@ -10,7 +10,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  height: 100vh;
 `;
 
 const Image = styled.img`

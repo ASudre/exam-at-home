@@ -5,7 +5,7 @@ export default styled.div`
   box-shadow: 1px 1px 4px 0 rgb(0 0 0 / 15%);
   box-sizing: border-box;
   padding: 1em;
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     padding: .5em;
   }
   display: flex;

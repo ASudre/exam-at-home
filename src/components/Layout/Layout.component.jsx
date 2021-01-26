@@ -18,7 +18,7 @@ const Content = styled.div`
   padding: 1.6em 1em;
   flex-direction: column;
   align-items: center;
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     align-items: initial;
   }
 `;

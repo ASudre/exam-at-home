@@ -17,15 +17,16 @@ const InfoCard = styled(Card)`
   position: sticky;
   top: 0;
   z-index: 1000;
-`;
-
-const InfoCardContent = styled(CardContent)`
-  background-color: ${(props) => props.theme.backgroundColor.primary};
-`;
-
-const Container = styled.div`
   background-color: white;
-  padding: 10px 0;
+`;
+
+const InfoCardContent = styled.h3`
+  color: black;
+  text-align: center;
+`;
+
+const ScaleTitle = styled.h3`
+  margin: 0;
 `;
 
 const toDisplay = (seconds) => (seconds > 0
@@ -54,9 +55,12 @@ const FlexContainer = styled.div`
 const Scale = ({ scale }) => {
   const format = ((nbPts) => `${nbPts}pt${Math.abs(nbPts) > 1 ? 's' : ''}`);
   return <FlexContainer>
-    <div>{I18n.get('Correct answer:')} {format(scale[0])}</div>
-    <div>{I18n.get('Wrong answer:')} {format(scale[1])}</div>
-    <div>{I18n.get('No answer:')} {format(scale[2])}</div>
+    <ScaleTitle>{I18n.get('Scale')}</ScaleTitle>
+    <ul>
+      <li>{I18n.get('Correct answer:')} {format(scale[0])}</li>
+      <li>{I18n.get('Wrong answer:')} {format(scale[1])}</li>
+      <li>{I18n.get('No answer:')} {format(scale[2])}</li>
+    </ul>
   </FlexContainer>;
 };
 
@@ -109,7 +113,7 @@ const Questionnaire = ({
   return (
     <>
       <Card>
-        <CardContent>
+        <CardContent row>
           <CardInfo>
             <InfoIcon />
           </CardInfo>
@@ -117,12 +121,10 @@ const Questionnaire = ({
         </CardContent>
       </Card>
       <InfoCard>
-        <Container>
-          <InfoCardContent>
-            {status === 'PLAYING' && `${toDisplay(remainingTime)} - ${answered} ${I18n.get('out of')} ${questions.length} ${I18n.get('Answered').toLowerCase()}`}
-            {status === 'PLAYED' && `${I18n.get('Your result:')} ${mark} / ${maxMark}`}
-          </InfoCardContent>
-        </Container>
+        <InfoCardContent>
+          {status === 'PLAYING' && `${toDisplay(remainingTime)} - ${answered} ${I18n.get('out of')} ${questions.length} ${I18n.get('Answered').toLowerCase()}`}
+          {status === 'PLAYED' && `${I18n.get('Your result:')} ${mark} / ${maxMark}`}
+        </InfoCardContent>
       </InfoCard>
       {questions.map((q) => (
         <CandidateQuestionCard

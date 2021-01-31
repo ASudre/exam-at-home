@@ -46,5 +46,6 @@ export default {
     'No answer:': 'Absence de réponse :',
     'Starts in': 'Commence dans',
     Second: 'Seconde',
+    Scale: 'Barème',
   },
 };

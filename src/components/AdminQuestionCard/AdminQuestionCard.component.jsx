@@ -1,5 +1,7 @@
 import React from 'react';
-import { API, Storage, graphqlOperation } from 'aws-amplify';
+import {
+  API, Storage, graphqlOperation, I18n,
+} from 'aws-amplify';
 
 import {
   createQuestion as createMutation,
@@ -30,12 +32,12 @@ const QuestionCard = ({
 }) => (update
   ? (<QuestionCardUpdate
     question={question}
-    onSave={(q) => updateQuestion(q).then(() => showSnackbar('updated'))}
-    onDelete={(q) => deleteQuestion(q).then(() => showSnackbar('deleted')).then(refreshQuestionnaire)}
+    onSave={(q) => updateQuestion(q).then(() => showSnackbar(I18n.get('Updated')))}
+    onDelete={(q) => deleteQuestion(q).then(() => showSnackbar(I18n.get('Deleted'))).then(refreshQuestionnaire)}
   />)
   : (<QuestionCardCreate
     questionnaireId={questionnaireId}
-    onSave={(q, f) => createQuestion(q, f).then(() => showSnackbar('created')).then(refreshQuestionnaire)}
+    onSave={(q, f) => createQuestion(q, f).then(() => showSnackbar(I18n.get('Created'))).then(refreshQuestionnaire)}
   />));
 
 export default QuestionCard;

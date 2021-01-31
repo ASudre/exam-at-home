@@ -4,12 +4,12 @@ export default styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     flex-direction: column-reverse;
   }
   > button, > a {
     margin: .8em .4em 0;
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       margin: .4em 0 0;
       }
       &:last-child {

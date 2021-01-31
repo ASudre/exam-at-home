@@ -21,7 +21,7 @@ const InfoTag = styled.div`
   font-size: smaller;
   margin-left: 1em;
   border-radius: 4px;
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     margin-left: .5em;
     font-size: small;
   }

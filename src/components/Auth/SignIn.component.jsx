@@ -63,7 +63,7 @@ const SignIn = (props) => {
       </CardContent>
       <CardActions>
         <Button
-          onClick={() => onStateChange('resettingPassword')}
+          onClick={() => onStateChange('forgotPassword')}
           type="button"
         >
           {I18n.get('Sign Up')}

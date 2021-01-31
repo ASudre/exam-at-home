@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import TextField from '../TextField/TextField.component.jsx';
 import Button from '../Button/Button.component.jsx';
+import Loader from '../Loader/Loader.component.jsx';
 import CardActions from '../Card/CardActions/CardActions.component.jsx';
 import CardContent from '../Card/CardContent/CardContent.component.jsx';
 import CardTitle from '../Card/CardTitle/CardTitle.component.jsx';
@@ -39,28 +40,31 @@ const ResettingPassword = (props) => {
     >
       <CardContent>
         <CardTitle>{I18n.get('Enter the code received by email and change your password')}</CardTitle>
-        <>
-          <TextField
-            label={`${I18n.get('Code')} *`}
-            value={code}
-            placeholder={I18n.get('Code').toLowerCase()}
-            onChange={setCode}
-          />
-          <TextField
-            label={`${I18n.get('New Password')} *`}
-            value={newPassword}
-            placeholder={I18n.get('New Password').toLowerCase()}
-            onChange={setNewPassword}
-            type="password"
-          />
-          <TextField
-            label={`${I18n.get('Confirm New Password')} *`}
-            value={newPasswordBis}
-            placeholder={I18n.get('Confirm New Password').toLowerCase()}
-            onChange={setNewPasswordBis}
-            type="password"
-          />
-        </>
+        {!loading
+          ? <>
+            <TextField
+              label={`${I18n.get('Code')} *`}
+              value={code}
+              placeholder={I18n.get('Code').toLowerCase()}
+              onChange={setCode}
+            />
+            <TextField
+              label={`${I18n.get('New Password')} *`}
+              value={newPassword}
+              placeholder={I18n.get('New Password').toLowerCase()}
+              onChange={setNewPassword}
+              type="password"
+            />
+            <TextField
+              label={`${I18n.get('Confirm New Password')} *`}
+              value={newPasswordBis}
+              placeholder={I18n.get('Confirm New Password').toLowerCase()}
+              onChange={setNewPasswordBis}
+              type="password"
+            />
+          </>
+          : <Loader />
+        }
         {error && <Error>{error}</Error>}
       </CardContent>
       <CardActions>

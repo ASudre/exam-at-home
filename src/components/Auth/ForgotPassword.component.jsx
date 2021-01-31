@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import TextField from '../TextField/TextField.component.jsx';
 import Button from '../Button/Button.component.jsx';
+import Loader from '../Loader/Loader.component.jsx';
 import CardActions from '../Card/CardActions/CardActions.component.jsx';
 import CardContent from '../Card/CardContent/CardContent.component.jsx';
 import CardTitle from '../Card/CardTitle/CardTitle.component.jsx';
@@ -36,13 +37,16 @@ const ForgotPassword = (props) => {
     >
       <CardContent>
         <CardTitle>{I18n.get('Enter your email to receive a verification code')}</CardTitle>
-        <TextField
-          label={`${I18n.get('Email')} *`}
-          value={email}
-          placeholder={I18n.get('Email').toLowerCase()}
-          onChange={setEmail}
-          type="email"
-        />
+        {!loading
+          ? <TextField
+            label={`${I18n.get('Email')} *`}
+            value={email}
+            placeholder={I18n.get('Email').toLowerCase()}
+            onChange={setEmail}
+            type="email"
+          />
+          : <Loader />
+        }
         {error && <Error>{error}</Error>}
       </CardContent>
       <CardActions>

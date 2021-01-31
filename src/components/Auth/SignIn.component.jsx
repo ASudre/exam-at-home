@@ -13,10 +13,10 @@ const Error = styled.div`
 `;
 
 const SignIn = (props) => {
-  const { onStateChange } = props;
-  const [email, setEmail] = useState();
+  const { onStateChange, email, setEmail } = props;
   const [password, setPassword] = useState();
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const signIn = async () => {
     setError(false);
     try {
@@ -28,9 +28,11 @@ const SignIn = (props) => {
   };
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        signIn();
+        setLoading(true);
+        await signIn();
+        setLoading(false);
       }}
     >
       <CardContent>
@@ -68,6 +70,7 @@ const SignIn = (props) => {
         </Button>
         <Button
           type="submit"
+          disabled={loading}
         >
           {I18n.get('Sign In')}
         </Button>

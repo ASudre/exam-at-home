@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { I18n } from 'aws-amplify';
 
 import Loader from '../Loader/Loader.component.jsx';
 import QuestionnaireCardEdit from '../QuestionnaireCard/QuestionnaireCardEdit.component.jsx';
@@ -25,8 +26,8 @@ const QuestionnairesPage = ({ isAdmin }) => {
           <QuestionnaireCard
             key={q.id}
             questionnaire={q}
-            onUpdate={(questionnaire) => updateQuestionnaire(questionnaire).then((uq) => { showSnackbar('updated'); return uq; })}
-            onDelete={(questionnaire) => deleteQuestionnaire(questionnaire).then(() => showSnackbar('deleted'))
+            onUpdate={(questionnaire) => updateQuestionnaire(questionnaire).then((uq) => { showSnackbar(I18n.get('Updated')); return uq; })}
+            onDelete={(questionnaire) => deleteQuestionnaire(questionnaire).then(() => showSnackbar(I18n.get('Deleted')))
               .then(listSortedQuestionnaires)
               .then(setQuestionnaires)
             }
@@ -37,7 +38,7 @@ const QuestionnairesPage = ({ isAdmin }) => {
           ? <QuestionnaireCardEdit
             onClose={() => setAddQuestionnaireOpened(false)}
             onCreate={(questionnaire) => createQuestionnaire(questionnaire)
-              .then(() => showSnackbar('created'))
+              .then(() => showSnackbar(I18n.get('Created')))
               .then(listSortedQuestionnaires)
               .then(setQuestionnaires)
               .then(() => setAddQuestionnaireOpened(false))

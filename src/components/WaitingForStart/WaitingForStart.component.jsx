@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { I18n } from 'aws-amplify';
 
 const Container = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ const WaitingForStart = ({ onStart, startTime }) => {
     }
     return () => clearTimeout(timeout);
   }, [countDown, onStart, startTime]);
-  return <Container><Counter>Starts in {countDown} second{`${countDown > 1 ? 's' : ''}`}</Counter></Container>;
+  return <Container><Counter>{I18n.get('Starts in')} {countDown} {I18n.get('Second').toLowerCase()}{`${countDown > 1 ? 's' : ''}`}</Counter></Container>;
 };
 
 export default WaitingForStart;

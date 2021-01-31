@@ -26,8 +26,8 @@ const QuestionnairesPage = ({ isAdmin }) => {
           <QuestionnaireCard
             key={q.id}
             questionnaire={q}
-            onUpdate={(questionnaire) => updateQuestionnaire(questionnaire).then((uq) => { showSnackbar('updated'); return uq; })}
-            onDelete={(questionnaire) => deleteQuestionnaire(questionnaire).then(() => showSnackbar('deleted'))
+            onUpdate={(questionnaire) => updateQuestionnaire(questionnaire).then((uq) => { showSnackbar(I18n.get('Updated')); return uq; })}
+            onDelete={(questionnaire) => deleteQuestionnaire(questionnaire).then(() => showSnackbar(I18n.get('Deleted')))
               .then(listSortedQuestionnaires)
               .then(setQuestionnaires)
             }

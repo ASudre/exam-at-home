@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { get } from 'lodash';
 import styled from 'styled-components';
 import moment from 'moment';
+import {
+  I18n,
+} from 'aws-amplify';
 
 import CandidateQuestionCard from '../CandidateQuestionCard/CandidateQuestionCard.component.jsx';
 import Card from '../Card/Card.component.jsx';
@@ -51,9 +54,9 @@ const FlexContainer = styled.div`
 const Scale = ({ scale }) => {
   const format = ((nbPts) => `${nbPts}pt${Math.abs(nbPts) > 1 ? 's' : ''}`);
   return <FlexContainer>
-    <div>Correct answer: {format(scale[0])}</div>
-    <div>Wrong answer: {format(scale[1])}</div>
-    <div>No answer: {format(scale[2])}</div>
+    <div>{I18n.get('Correct answer:')} {format(scale[0])}</div>
+    <div>{I18n.get('Wrong answer:')} {format(scale[1])}</div>
+    <div>{I18n.get('No answer:')} {format(scale[2])}</div>
   </FlexContainer>;
 };
 
@@ -116,8 +119,8 @@ const Questionnaire = ({
       <InfoCard>
         <Container>
           <InfoCardContent>
-            {status === 'PLAYING' && `${toDisplay(remainingTime)} - ${answered} out of ${questions.length} answered`}
-            {status === 'PLAYED' && `Your result: ${mark} / ${maxMark}`}
+            {status === 'PLAYING' && `${toDisplay(remainingTime)} - ${answered} ${I18n.get('out of')} ${questions.length} ${I18n.get('Answered').toLowerCase()}`}
+            {status === 'PLAYED' && `${I18n.get('Your result:')} ${mark} / ${maxMark}`}
           </InfoCardContent>
         </Container>
       </InfoCard>
@@ -125,9 +128,9 @@ const Questionnaire = ({
         <CandidateQuestionCard
           key={q.id}
           question={q}
-          onUpdateAnswer={() => showSnackbar('answered')}
-          onCreateAnswer={() => { setAnswered(answered + 1); showSnackbar('answered'); }}
-          onDeleteAnswer={() => { setAnswered(answered - 1); showSnackbar('answer canceled'); }}
+          onUpdateAnswer={() => showSnackbar(I18n.get('Updated'))}
+          onCreateAnswer={() => { setAnswered(answered + 1); showSnackbar(I18n.get('Created')); }}
+          onDeleteAnswer={() => { setAnswered(answered - 1); showSnackbar(I18n.get('Canceled')); }}
           disabled={status !== 'PLAYING'}
         />
       ))}

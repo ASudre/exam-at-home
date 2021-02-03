@@ -23,6 +23,10 @@ const ResettingPassword = (props) => {
   const sendCode = async () => {
     setError(null);
     try {
+      if (newPassword !== newPasswordBis) {
+        setError(I18n.get('Passwords don\'t match'));
+        return;
+      }
       await Auth.forgotPasswordSubmit(email, code, newPassword);
       onStateChange('signIn');
     } catch (e) {

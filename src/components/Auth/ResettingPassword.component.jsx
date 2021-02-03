@@ -73,6 +73,7 @@ const ResettingPassword = (props) => {
       </CardContent>
       <CardActions>
         <Button
+          disabled={loading}
           onClick={() => onStateChange('signIn')}
           type="button"
         >

@@ -51,6 +51,7 @@ const ForgotPassword = (props) => {
       </CardContent>
       <CardActions>
         <Button
+          disabled={loading}
           onClick={() => onStateChange('signIn')}
           type="button"
         >

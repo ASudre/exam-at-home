@@ -47,5 +47,6 @@ export default {
     'Starts in': 'Commence dans',
     Second: 'Seconde',
     Scale: 'Barème',
+    'Passwords don\'t match': 'Les mots de passe sont différents',
   },
 };

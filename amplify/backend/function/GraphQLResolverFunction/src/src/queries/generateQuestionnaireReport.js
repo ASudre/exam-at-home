@@ -9,14 +9,15 @@ module.exports = async (ctx) => {
     W: -0.5,
   };
 
-  const users = await listUsers();
-  const adminUsers = await listGroupUsers('Admin');
-  const notAdminAndNotTestUsers = users.filter((u) => !(adminUsers.includes(u) || u.includes('+test')));
-
   const { questions } = await getQuestionnaireWithQuestions({ id });
-  if (!questions) {
+  const users = await listUsers();
+
+  if (!questions || !users) {
     return '';
   }
+
+  const adminUsers = await listGroupUsers('Admin');
+  const notAdminAndNotTestUsers = users.filter((u) => !((adminUsers && adminUsers.includes(u)) || u.includes('+test')));
   const sortedQuestions = questions
     .items
     .sort((q1, q2) => (q1.createdAt > q2.createdAt ? 1 : -1));

@@ -21,6 +21,22 @@ describe('generateQuestionnaireReport', () => {
       ['Raymond', 'W', 'W', -1],
       ['Mariana', 'W', 'R', 2],
     ],
+  ],
+  [
+    ['Sebastien'],
+    [
+      ['D', [['Sebastien', 'D']]],
+      ['A', [['Sebastien', 'D']]],
+      ['C', [['Sebastien', 'C']]],
+      ['A', [['Sebastien', 'A']]],
+      ['D', [['Sebastien', 'D']]],
+      ['C', [['Sebastien', 'C']]],
+      ['C', [['Sebastien', 'C']]],
+      ['C', [['Sebastien', 'D']]],
+    ],
+    [
+      ['Sebastien', 'R', 'W', 'R', 'R', 'R', 'R', 'R', 'W', 14],
+    ],
   ]])('should generate report', async (users, questions, result) => {
     // Given
     mockListUsers.mockResolvedValue(utils.formatUsers(users));
@@ -30,7 +46,7 @@ describe('generateQuestionnaireReport', () => {
     const res = await generateQuestionnaireReport({ arguments: { id: '' } });
 
     // Then
-    expect(res).toEqual(utils.formatReport(result));
+    expect(res).toEqual(utils.formatReport(questions, result));
   });
 
 

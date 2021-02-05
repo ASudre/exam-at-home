@@ -44,8 +44,8 @@ jest.mock('aws-sdk/clients/cognitoidentityserviceprovider', () => class {
 
   listUsersInGroup = () => ({ promise: mockListUsersInGroup });
 });
-const formatReport = (answers) => (`Username,Q1,Q2,Mark
-${answers.map((a) => a.join(',')).join(`
+const formatReport = (questions, result) => (`Username,${questions.map((_, i) => `Q${i + 1}`)},Mark
+${result.map((a) => a.join(',')).join(`
 `)}`);
 
 module.exports = {

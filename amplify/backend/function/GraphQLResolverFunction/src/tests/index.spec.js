@@ -19,7 +19,7 @@ describe('generateQuestionnaireReport', () => {
     ],
     [
       ['Raymond', 'W', 'W', -1],
-      ['Mariana', 'R', 'W', 2],
+      ['Mariana', 'W', 'R', 2],
     ],
   ]])('should generate report', async (users, questions, result) => {
     // Given

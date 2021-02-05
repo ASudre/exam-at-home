@@ -4,10 +4,10 @@ const formatQuestionnaire = (questions) => ({
   data: {
     getQuestionnaire: {
       questions: {
-        items: questions.map((q) => (
+        items: questions.map((q, index) => (
           {
-            id: '1',
-            createdAt: '2020-04-20T09:06:54.421Z',
+            id: index,
+            createdAt: index,
             answer: q[0],
             answers: {
               items: q[1].map((a) => ({

@@ -10,10 +10,13 @@ module.exports = async (ctx) => {
   };
 
   const users = await listUsers();
+  console.log('users', JSON.stringify(users));
   const adminUsers = await listGroupUsers('Admin');
+  console.log('admin users', JSON.stringify(adminUsers));
   const notAdminAndNotTestUsers = users.filter((u) => !(adminUsers.includes(u) || u.includes('+test')));
 
   const { questions } = await getQuestionnaireWithQuestions({ id });
+  console.log('questions', JSON.stringify(questions));
   if (!questions) {
     return '';
   }

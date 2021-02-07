@@ -10,19 +10,27 @@ const cognitoISP = new CognitoISP(
 
 const listUsers = (paginationToken = null) => cognitoISP
   .listUsers({ UserPoolId: userPoolId, PaginationToken: paginationToken }).promise()
-  .then(async ({ Users, PaginationToken }) => (PaginationToken
-    ? [...(await listUsers(paginationToken)), ...Users.map((u) => u.Username)]
-    : Users.map((u) => u.Username)));
+  .then(async ({ Users, PaginationToken }) => [
+    ...Users.map((u) => u.Username),
+    ...(PaginationToken
+      ? await listUsers(PaginationToken)
+      : []
+    ),
+  ]);
 
-const listGroupUsers = (groupName, paginationToken = null) => cognitoISP
+const listGroupUsers = (groupName, nextToken = null) => cognitoISP
   .listUsersInGroup({
     UserPoolId: userPoolId,
     GroupName: groupName,
-    PaginationToken: paginationToken,
+    NextToken: nextToken,
   }).promise()
-  .then(async ({ Users, PaginationToken }) => (PaginationToken
-    ? [...(await listGroupUsers(groupName, paginationToken)), ...Users.map((u) => u.Username)]
-    : Users.map((u) => u.Username)));
+  .then(async ({ Users, NextToken }) => [
+    ...Users.map((u) => u.Username),
+    ...(NextToken
+      ? await listGroupUsers(groupName, NextToken)
+      : []
+    ),
+  ]);
 
 module.exports = {
   listUsers,

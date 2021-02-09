@@ -40,6 +40,7 @@ const getCandidateQuestionnaireQuery = gql`
     $owner: String
   ) {
     getQuestionnaire(id: $id) {
+      id
       questions {
         items {
           id
@@ -69,6 +70,7 @@ const getCandidateQuestionnaireWithCorrectionQuery = gql`
     $owner: String
   ) {
     getQuestionnaire(id: $id) {
+      id
       questions {
         items {
           id
@@ -96,6 +98,7 @@ const getCandidateQuestionnaireWithCorrectionQuery = gql`
 const getQuestionnaireFromQuestionQuery = gql`
   query GetQuestion($id: ID!) {
     getQuestion(id: $id) {
+      id
       questionnaire {
         startTime
         name
@@ -109,6 +112,7 @@ const getQuestionnaireFromQuestionQuery = gql`
 const getExtendedAnswerQuery = gql`
   query GetAnswer($id: ID!) {
     getAnswer(id: $id) {
+      id
       owner
       question {
         id

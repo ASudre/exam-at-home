@@ -43,8 +43,10 @@ const generateReport = async (id) => API
     console.error(e);
   });
 
-const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
+const QuestionnaireCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
   const [exporting, setExporting] = useState(false);
+  const isStarted = moment(questionnaire.startTime).isBefore(moment());
+  const isFinished = moment(questionnaire.startTime).add(questionnaire.duration, 'minutes').isBefore(moment());
 
   return (
     <Card>
@@ -56,7 +58,7 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
         <CardTitle>{questionnaire.name}</CardTitle>
       </CardContent>
       <CardActions>
-        {isAdmin && new Date(questionnaire.startTime) < new Date()
+        {isAdmin && isFinished
           && <Button
             onClick={async () => {
               setExporting(true);
@@ -68,21 +70,21 @@ const QuestionCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
             {I18n.get('Export')}
           </Button>
         }
-        {isAdmin && <Button onClick={onEdit}>
+        {isAdmin && !isStarted && <Button onClick={onEdit}>
           {I18n.get('Configure')}
         </Button>
         }
         <Link to={`/questionnaires/${questionnaire.id}`}>
-          <Button>
-            {isAdmin
-              ? I18n.get('Edit Questions')
-              : I18n.get('Start')
-            }
-          </Button>
+          {isAdmin && !isStarted && <Button>
+            {I18n.get('Edit Questions')}
+          </Button>}
+          {!isAdmin && <Button>
+            {I18n.get('Start')}
+          </Button>}
         </Link>
       </CardActions>
     </Card>
   );
 };
 
-export default QuestionCardCandidate;
+export default QuestionnaireCardCandidate;

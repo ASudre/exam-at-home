@@ -27,8 +27,8 @@ const appSyncClient = new appsync.AWSAppSyncClient({
 
 const queryAppSync = (query, variables) => appSyncClient.hydrated()
   .then(async (client) => client.query({ query, variables }));
-const mutateAppSync = (query, variables) => appSyncClient.hydrated()
-  .then(async (client) => client.mutate({ query, variables }));
+const mutateAppSync = (mutation, variables) => appSyncClient.hydrated()
+  .then(async (client) => client.mutate({ mutation, variables }));
 
 const getQuestionnaire = (variables) => queryAppSync(
   getQuestionnaireQuery, variables,

@@ -29,9 +29,7 @@ const queryAppSync = (query, variables) => appSyncClient.hydrated()
   .then(async (client) => client.query({
     query,
     variables,
-    options: {
-      fetchPolicy: 'no-cache',
-    },
+    fetchPolicy: 'no-cache',
   }));
 const mutateAppSync = (mutation, variables) => appSyncClient.hydrated()
   .then(async (client) => client.mutate({ mutation, variables }));

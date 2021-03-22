@@ -31,6 +31,7 @@ export default {
     Configure: 'Configurer',
     'Edit Questions': 'Éditer les questions',
     Start: 'Débuter',
+    Review: 'Revoir',
     Export: 'Exporter',
     Minutes: 'Minute',
     Duration: 'Durée',

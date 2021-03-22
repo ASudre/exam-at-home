@@ -79,7 +79,7 @@ const QuestionnaireCardCandidate = ({ questionnaire, onEdit, isAdmin }) => {
             {I18n.get('Edit Questions')}
           </Button>}
           {!isAdmin && <Button>
-            {I18n.get('Start')}
+            {isFinished ? I18n.get('Review') : I18n.get('Start')}
           </Button>}
         </Link>
       </CardActions>

@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "aws-appsync": "^3.0.2",
-    "aws-sdk": "^2.659.0",
+    "aws-sdk": "^2.814.0",
     "graphql-tag": "^2.10.3",
     "lodash": "^4.17.19",
     "moment": "^2.24.0",
